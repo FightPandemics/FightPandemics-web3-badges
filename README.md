@@ -1,3 +1,3 @@
 # FightPandemics-Web3
 
-This is the Web3 section of FightPandemics.
+Fight Pandemics Token Badges for volunteers.
