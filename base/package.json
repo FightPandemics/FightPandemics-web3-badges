@@ -1,8 +1,8 @@
 {
-  "name": "base",
+  "name": "Badges Contract",
   "version": "1.0.0",
-  "description": "",
-  "main": "truffle-config.js",
+  "description": "This repo contains the Badges smart contracts for the Badges module used by FightPandemics",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
