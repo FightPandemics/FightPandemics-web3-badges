@@ -1,8 +1,8 @@
-pragma solidity ^0.6.0;
+pragma solidity ^0.7.3;
 
-import "./contracts/token/ERC721/ERC721.sol";
-import "./contracts/access/Ownable.sol";
-import "./contracts/math/SafeMath.sol";
+import "@openzeppelin/contracts/token/ECR721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/math/SafeMath.sol";
 
 /// @title Fight Pandemics Badges
 /// SPDX-License-Identifier: MIT
