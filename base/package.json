@@ -9,7 +9,8 @@
   "scripts": {
     "test": "npx hardhat test",
     "start": "npx hardhat node",
-    "compile": "npx hardhat compile"
+    "compile": "npx hardhat compile",
+    "console": "npx hardhat console --network localhost"
   },
   "keywords": [],
   "author": "",

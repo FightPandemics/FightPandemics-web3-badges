@@ -1,5 +1,47 @@
-const Badges = artifacts.require("./Badges.sol");
+// const Badges = artifacts.require("./Badges.sol");
+const { expect, assert } = require("chai")
+// const { ethers } = require("ethers")
 
+
+let factory
+let badge
+// start test block
+describe("Badges contract", function() {
+  // get contract instance
+  before(async function() {
+    factory = await ethers.getContractFactory("Badges")
+  })
+
+  // deploy contract before each test
+  beforeEach(async function() {
+    badge = await factory.deploy()
+  })
+
+  // test case 1
+  it("Deploys", async function() {
+    assert.ok(badge.address) // ok makes an asumtion that whatever we pass as a argument that value exists
+    assert.notEqual(badge.address, 0x0)
+    assert.notEqual(badge.address, "")
+    assert.notEqual(badge.address, null)
+    assert.notEqual(badge.address, undefined)
+  })
+
+  // test case 2
+  it("Mints badges", async function() {
+    // mint a new token
+    const result = await badge.mint("0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266", 0, "http://sticlalux.ro/bedge.json")
+    const totalSupply = await badge.totalSupply()
+    const event = result.logs[0].args
+    console.log()
+    // check
+    assert.equal(totalSupply, 1)
+    assert.equal(event.tokenId.toNumber(), 1, 'id is correct') // result.logs[0].args.tokenId.toNumber()
+    assert.equal(event.from, '0x0000000000000000000000000000000000000000', 'from is correct')
+    assert.equal(event.to, accounts[1], 'to is correct')
+  })
+})
+
+/*
 let accounts;
 let latestId;
 beforeEach(async () => {
@@ -26,7 +68,7 @@ describe('Token mint', () => {
     const totalSupply = await contract.totalSupply()
     const event = result.logs[0].args
     console.log()
-    // check 
+    // check
     assert.equal(totalSupply, 1)
     assert.equal(event.tokenId.toNumber(), 1, 'id is correct') // result.logs[0].args.tokenId.toNumber()
     assert.equal(event.from, '0x0000000000000000000000000000000000000000', 'from is correct')
@@ -40,12 +82,12 @@ describe('Token burn', () => {
     // check supply
     let totalSupply = await contract.totalSupply()
     assert.equal(totalSupply.toNumber(), 1, 'total supply 1')
-    // burn it 
+    // burn it
 
     // console.log(latestID.toNumber())
     await contract.burn(latestId.toNumber());
 
-    //check total supply 
+    //check total supply
     totalSupply = await contract.totalSupply()
     assert.equal(totalSupply.toNumber(), 0, 'token was burned')
   })
@@ -59,9 +101,9 @@ describe('Set Price', () => {
   // })
 
   it('It can set a price', async () => {
-    // mint a new token with price: 0 
+    // mint a new token with price: 0
     await contract.mint('0xf17f52151EbEF6C7334FAD080c5704D77216b732', 0, 'http://sticlalux.ro/bedge.json')
-    // token price 
+    // token price
     const tokenPrice = 1020;
 
     // set token price using setPrice() function
@@ -97,3 +139,5 @@ describe('Set Price', () => {
   //console.log(result);
   //assert.strictEqual(status, true)
   //})
+
+*/
