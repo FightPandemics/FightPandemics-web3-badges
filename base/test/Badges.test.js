@@ -4,40 +4,50 @@ const { expect, assert } = require("chai")
 
 
 let factory
-let badge
+let contract
+let accounts
+let priceFinney = 2
+let tokenURI = "http://sticlalux.ro/bedge.json"
 // start test block
 describe("Badges contract", function() {
   // get contract instance
   before(async function() {
     factory = await ethers.getContractFactory("Badges")
+    accounts = await ethers.provider.listAccounts()
   })
 
   // deploy contract before each test
   beforeEach(async function() {
-    badge = await factory.deploy()
+    contract = await factory.deploy()
   })
 
   // test case 1
   it("Deploys", async function() {
-    assert.ok(badge.address) // ok makes an asumtion that whatever we pass as a argument that value exists
-    assert.notEqual(badge.address, 0x0)
-    assert.notEqual(badge.address, "")
-    assert.notEqual(badge.address, null)
-    assert.notEqual(badge.address, undefined)
+    assert.ok(contract.address) // ok makes an asumtion that whatever we pass as a argument that value exists
+    assert.notEqual(contract.address, 0x0)
+    assert.notEqual(contract.address, "")
+    assert.notEqual(contract.address, null)
+    assert.notEqual(contract.address, undefined)
   })
 
   // test case 2
   it("Mints badges", async function() {
     // mint a new token
-    const result = await badge.mint("0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266", 0, "http://sticlalux.ro/bedge.json")
-    const totalSupply = await badge.totalSupply()
-    const event = result.logs[0].args
-    console.log()
-    // check
-    assert.equal(totalSupply, 1)
-    assert.equal(event.tokenId.toNumber(), 1, 'id is correct') // result.logs[0].args.tokenId.toNumber()
-    assert.equal(event.from, '0x0000000000000000000000000000000000000000', 'from is correct')
-    assert.equal(event.to, accounts[1], 'to is correct')
+    await contract.mint(accounts[1], priceFinney, tokenURI, {from: accounts[0]})
+
+    // get latest badge ID
+    let badgeId = (await contract.getLatestId()).toNumber()
+
+    // get badge by ID
+    let badge = await contract.getBadgesById(badgeId)
+    let actualBadge = [badge[0].toNumber(), badge[1]] // formated for assertions
+
+    // the badge that we expect
+    let expectedBadge = [priceFinney, tokenURI]
+
+    assert.deepEqual(actualBadge, expectedBadge)
+    assert.equal(await contract.tokenURI(badgeId), tokenURI)
+    assert.equal(await contract.ownerOf(badgeId), accounts[1])
   })
 })
 
