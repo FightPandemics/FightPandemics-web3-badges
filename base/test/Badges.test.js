@@ -49,6 +49,25 @@ describe("Badges contract", function() {
     assert.equal(await contract.tokenURI(badgeId), tokenURI)
     assert.equal(await contract.ownerOf(badgeId), accounts[1])
   })
+
+  // test case 3
+  it("Burns badges", async function() {
+    // mint badge first
+    await contract.mint(accounts[1], priceFinney, tokenURI, {from: accounts[0]})
+
+    // check supply
+    let totalSupply = await contract.totalSupply()
+    assert.equal(totalSupply.toNumber(), 1, 'total supply 1')
+
+    let latestId = await contract.getLatestId()
+    // burn it
+    // console.log(latestID.toNumber())
+    await contract.burn(latestId.toNumber());
+
+    //check total supply
+    totalSupply = await contract.totalSupply()
+    assert.equal(totalSupply.toNumber(), 0, 'token was burned')
+  })
 })
 
 /*
