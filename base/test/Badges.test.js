@@ -68,6 +68,25 @@ describe("Badges contract", function() {
     totalSupply = await contract.totalSupply()
     assert.equal(totalSupply.toNumber(), 0, 'token was burned')
   })
+
+  //test case 4
+  it("Can set price", async function() {
+    // mint badge with token price 0
+    await contract.mint(accounts[1], 0, tokenURI, {from: accounts[0]})
+    // // token price
+    const newBadgePrice = 1020;
+
+    const latestId = (await contract.getLatestId()).toNumber()
+
+    // set token price using setPrice() function
+    await contract.setPrice(latestId, newBadgePrice)
+
+    // extract priceFinney from badge
+    const badge = await contract.getBadgesById(latestId)
+    const badgePrice = badge[0].toNumber()
+
+    assert.equal(badgePrice, newBadgePrice)
+  })
 })
 
 /*
