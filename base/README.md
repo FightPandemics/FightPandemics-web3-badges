@@ -4,7 +4,7 @@ This repository contrains contracts.
 # Prerequisites
 - Solidity compiler (solc) 0.7.3
 - Yarn
-- NVM (Node Version Manager) - `nvm install` to install node version locally from `.nvmrc` file
+- NVM (Node Version Manager) - run `nvm install` to install node version locally from `.nvmrc` file in `/base` folder
 
 # How to
 - Compile: `yarn compile`
