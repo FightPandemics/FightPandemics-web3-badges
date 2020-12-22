@@ -1,6 +1,4 @@
-// const Badges = artifacts.require("./Badges.sol");
 const { expect, assert } = require("chai")
-// const { ethers } = require("ethers")
 
 
 let factory
