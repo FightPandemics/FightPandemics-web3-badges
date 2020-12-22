@@ -14,5 +14,6 @@ This repository contrains contracts.
 - Connect to console of node: `yarn console`
 
 # Steps
-1. `yarn start` to start local blockchain node.
-2. `yarn deploy` to deploy to local node. 
+1. `yarn install` to install dependencies
+2. `yarn start` to start local blockchain node.
+3. `yarn deploy` to deploy contract to local node. 
