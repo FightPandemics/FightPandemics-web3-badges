@@ -5,3 +5,5 @@ This repository contrains contracts.
 - Compile: `yarn compile`
 - Start local blockchain node: `yarn start`
 - Test: `yarn test`
+- Deploy contract: `yarn deploy`
+- Connect to console of node: `yarn console`
