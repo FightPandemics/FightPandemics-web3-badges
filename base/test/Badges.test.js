@@ -81,11 +81,26 @@ describe("Badges contract", function() {
     // set token price using setPrice() function
     await contract.setPrice(latestId, newBadgePrice)
 
-    // extract priceFinney from badge
+
     const badge = await contract.getBadgesById(latestId)
-    const badgePrice = badge[0].toNumber()
+    const badgePrice = badge[0].toNumber()  // extract priceFinney from badge
 
     assert.equal(badgePrice, newBadgePrice)
+  })
+
+  // test case 5
+  it("Can set token URI", async function() {
+    // mint badge
+    await contract.mint(accounts[1], priceFinney, tokenURI, {from: accounts[0]})
+
+    const newTokenURI = "https://fightpandemics.com"
+    const latestId = (await contract.getLatestId()).toNumber()
+
+    // set new token URI
+    await contract.setTokenURI(latestId, newTokenURI)
+
+    const badge = await contract.getBadgesById(latestId)
+    assert.equal(badge[1], newTokenURI)
   })
 })
 
