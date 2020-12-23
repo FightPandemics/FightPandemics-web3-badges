@@ -1,8 +1,17 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+// import styles from '../styles/Home.module.css'
+import dynamic from "next/dynamic"
+
+// disable ssr
+let DynamicComponent: any = dynamic(
+  () => import("../components/getWeb3"), { ssr: false }
+)
 
 export default function Home() {
   return (
+    <DynamicComponent />
+
+    /*
     <div className={styles.container}>
       <Head>
         <title>Create Next App</title>
@@ -60,6 +69,6 @@ export default function Home() {
           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
       </footer>
-    </div>
+    </div>*/
   )
 }
