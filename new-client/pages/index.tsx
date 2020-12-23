@@ -1,15 +1,21 @@
 import Head from 'next/head'
 // import styles from '../styles/Home.module.css'
 import dynamic from "next/dynamic"
+import Button from "../components/Button"
+import Button1 from "../components/Button1"
 
 // disable ssr
-let DynamicComponent: any = dynamic(
-  () => import("../components/getWeb3"), { ssr: false }
-)
+// let Button: any = dynamic(
+//   () => import("../components/Button"), { ssr: false }
+// )
 
 export default function Home() {
   return (
-    <DynamicComponent />
+    <div>
+      <h1>Badges Module</h1>
+      <Button />
+      <Button1 />
+    </div>
 
     /*
     <div className={styles.container}>
