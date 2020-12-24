@@ -3,6 +3,7 @@ import Head from 'next/head'
 import dynamic from "next/dynamic"
 import Button from "../components/Button"
 import Button1 from "../components/Button1"
+import Button2 from "../components/Button2"
 
 // disable ssr
 // let Button: any = dynamic(
@@ -15,6 +16,7 @@ export default function Home() {
       <h1>Badges Module</h1>
       <Button />
       <Button1 />
+      <Button2 />
     </div>
 
     /*
