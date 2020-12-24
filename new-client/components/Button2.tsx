@@ -1,4 +1,3 @@
-// import { ethers } from "ethers"
 import React, { MouseEvent } from "react"
 import GetSigner from "../components/web3/GetSigner"
 
