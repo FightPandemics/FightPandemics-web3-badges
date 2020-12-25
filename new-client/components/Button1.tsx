@@ -1,7 +1,6 @@
-// import { ethers } from "ethers"
 import React, { MouseEvent } from "react"
 import { ethers } from "ethers"
-import GetContract from "../components/web3/GetContract"
+import GetContract from "../components/web3/GetContractRead"
 
 export default function Button(): any {
   async function handleClick(e: MouseEvent) {

@@ -1,22 +1,18 @@
 import Head from 'next/head'
-// import styles from '../styles/Home.module.css'
-import dynamic from "next/dynamic"
-import Button from "../components/Button"
-import Button1 from "../components/Button1"
-import Button2 from "../components/Button2"
-
-// disable ssr
-// let Button: any = dynamic(
-//   () => import("../components/Button"), { ssr: false }
-// )
+// import Button from "../components/Button"
+// import Button1 from "../components/Button1"
+// import Button2 from "../components/Button2"
+import Mint from "../components/Mint"
 
 export default function Home() {
   return (
     <div>
       <h1>Badges Module</h1>
+      {/*
       <Button />
       <Button1 />
-      <Button2 />
+      <Button2 /> */}
+      <Mint />
     </div>
 
     /*

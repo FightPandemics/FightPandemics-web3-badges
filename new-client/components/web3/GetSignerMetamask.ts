@@ -1,7 +1,7 @@
-import GetProvider from "./GetProvider"
+import GetProviderMetamask from "./GetProviderMetamask"
 
 export default async function GetSigner(): Promise<any> {
-  const provider = await GetProvider()
+  const provider = await GetProviderMetamask()
   const signer = provider.getSigner()
   return signer
 }
