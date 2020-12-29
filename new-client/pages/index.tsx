@@ -3,6 +3,7 @@ import Head from 'next/head'
 // import Button1 from "../components/Button1"
 // import Button2 from "../components/Button2"
 import Mint from "../components/Mint"
+import ViewBadge from "../components/ViewBadge"
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Button1 />
       <Button2 /> */}
       <Mint />
+      <ViewBadge />
     </div>
 
     /*
