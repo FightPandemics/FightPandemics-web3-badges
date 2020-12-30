@@ -19,12 +19,11 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: [
-    'react',
-    'prettier'
+    'react'
   ],
   rules: {
     "react/jsx-filename-extension": [1, {
-      extensions: [".ts", ".tsx"]
+      extensions: [".js", ".jsx"]
     }],
     "import/extensions": "off",
     "react/prop-types": "off",
@@ -32,7 +31,6 @@ module.exports = {
     "react/jsx-props-no-spreading": ["error", {
       custom: "ignore"
     }],
-    "prettier/prettier": "error",
     "react/no-unescaped-entities": "off",
     "import/no-cycle": [0, {
       ignoreExternal: true
@@ -44,10 +42,10 @@ module.exports = {
   settings: {
     "import/resolver": {
       "babel-module": {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        extensions: [".js", ".jsx"],
       },
       node: {
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        extensions: [".js", ".jsx"],
         paths: ["src"],
       }
     }
