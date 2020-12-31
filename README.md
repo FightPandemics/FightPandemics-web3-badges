@@ -11,7 +11,7 @@ Folder structure:
 # Prerequisites
 - Solidity compiler (solc) 0.7.3 (soon to be upgraded to 0.8.0)
 - Yarn
-- NVM (Node Version Manager) - run `nvm install` to install node version locally from `.nvmrc` file in `/base` folder
+- NVM (Node Version Manager) - run `nvm install` to install node version locally from `.nvmrc` file in root folder
 
 # General Steps
 1. Run `yarn install` inside each folder to install dependencies
