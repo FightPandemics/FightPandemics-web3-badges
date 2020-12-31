@@ -4,7 +4,7 @@ import GetContractReadWrite from "../web3/GetContractReadWrite"
 import Badges from "../contracts/Badges.json"
 import { ethers } from "ethers"
 
-export default function Button() {
+export default function Mint() {
   async function handleClick() {
     const provider = await GetProviderMetamask()
     console.log("Provider: ", provider)
@@ -19,6 +19,14 @@ export default function Button() {
     const priceFinney = 2
     const tokenURI = "http://sticlalux.ro/bedge.json"
     await contractInstance.mint(accounts[0], priceFinney, tokenURI)
+
+    const badgeId = (await contractInstance.getLatestId()).toNumber()
+
+    const badge = await contractInstance.getBadgesById(badgeId)
+
+    if (badge !== null) {
+      alert("Badge Minted!")
+    }
 
   }
   return (
