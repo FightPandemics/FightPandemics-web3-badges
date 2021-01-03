@@ -1,4 +1,4 @@
-import ethers from "ethers"
+import { ethers } from "ethers"
 import Badges from "../contracts/Badges.json"
 import GetProviderMetamask from "./GetProviderMetamask"
 
