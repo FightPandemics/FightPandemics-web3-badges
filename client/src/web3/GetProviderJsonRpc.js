@@ -1,6 +1,6 @@
-import { ethers } from "ethers"
+import { ethers } from "ethers";
 
 export default async function GetProviderJsonRpc() {
-  const provider = new ethers.providers.JsonRpcProvider()
-  return provider
+  const provider = new ethers.providers.JsonRpcProvider();
+  return provider;
 }

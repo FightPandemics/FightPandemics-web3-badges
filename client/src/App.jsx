@@ -1,7 +1,7 @@
-import React from "react"
-import './App.css';
-import Mint from "./components/Mint"
-import ViewBadge from "./components/ViewBadge"
+import React from "react";
+import "./App.css";
+import Mint from "./components/Mint";
+import ViewBadge from "./components/ViewBadge";
 
 function App() {
   return (
