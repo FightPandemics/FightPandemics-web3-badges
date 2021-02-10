@@ -12,7 +12,8 @@
     "compile": "npx hardhat compile",
     "compile:trace": "npx hardhat compile --show-stack-traces",
     "console": "npx hardhat console --network localhost",
-    "deploy": "npx hardhat run --network localhost scripts/deploy.js"
+    "deploy": "npx hardhat run --network localhost scripts/deploy.js",
+    "lint": "solhint contracts/*.sol"
   },
   "keywords": [],
   "author": "",
