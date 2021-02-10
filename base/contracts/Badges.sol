@@ -1,21 +1,25 @@
-pragma solidity ^0.7.3;
+pragma solidity 0.7.3;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
+import "@openzeppeline/contracts/utils/Counters.sol";
 
-/// @title Fight Pandemics Badges
-/// SPDX-License-Identifier: MIT
-/// Daniel Ses ses.capital  for fithtPandemics.com
+
 contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
     using SafeMath for uint256;
+    using Counters for Counters.Counter;
+
+    Counters.Counter private _tokenIds;
 
     struct Badge {
         uint256 priceFinney;
+        uint256 numClonesAllowed;
+        uint256 numClonesInWild;
+        uint256 cloneFromId;
     }
 
     Badge[] public badges;
-
     bool public isMintable = true;
 
     modifier mintable {
@@ -27,9 +31,13 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
     }
 
     constructor() public {
-        // If the array is new, skip over the first index.
         if (badges.length == 0) {
-            Badge memory _dummyBadge = Badge({priceFinney: 0});
+            Badge memory _dummyBadge = Badge({
+                priceFinney: 0,
+                numClonesAllowed: 0,
+                numClonesInWild: 0,
+                cloneFromId: 0
+            });
             badges.push(_dummyBadge);
         }
     }
@@ -37,14 +45,17 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
     function mint(
         address _to,
         uint256 _priceFinney,
+        uint256 _numClonesAllowed,
         string memory _tokenURI
     ) public mintable onlyOwner returns (uint256 tokenId) {
-        Badge memory _badge = Badge({priceFinney: _priceFinney});
-        // The new badge is pushed onto the array and minted
-        // Note that Solidity uses 0 as a default value when an item is not found in a mapping.
-        badges.push(_badge);
-        tokenId = badges.length - 1;
-        _mint(_to, tokenId);
+        Badge memory _badge = Badge({
+            priceFinney: _priceFinney,
+            numClonesAllowed: _numClonesAllowed,
+            numClonesInWild: 0,
+            cloneFromId: 0
+        });
+        tokenId = badges.push(_badge) - 1; // Solidity uses 0 as a default value when item not found in mapping.
+        _safeMint(_to, tokenId);
         _setTokenURI(tokenId, _tokenURI);
     }
 
