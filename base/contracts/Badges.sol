@@ -44,7 +44,7 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
     function mint(
         address _to,
         uint256 _numClonesAllowed,
-        string memory _tokenURI
+        string memory _tokenUri
     ) public mintable onlyOwner returns (uint256 tokenId) {
         Badge memory _badge = Badge({
             numClonesAllowed: _numClonesAllowed,
@@ -59,9 +59,37 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         badges[tokenId].cloneFromId = tokenId;
 
         _safeMint(_to, tokenId);
-        _setTokenURI(tokenId, _tokenURI);
+        _setTokenURI(tokenId, _tokenUri);
 
         return tokenId;
+    }
+
+    function clone(
+        address _to,
+        uint256 _tokenId,
+        uint256 _numClonesRequested
+    ) public mintable onlyOwner {
+        Badge memory _badge = badges[_tokenId];
+        require(_badge.numClonesInWild + _numClonesRequested <= _badge.numClonesAllowed,
+            "No. of clones requested exceed no. of clones allowed"
+        );
+
+        _badge.numClonesInWild += _numClonesRequested;
+        badges[_tokenId] = _badge;
+
+        for (uint i = 0; i < _numClonesRequested; i++) {
+            Badge memory _newBadge;
+            _newBadge.numClonesAllowed = 0;
+            _newBadge.numClonesInWild = 0;
+            _newBadge.cloneFromId = _tokenId;
+
+            _tokenIds.increment();
+            uint256 newTokenId = _tokenIds.current();
+            _safeMint(_to, newTokenId);
+
+            string memory  _tokenUri = tokenURI(_tokenId);
+            _setTokenURI(newTokenId, _tokenUri);
+        }
     }
 
     function burn(uint256 _tokenId) public onlyOwner {
@@ -110,6 +138,10 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         } else {
             tokenId = badges.length - 1;
         }
+    }
+
+    function getBadgeOwner(uint256 _tokenId) public view returns (address _owner) {
+        return ownerOf(_tokenId);
     }
     /*
     function distroyContract() public onlyOwner {

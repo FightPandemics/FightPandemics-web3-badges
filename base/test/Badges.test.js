@@ -5,12 +5,14 @@ let contract
 let accounts
 let numClonesAllowed = 1
 let tokenURI = "http://sticlalux.ro/bedge.json"
+let contractOwner
 // start test block
 describe("Badges contract", function() {
   // get contract instance
   before(async function() {
     factory = await ethers.getContractFactory("Badges")
     accounts = await ethers.provider.listAccounts()
+    contractOwner = accounts[0]
   })
 
   // deploy contract before each test
@@ -29,7 +31,7 @@ describe("Badges contract", function() {
 
   // test case 2
   it("Mints badge", async function() {
-    await contract.mint(accounts[1], numClonesAllowed, tokenURI, { from: accounts[0] })
+    await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
 
     const badgeId = (await contract.getLatestBadgeId()).toNumber()
 
@@ -45,6 +47,18 @@ describe("Badges contract", function() {
     assert.equal(actualCloneFromId, badgeId)
     assert.equal(actualTokenUri, tokenURI)
   })
+
+  it("Has badge owner", async function() {
+    await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
+    const badgeId = (await contract.getLatestBadgeId()).toNumber()
+    const actualBadgeOwner = await contract.getBadgeOwner(badgeId);
+    assert.equal(actualBadgeOwner, contractOwner)
+  })
+
+  // it("Clones badge", async function() {
+  //   await contract.mint(accounts[1], 2, tokenURI, { from: accounts[0] })
+  //   await contract.clone()
+  // })
   /*
   // test case 3
   it("Burns badges", async function() {
