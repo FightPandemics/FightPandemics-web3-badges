@@ -1,4 +1,6 @@
-const { expect, assert } = require("chai")
+import { assert } from "chai"
+import { it, describe, before, beforeEach } from "mocha"
+import { ethers } from "ethers"
 
 
 let factory
@@ -9,7 +11,7 @@ let tokenURI = "http://sticlalux.ro/bedge.json"
 // start test block
 describe("Badges contract", function() {
   // get contract instance
-  before(async function() {
+  before(async () => {
     factory = await ethers.getContractFactory("Badges")
     accounts = await ethers.provider.listAccounts()
   })
@@ -21,7 +23,7 @@ describe("Badges contract", function() {
 
   // test case 1
   it("Deploys", async function() {
-    assert.ok(contract.address) // ok makes an asumtion that whatever we pass as a argument that value exists
+    assert.ok(contract.address) // ok makes an asumtion that we pass as a argument that value exists
     assert.notEqual(contract.address, 0x0)
     assert.notEqual(contract.address, "")
     assert.notEqual(contract.address, null)
@@ -31,7 +33,7 @@ describe("Badges contract", function() {
   // test case 2
   it("Mints badges", async function() {
     // mint a new token
-    await contract.mint(accounts[1], priceFinney, tokenURI, {from: accounts[0]})
+    await contract.mint(accounts[1], priceFinney, tokenURI, { from: accounts[0] })
 
     // get latest badge ID
     let badgeId = (await contract.getLatestId()).toNumber()
@@ -51,28 +53,28 @@ describe("Badges contract", function() {
   // test case 3
   it("Burns badges", async function() {
     // mint badge first
-    await contract.mint(accounts[1], priceFinney, tokenURI, {from: accounts[0]})
+    await contract.mint(accounts[1], priceFinney, tokenURI, { from: accounts[0] })
 
     // check supply
     let totalSupply = await contract.totalSupply()
-    assert.equal(totalSupply.toNumber(), 1, 'total supply 1')
+    assert.equal(totalSupply.toNumber(), 1, "total supply 1")
 
     let latestId = await contract.getLatestId()
     // burn it
     // console.log(latestID.toNumber())
-    await contract.burn(latestId.toNumber());
+    await contract.burn(latestId.toNumber())
 
     //check total supply
     totalSupply = await contract.totalSupply()
-    assert.equal(totalSupply.toNumber(), 0, 'token was burned')
+    assert.equal(totalSupply.toNumber(), 0, "token was burned")
   })
 
   //test case 4
   it("Can set price", async function() {
     // mint badge with token price 0
-    await contract.mint(accounts[1], 0, tokenURI, {from: accounts[0]})
+    await contract.mint(accounts[1], 0, tokenURI, { from: accounts[0] })
     // // token price
-    const newBadgePrice = 1020;
+    const newBadgePrice = 1020
 
     const latestId = (await contract.getLatestId()).toNumber()
 
@@ -89,7 +91,7 @@ describe("Badges contract", function() {
   // test case 5
   it("Can set token URI", async function() {
     // mint badge
-    await contract.mint(accounts[1], priceFinney, tokenURI, {from: accounts[0]})
+    await contract.mint(accounts[1], priceFinney, tokenURI, { from: accounts[0] })
 
     const newTokenURI = "https://fightpandemics.com"
     const latestId = (await contract.getLatestId()).toNumber()
