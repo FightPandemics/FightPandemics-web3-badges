@@ -83,6 +83,7 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
             _newBadge.numClonesInWild = 0;
             _newBadge.cloneFromId = _tokenId;
 
+            badges.push(_newBadge);
             _tokenIds.increment();
             uint256 newTokenId = _tokenIds.current();
             _safeMint(_to, newTokenId);
@@ -93,21 +94,16 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
     }
 
     function burn(uint256 _tokenId) public onlyOwner {
-        //  Badge memory _badge = badges[_tokenId];
-        _burn(_tokenId);
-        delete badges[_tokenId];
-    }
-    /*
-    function setPrice(uint256 _tokenId, uint256 _newPriceFinney)
-        public
-        onlyOwner
-    {
-        //  require(_exists(_tokenId), "ERC721: The token donse not exist");
         Badge memory _badge = badges[_tokenId];
-
-        _badge.priceFinney = _newPriceFinney;
-        badges[_tokenId] = _badge;
-    } */
+        uint256 originalId = _badge.cloneFromId;
+        if (_tokenId != originalId) {
+            Badge memory _originalBadge = badges[originalId];
+            _originalBadge.numClonesInWild -= 1;
+            badges[originalId] = _originalBadge;
+        }
+        delete badges[_tokenId];
+        _burn(_tokenId);
+    }
 
     function setTokenURI(uint256 _tokenId, string memory _tokenURI)
         public
@@ -143,12 +139,4 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
     function getBadgeOwner(uint256 _tokenId) public view returns (address) {
         return ownerOf(_tokenId);
     }
-
-    function getNumClonesOfOwner(address _owner) public view returns (uint256) {
-        return balanceOf(_owner);
-    }
-    /*
-    function distroyContract() public onlyOwner {
-        selfdestruct(msg.sender);
-    }*/
 }

@@ -3,7 +3,7 @@ const assert = require('chai').assert;
 let factory
 let contract
 let accounts
-const numClonesAllowed = 1
+const numClonesAllowed = 5
 const numClonesRequested = 2
 const tokenURI = "http://sticlalux.ro/bedge.json"
 let contractOwner
@@ -53,33 +53,35 @@ describe("Badges contract", function() {
   })
 
   it("Clones badge", async function() {
-    await contract.mint(contractOwner, numClonesRequested, tokenURI, { from: contractOwner })
-    const badgeId = (await contract.getLatestBadgeId()).toNumber()
-    await contract.clone(contractOwner, badgeId, numClonesRequested)
-    const badgeOwner = await contract.getBadgeOwner(badgeId)
-    const totalNumOfClones = await contract.getNumClonesOfOwner(badgeOwner)
-    assert.equal(totalNumOfClones, numClonesRequested + 1) // original plus clones
+    await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
+    const originalBadgeId = (await contract.getLatestBadgeId()).toNumber()
+    await contract.clone(contractOwner, originalBadgeId, numClonesRequested)
 
-    const actualBadge = await contract.getBadgeById(badgeId);
-    const actualNumClonesInWild = actualBadge[1].toNumber()
+    const actualOriginalBadge = await contract.getBadgeById(originalBadgeId);
+    const actualNumClonesInWild = actualOriginalBadge[1].toNumber()
     assert.equal(actualNumClonesInWild, numClonesRequested)
+
+    const actualBadgeIdOfClone = (await contract.getLatestBadgeId()).toNumber()
+    const actualClonedBadge = await contract.getBadgeById(actualBadgeIdOfClone)
+    const actualTokenUriOfClonedBadge = actualClonedBadge[3]
+    assert.equal(actualTokenUriOfClonedBadge, tokenURI)
+
   })
 
   it("Burns badge", async function() {
     await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
+    const originalBadgeId = (await contract.getLatestBadgeId()).toNumber()
+    const actualOriginalBadgePreBurn = await contract.getBadgeById(originalBadgeId);
+    await contract.clone(contractOwner, originalBadgeId, numClonesRequested)
 
-    // check supply
-    let totalSupply = await contract.totalSupply()
-    assert.equal(totalSupply.toNumber(), 1, "total supply 1")
+    const currentSupply = (await contract.totalSupply()).toNumber()
+    const actualBadgeIdOfClone = (await contract.getLatestBadgeId()).toNumber()
+    await contract.burn(actualBadgeIdOfClone)
 
-    let latestId = await contract.getLatestId()
-    // burn it
-    // console.log(latestID.toNumber())
-    await contract.burn(latestId.toNumber())
+    const actualOriginalBadge = await contract.getBadgeById(originalBadgeId);
+    const actualNumClonesInWild = actualOriginalBadge[1].toNumber()
 
-    //check total supply
-    totalSupply = await contract.totalSupply()
-    assert.equal(totalSupply.toNumber(), 0, "token was burned")
+    assert.equal(actualNumClonesInWild, numClonesRequested - 1)
   })
   /*
   //test case 4
