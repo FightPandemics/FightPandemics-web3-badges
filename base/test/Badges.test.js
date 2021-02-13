@@ -3,8 +3,9 @@ const assert = require('chai').assert;
 let factory
 let contract
 let accounts
-let numClonesAllowed = 1
-let tokenURI = "http://sticlalux.ro/bedge.json"
+const numClonesAllowed = 1
+const numClonesRequested = 2
+const tokenURI = "http://sticlalux.ro/bedge.json"
 let contractOwner
 // start test block
 describe("Badges contract", function() {
@@ -20,7 +21,6 @@ describe("Badges contract", function() {
     contract = await factory.deploy()
   })
 
-  // test case 1
   it("Deploys", async function() {
     assert.ok(contract.address) // ok makes an asumtion that we pass as a argument that value exists
     assert.notEqual(contract.address, 0x0)
@@ -29,12 +29,9 @@ describe("Badges contract", function() {
     assert.notEqual(contract.address, undefined)
   })
 
-  // test case 2
   it("Mints badge", async function() {
     await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
-
     const badgeId = (await contract.getLatestBadgeId()).toNumber()
-
     const actualBadge = await contract.getBadgeById(badgeId)
     const actualNumClonesAllowed = actualBadge[0].toNumber()
     const actualNumClonesInWild = actualBadge[1].toNumber()
@@ -51,19 +48,25 @@ describe("Badges contract", function() {
   it("Has badge owner", async function() {
     await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
     const badgeId = (await contract.getLatestBadgeId()).toNumber()
-    const actualBadgeOwner = await contract.getBadgeOwner(badgeId);
+    const actualBadgeOwner = await contract.getBadgeOwner(badgeId)
     assert.equal(actualBadgeOwner, contractOwner)
   })
 
-  // it("Clones badge", async function() {
-  //   await contract.mint(accounts[1], 2, tokenURI, { from: accounts[0] })
-  //   await contract.clone()
-  // })
-  /*
-  // test case 3
-  it("Burns badges", async function() {
-    // mint badge first
-    await contract.mint(accounts[1], priceFinney, tokenURI, { from: accounts[0] })
+  it("Clones badge", async function() {
+    await contract.mint(contractOwner, numClonesRequested, tokenURI, { from: contractOwner })
+    const badgeId = (await contract.getLatestBadgeId()).toNumber()
+    await contract.clone(contractOwner, badgeId, numClonesRequested)
+    const badgeOwner = await contract.getBadgeOwner(badgeId)
+    const totalNumOfClones = await contract.getNumClonesOfOwner(badgeOwner)
+    assert.equal(totalNumOfClones, numClonesRequested + 1) // original plus clones
+
+    const actualBadge = await contract.getBadgeById(badgeId);
+    const actualNumClonesInWild = actualBadge[1].toNumber()
+    assert.equal(actualNumClonesInWild, numClonesRequested)
+  })
+
+  it("Burns badge", async function() {
+    await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
 
     // check supply
     let totalSupply = await contract.totalSupply()
@@ -78,7 +81,7 @@ describe("Badges contract", function() {
     totalSupply = await contract.totalSupply()
     assert.equal(totalSupply.toNumber(), 0, "token was burned")
   })
-
+  /*
   //test case 4
   it("Can set price", async function() {
     // mint badge with token price 0

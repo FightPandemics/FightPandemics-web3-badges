@@ -140,8 +140,12 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         }
     }
 
-    function getBadgeOwner(uint256 _tokenId) public view returns (address _owner) {
+    function getBadgeOwner(uint256 _tokenId) public view returns (address) {
         return ownerOf(_tokenId);
+    }
+
+    function getNumClonesOfOwner(address _owner) public view returns (uint256) {
+        return balanceOf(_owner);
     }
     /*
     function distroyContract() public onlyOwner {
