@@ -1,15 +1,14 @@
 const assert = require('chai').assert;
 
-
 let factory
 let contract
 let accounts
-let priceFinney = 2
+let numClonesAllowed = 1
 let tokenURI = "http://sticlalux.ro/bedge.json"
 // start test block
 describe("Badges contract", function() {
   // get contract instance
-  before(async () => {
+  before(async function() {
     factory = await ethers.getContractFactory("Badges")
     accounts = await ethers.provider.listAccounts()
   })
@@ -29,23 +28,22 @@ describe("Badges contract", function() {
   })
 
   // test case 2
-  it("Mints badges", async function() {
-    // mint a new token
-    await contract.mint(accounts[1], priceFinney, tokenURI, { from: accounts[0] })
+  it("Mints badge", async function() {
+    await contract.mint(accounts[1], numClonesAllowed, tokenURI, { from: accounts[0] })
 
-    // get latest badge ID
-    let badgeId = (await contract.getLatestId()).toNumber()
+    const badgeId = (await contract.getLatestBadgeId()).toNumber()
 
-    // get badge by ID
-    let badge = await contract.getBadgesById(badgeId)
-    let actualBadge = [badge[0].toNumber(), badge[1]] // formated for assertions
+    const actualBadge = await contract.getBadgeById(badgeId)
+    const actualNumClonesAllowed = actualBadge[0].toNumber()
+    const actualNumClonesInWild = actualBadge[1].toNumber()
+    const actualCloneFromId = actualBadge[2].toNumber()
+    const actualTokenUri = actualBadge[3]
 
-    // the badge that we expect
-    let expectedBadge = [priceFinney, tokenURI]
-
-    assert.deepEqual(actualBadge, expectedBadge)
-    assert.equal(await contract.tokenURI(badgeId), tokenURI)
-    assert.equal(await contract.ownerOf(badgeId), accounts[1])
+    assert.equal(badgeId, 1)
+    assert.equal(actualNumClonesAllowed, numClonesAllowed)
+    assert.equal(actualNumClonesInWild, 0)
+    assert.equal(actualCloneFromId, badgeId)
+    assert.equal(actualTokenUri, tokenURI)
   })
   /*
   // test case 3

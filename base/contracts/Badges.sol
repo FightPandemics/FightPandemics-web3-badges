@@ -13,7 +13,6 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
     Counters.Counter private _tokenIds;
 
     struct Badge {
-        uint256 priceFinney;
         uint256 numClonesAllowed;
         uint256 numClonesInWild;
         uint256 cloneFromId;
@@ -30,14 +29,24 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         _;
     }
 
+    constructor () public {
+        // If the array is new, skip over the first index.
+        if (badges.length == 0) {
+            Badge memory _dummyBadge = Badge({
+                numClonesAllowed: 0,
+                numClonesInWild: 0,
+                cloneFromId: 0
+            });
+            badges.push(_dummyBadge);
+        }
+    }
+
     function mint(
         address _to,
-        uint256 _priceFinney,
         uint256 _numClonesAllowed,
         string memory _tokenURI
     ) public mintable onlyOwner returns (uint256 tokenId) {
         Badge memory _badge = Badge({
-            priceFinney: _priceFinney,
             numClonesAllowed: _numClonesAllowed,
             numClonesInWild: 0,
             cloneFromId: 0
@@ -60,7 +69,7 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         _burn(_tokenId);
         delete badges[_tokenId];
     }
-
+    /*
     function setPrice(uint256 _tokenId, uint256 _newPriceFinney)
         public
         onlyOwner
@@ -70,7 +79,7 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
 
         _badge.priceFinney = _newPriceFinney;
         badges[_tokenId] = _badge;
-    }
+    } */
 
     function setTokenURI(uint256 _tokenId, string memory _tokenURI)
         public
@@ -79,25 +88,31 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         _setTokenURI(_tokenId, _tokenURI);
     }
 
-    function getBadgesById(uint256 _tokenId)
+    function getBadgeById(uint256 _tokenId)
         public
         view
-        returns (uint256 priceFinney, string memory tokenURIinfo)
+        returns (uint256 numClonesAllowed,
+            uint256 numClonesInWild,
+            uint256 cloneFromId,
+            string memory tokenUriInfo
+        )
     {
         Badge memory _badge = badges[_tokenId];
-        priceFinney = _badge.priceFinney;
-        tokenURIinfo = tokenURI(_tokenId);
+        numClonesAllowed = _badge.numClonesAllowed;
+        numClonesInWild = _badge.numClonesInWild;
+        cloneFromId = _badge.cloneFromId;
+        tokenUriInfo = tokenURI(_tokenId);
     }
 
-    function getLatestId() public view returns (uint256 tokenId) {
+    function getLatestBadgeId() public view returns (uint256 tokenId) {
         if (badges.length == 0) {
             tokenId = 0;
         } else {
             tokenId = badges.length - 1;
         }
     }
-
+    /*
     function distroyContract() public onlyOwner {
         selfdestruct(msg.sender);
-    }
+    }*/
 }
