@@ -71,7 +71,6 @@ describe("Badges contract", function() {
   it("Burns badge", async function() {
     await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
     const originalBadgeId = (await contract.getLatestBadgeId()).toNumber()
-    const actualOriginalBadgePreBurn = await contract.getBadgeById(originalBadgeId);
     await contract.clone(contractOwner, originalBadgeId, numClonesRequested)
 
     const currentSupply = (await contract.totalSupply()).toNumber()
