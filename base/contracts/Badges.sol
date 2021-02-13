@@ -30,18 +30,6 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         _;
     }
 
-    constructor() public {
-        if (badges.length == 0) {
-            Badge memory _dummyBadge = Badge({
-                priceFinney: 0,
-                numClonesAllowed: 0,
-                numClonesInWild: 0,
-                cloneFromId: 0
-            });
-            badges.push(_dummyBadge);
-        }
-    }
-
     function mint(
         address _to,
         uint256 _priceFinney,
@@ -54,9 +42,17 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
             numClonesInWild: 0,
             cloneFromId: 0
         });
-        tokenId = badges.push(_badge) - 1; // Solidity uses 0 as a default value when item not found in mapping.
+
+        _tokenIds.increment();
+        tokenId = _tokenIds.current();
+
+        badges.push(_badge);
+        badges[tokenId].cloneFromId = tokenId;
+
         _safeMint(_to, tokenId);
         _setTokenURI(tokenId, _tokenURI);
+
+        return tokenId;
     }
 
     function burn(uint256 _tokenId) public onlyOwner {

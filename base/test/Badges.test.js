@@ -1,6 +1,4 @@
-import { assert } from "chai"
-import { it, describe, before, beforeEach } from "mocha"
-import { ethers } from "ethers"
+const assert = require('chai').assert;
 
 
 let factory
@@ -49,7 +47,7 @@ describe("Badges contract", function() {
     assert.equal(await contract.tokenURI(badgeId), tokenURI)
     assert.equal(await contract.ownerOf(badgeId), accounts[1])
   })
-
+  /*
   // test case 3
   it("Burns badges", async function() {
     // mint badge first
@@ -102,4 +100,5 @@ describe("Badges contract", function() {
     const badge = await contract.getBadgesById(latestId)
     assert.equal(badge[1], newTokenURI)
   })
+  */
 })
