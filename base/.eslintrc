@@ -1,7 +1,14 @@
 {
   "extends": "standard",
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+    }
+  },
   "rules": {
-    "semi": [2, "always"],
+    "semi": [2, "never"],
     "indent": ["error", 2],
     "space-in-parens": ["error", "never"],
     "array-bracket-spacing": ["error", "never"],

@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "dev": "nodemon --exec babel-node index.js",
     "test": "npx hardhat test",
     "start": "npx hardhat node",
     "compile": "npx hardhat compile",
@@ -21,10 +22,17 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "@openzeppelin/contracts": "^3.3.0",
+    "@openzeppelin/contracts": "^3.4.0",
     "chai": "^4.2.0",
-    "ethereum-waffle": "^3.2.1",
+    "ethereum-waffle": "^3.2.2",
     "ethers": "^5.0.24",
     "hardhat": "^2.0.5"
+  },
+  "dependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1"
   }
 }
