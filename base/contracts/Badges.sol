@@ -60,8 +60,6 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
 
         _safeMint(_to, tokenId);
         _setTokenURI(tokenId, _tokenUri);
-
-        return tokenId;
     }
 
     function clone(
