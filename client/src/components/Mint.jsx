@@ -18,9 +18,9 @@ export default function Mint() {
     const tokenURI = "http://sticlalux.ro/bedge.json";
     await contractInstance.mint(accounts[0], priceFinney, tokenURI);
 
-    const badgeId = (await contractInstance.getLatestId()).toNumber();
+    const badgeId = (await contractInstance.getLatestBadgeId()).toNumber();
 
-    const badge = await contractInstance.getBadgesById(badgeId);
+    const badge = await contractInstance.getBadgeById(badgeId);
 
     if (badge !== null) {
       alert("Badge Minted!");

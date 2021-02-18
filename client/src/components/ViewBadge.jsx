@@ -15,12 +15,13 @@ export default function ViewBadge() {
     const contractInstance = await GetContractReadWrite();
     console.log("Contract Instance: ", contractInstance);
 
-    const badgeId = (await contractInstance.getLatestId()).toNumber();
+    const badgeId = (await contractInstance.getLatestBadgeId()).toNumber();
     console.log("Latest Badge ID: ", badgeId);
 
     const tokenURI = await contractInstance.tokenURI(badgeId);
     console.log("TokenURI: ", tokenURI);
 
+    // enter this URL in your browser to get temporary access
     const proxyURL = "https://cors-anywhere.herokuapp.com/";
 
     axios.get(proxyURL + tokenURI, {
