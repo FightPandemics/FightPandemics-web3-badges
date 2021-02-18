@@ -1,10 +1,10 @@
 import React from "react";
-import GetProviderMetamask from "../web3/GetProviderMetamask";
+import GetProviderJsonRpc from "../web3/GetProviderJsonRpc";
 import GetContractReadWrite from "../web3/GetContractReadWrite";
 
 export default function Mint() {
   async function handleClick() {
-    const provider = await GetProviderMetamask();
+    const provider = await GetProviderJsonRpc();
     console.log("Provider: ", provider);
 
     const accounts = await provider.listAccounts();
