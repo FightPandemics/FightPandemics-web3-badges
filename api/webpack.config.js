@@ -30,7 +30,7 @@ module.exports = {
           /node_modules/,
           path.resolve(__dirname, "migrations"),
           path.resolve(__dirname, "seeds"),
-          /knexfile.ts/,
+          /knexfile.js/,
         ],
       },
     ],
