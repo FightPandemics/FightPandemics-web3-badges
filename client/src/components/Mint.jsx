@@ -8,15 +8,16 @@ export default function Mint() {
     console.log("Provider: ", provider);
 
     const accounts = await provider.listAccounts();
-    console.log("Accounts: ", accounts);
+    const contractOwner = accounts[0];
+    console.log("Contract owner address: ", contractOwner);
 
     const contractInstance = await GetContractReadWrite();
     console.log("Contract Instance: ", contractInstance);
 
     // mint
-    const priceFinney = 2;
+    const numClonesAllowed = 2;
     const tokenURI = "http://sticlalux.ro/bedge.json";
-    await contractInstance.mint(accounts[0], priceFinney, tokenURI);
+    await contractInstance.mint(contractOwner, numClonesAllowed, tokenURI);
 
     const badgeId = (await contractInstance.getLatestBadgeId()).toNumber();
 
