@@ -10,7 +10,7 @@
     "setup": "yarn install && concurrently \"cd api && yarn install\" \"cd client && yarn install\" \"cd base && yarn install\"",
     "clean": "concurrently \"cd api && rm -rf node_modules/\" \"cd client && rm -rf node_modules/\" && rm -rf node_modules",
     "api:dev": "cd api && yarn watch",
-    "client:dev": "cd client && yarn dev",
+    "client:dev": "cd client && yarn start",
     "dev": "concurrently \"yarn api:dev\" \"yarn client:dev\""
   },
   "devDependencies": {
