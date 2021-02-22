@@ -13,7 +13,7 @@ Folder structure:
 - Solidity compiler (solc) 0.7.3 (soon to be upgraded to 0.8.0)
 - Yarn latest version
 - NVM (Node Version Manager) - run `nvm install` to install node version locally from `.nvmrc` file within each folder
-- Install PostGres for your platform and created database named `badges_dev`.
+- Install PostGres for your platform and create database named `badges_dev` based on the database URL string below.
 - In `/api` created a `.env` file with the following
 ```
 NODE_ENV=development
