@@ -1,5 +1,5 @@
 import { knexSnakeCaseMappers } from "objection";
-import { config } from "libs/config"
+import { config } from "./libs/config"
 
 module.exports = {
 
@@ -7,9 +7,9 @@ module.exports = {
     client: "pg",
     connection: config.databaseUrl,
     migrations: {
-      extension: "js",
+      extension: "ts",
       tableName: "migrations",
-      directory: "./migrations/",
+      directory: "./migrations",
     },
     seeds: {
       directory: "./seeds/",
