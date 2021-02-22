@@ -3,7 +3,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
   entry: {
-    index: "./index.js",
+    index: "./index.ts",
   },
   target: "node",
   mode: "production",
@@ -17,20 +17,20 @@ module.exports = {
     libraryTarget: "commonjs2",
   },
   resolve: {
-    extensions: [".js", ".json", ".mjs"]
+    extensions: [".ts", ".tsx", ".js", ".json"],
   },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         use: {
-          loader: "babel-loader",
+          loader: "ts-loader",
         },
         exclude: [
           /node_modules/,
           path.resolve(__dirname, "migrations"),
           path.resolve(__dirname, "seeds"),
-          /knexfile.js/,
+          /knexfile.ts/,
         ],
       },
     ],
@@ -50,5 +50,5 @@ module.exports = {
     "mssql/lib/base": "mssql/lib/base",
     "mssql/package.json": "mssql/package.json",
   },
-  plugins: [ new CleanWebpackPlugin() ],
+  plugins: [new CleanWebpackPlugin()],
 };
