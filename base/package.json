@@ -29,8 +29,6 @@
     "hardhat": "^2.0.5"
   },
   "dependencies": {
-    "axios": "^0.21.1",
-    "dotenv": "^8.2.0",
     "eslint": "^7.20.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
