@@ -1,0 +1,19 @@
+{
+  "name": "DuinGud-Badges",
+  "version": "1.0.0",
+  "description": "DuinGud badges project for volunteers",
+  "main": "index.js",
+  "repository": "git@github.com:FightPandemics/FightPandemics-web3-badges.git",
+  "author": "CareDAO & DuinGud",
+  "license": "MIT",
+  "scripts": {
+    "setup": "yarn install && concurrently \"cd api && yarn install\" \"cd client && yarn install\" \"cd base && yarn install\"",
+    "clean": "concurrently \"cd api && rm -rf node_modules/\" \"cd client && rm -rf node_modules/\" && rm -rf node_modules",
+    "api:dev": "cd api && yarn watch",
+    "client:dev": "cd client && yarn start",
+    "dev": "concurrently \"yarn api:dev\" \"yarn client:dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.0"
+  }
+}
