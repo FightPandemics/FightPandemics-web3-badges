@@ -1,12 +1,15 @@
-require('dotenv').config();
-const pinataApiKey = process.env.PINATA_API_KEY
-const pinataSecretApiKey = process.env.PINATA_SECRET_API_KEY
-// console.log(pinataApiKey, pinataSecretApiKey);
-const axios = require('axios');
-const fs = require('fs');
-const FormData = require('form-data');
+// require('dotenv').config();
+import "dotenv/config";
+const {
+  PINATA_API_KEY,
+  PINATA_SECRET_API_KEY
+} = process.env;
+import axios from 'axios'
+import {ethers} from 'ethers';
+import fs from 'fs';
+import FormData from 'form-data';
 
-const pinFileToIPFS = async () => {
+export default async function pinFileToIPFS() {
 
   const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
 
@@ -26,8 +29,16 @@ const pinFileToIPFS = async () => {
         pinata_secret_api_key: pinataSecretApiKey,
       },
     });
-    console.log(res.data);
+    // console.log(res.data);
+    return res.data
   }
+  
+  console.log(ethers.Contract.address);
 }
 
-pinFileToIPFS();
+// (async () => {
+//   await pinFileToIPFS().then( (data) => {
+//     console.log(data.IpfsHash);
+//   })
+// })()
+// pinFileToIPFS();
