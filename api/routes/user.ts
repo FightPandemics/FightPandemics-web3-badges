@@ -1,9 +1,9 @@
-import express, { Router } from "express";
+import express from "express";
 import { Magic, MagicUserMetadata } from "@magic-sdk/admin";
 import { config } from "../libs/config";
 import passport from "passport";
 import { Strategy as MagicStrategy, MagicUser, DoneFunc } from "passport-magic";
-import { User } from "models/user"
+import { User } from "../models/user"
 
 const router = express.Router()
 
@@ -42,7 +42,7 @@ const signup = async (user: MagicUser, userMetadata: MagicUserMetadata, done: Do
 const login = async (user: MagicUser, existingUser: User, done: DoneFunc) => {
   /* Replay attack protection (https://go.magic.link/replay-attack) */
   if (user.claim.iat <= existingUser.lastLoginAt) {
-    return done(null, false {
+    return done(null, false, {
       message: `Replay attack detected for user ${user.issuer}`
     })
   }
@@ -117,3 +117,5 @@ router.post("/logout", async (req, res) => {
       .end()
   }
 })
+
+export default router;

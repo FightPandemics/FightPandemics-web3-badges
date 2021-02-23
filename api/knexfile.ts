@@ -1,7 +1,7 @@
 import { knexSnakeCaseMappers } from "objection";
 import { config } from "./libs/config"
 
-module.exports = {
+export default {
 
   development: {
     client: "pg",
