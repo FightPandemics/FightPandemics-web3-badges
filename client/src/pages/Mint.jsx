@@ -24,6 +24,7 @@ export default function Mint() {
     const badge = await contractInstance.getBadgeById(badgeId);
 
     if (badge !== null) {
+      // eslint-disable-next-line no-undef
       alert("Badge Minted!");
     }
   }

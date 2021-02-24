@@ -25,7 +25,8 @@ const theme = {
     font: {
       family: {
         display:
-        'Poppins,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,"Droid Sans","Helvetica Neue",sans-serif',
+        // eslint-disable-next-line max-len
+        '"Poppins","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif',
         body: '"Work Sans", sans-serif',
         button: '"DM Sans", sans-serif',
       },

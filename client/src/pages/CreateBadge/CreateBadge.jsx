@@ -1,13 +1,14 @@
 import React from "react";
-import { CreateBadgeContainer, FormContainer } from "./CreateBadgeComponents";
+import { CreateBadgeContainer, FormContainer } from "./StyledCreateBadge";
 import CreateBadgeForm from "./CreateBadgeForm";
+import Heading from "../../components/Typography/Heading";
 
 export default function CreateBadge() {
   return (
     <div>
       <CreateBadgeContainer>
-        <h1>Create Badge</h1>
         <FormContainer>
+          <Heading> Create Badge </Heading>
           <CreateBadgeForm/>
         </FormContainer>
       </CreateBadgeContainer>

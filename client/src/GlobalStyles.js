@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { createGlobalStyle } from "styled-components";
 import { WHITE, SELAGO } from "./constants/colors";
 import { mq } from "./constants/theme";
@@ -61,12 +62,12 @@ a {
   padding: 0;
 }
 .app-drawer .am-drawer-content {
-	position: relative;
-	min-height: 100vh;
-	padding-bottom: 6rem; // footer height
-	overflow: hidden;
+position: relative;
+min-height: 100vh;
+padding-bottom: 6rem; // footer height
+overflow: hidden;
   @media screen and (max-width: ${mq.tablet.wide.minWidth}) {
-	  padding-bottom: 8rem; // max mobile footer height based on content
+ padding-bottom: 8rem; // max mobile footer height based on content
   }
 }
 .am-drawer-sidebar {
