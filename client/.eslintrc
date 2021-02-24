@@ -5,7 +5,8 @@
     "eslint:recommended"
   ],
   "plugins": [
-    "react"
+    "react",
+    "react-hooks"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
@@ -33,6 +34,8 @@
         "anonymous": "never",
         "asyncArrow": "always"
       }
-    ]
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

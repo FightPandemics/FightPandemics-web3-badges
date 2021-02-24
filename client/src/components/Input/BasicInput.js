@@ -1,22 +1,18 @@
 import React from "react";
-// import Input from "antd";
+import { Form, Input } from "antd";
 import styled from "styled-components";
 import { theme } from "../../constants/theme";
-const { colors } = theme;
 
-const FormInput = styled.input`
-border: none;
-box-shadow: none;
-color: ${colors.black};
-flex-grow: 1;
-overflow: auto;
-padding-bottom: 0.5rem;
+const StyledInput = styled(Input)`
+font-family: ${theme.typography.font.family.body};
 `;
 
-function BasicInput() {
+const BasicInput = (inputLabel) => {
   return (
-    <FormInput />
+    <Form.Item label={inputLabel}>
+      <StyledInput />
+    </Form.Item>
   );
-}
+};
 
 export default BasicInput;

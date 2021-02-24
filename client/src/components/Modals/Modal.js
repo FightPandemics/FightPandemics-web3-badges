@@ -11,7 +11,6 @@ import Heading from "../Typography/Heading";
 const { colors, typography } = theme;
 
 const StyledModal = styled(AntModal)`
-    
 	&&& .btn-primary {
 		font-family: ${typography.font.family.display.poppins};
 		border-radius: 46px;
@@ -30,7 +29,18 @@ const StyledModal = styled(AntModal)`
 		background-color: ${colors.white};
 		color: ${colors.royalBlue};
 		border: none;
+		box-shadow: none;
 	}
+	.btn-container {
+		width: 524px;
+		display: flex;
+		justify-content: end;
+		align-items: center;
+		margin: 0 auto;
+	}
+    .ant-typography sc-eCssSg kLCpNp {
+        text-align: center;
+    }
 `;
 
 const Modal = ({ isShowing, hide, title, buttonPrimary, buttonSecondary }) =>
@@ -42,26 +52,26 @@ const Modal = ({ isShowing, hide, title, buttonPrimary, buttonSecondary }) =>
           width={800}
           title={
             <Heading>
-              <h4>{title}</h4>
+              <h5>{title}</h5>
             </Heading>
           }
           visible={isShowing}
           onCancel={hide}
           okButtonProps={{ type: "primary" }}
           cancelButtonProps={{ type: "primary" }}
-          footer={[
+          footer={null}>
+          <div className="btn-container">
             <Button className="btn-tertiary" key="back" onClick={hide}>
               {buttonSecondary}
-            </Button>,
+            </Button>
             <BaseButton
               className="btn-primary"
               type="primary"
               key="submit"
               onClick="">
               {buttonPrimary}
-            </BaseButton>,
-          ]}>
-          <img src={logo} />
+            </BaseButton>
+          </div>
         </StyledModal>
       </React.Fragment>,
       document.body,

@@ -1,13 +1,57 @@
+/* eslint-disable max-len */
+import React from "react";
 import styled from "styled-components";
-import { Upload } from "antd";
-// import { theme } from "../../constants/theme";
+import { Upload, Button } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import { theme } from "../../constants/theme";
 // const { colors } = theme;
 
-const UploadButton = styled(Upload)`
-&.ant-upload-list.ant-upload-list-text {
-    width: 100%;
-    color: black;
-}
+const StyledUpload = styled(Upload)`
+font-family: ${theme.typography.font.family.display};
 `;
+
+class UploadButton extends React.Component {
+state = {
+  fileList: [],
+};
+
+handleChange = (info) => {
+  let fileList = [...info.fileList];
+  fileList = fileList.slice(-1);
+  this.setState({ fileList });
+};
+
+render() {
+  const props = {
+    onChange: this.handleChange,
+    multiple: true,
+  };
+  return (
+    <StyledUpload
+      {...props}
+      fileList={this.state.fileList}
+      id="upload-button"
+      name="logo"
+      action="/upload.do"
+      listType="text"
+      accept="image/png">
+      {this.state.fileList.length > 0
+        ? null
+        : (
+          <>
+            <Button type="secondary" icon={<UploadOutlined />} shape="round">
+                  Upload an image
+            </Button>
+
+            <p>
+              {" "}
+            We accept images in PNG format, <br /> 500x500 px, &#60;200KB{" "}
+            </p>
+          </>
+        )}
+    </StyledUpload>
+  );
+}
+}
 
 export default UploadButton;

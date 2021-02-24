@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Form, Input, Button, Upload } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import StyledForm from "./StyledCreateBadgeForm";
 import Modal from "../../components/Modals/Modal";
 import useModal from "../../hooks/useModal";
 import UploadButton from "../../components/Button/UploadButton";
@@ -13,6 +13,7 @@ export default function CreateBadgeForm() {
   const { isShowing, toggle } = useModal();
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState("vertical");
+  const [image, setImage] = useState();
 
   const onFormLayoutChange = ({ layout }) => {
     setFormLayout(layout);
@@ -33,22 +34,25 @@ export default function CreateBadgeForm() {
   const normFile = (e) => {
     console.log("Upload event:", e);
     if (Array.isArray(e)) {
+      console.log(e, e.fileList);
       return e;
     }
+    console.log(e.fileList);
     return e && e.fileList;
   };
 
-  const buttonItemLayout =
-    formLayout === "vertical"
-      ? {
-        wrapperCol: {
-          span: 14,
-          offset: 5,
-        },
-      }
-      : null;
+  // const buttonItemLayout =
+  //   formLayout === "vertical"
+  //     ? {
+  //       wrapperCol: {
+  //         span: 14,
+  //         offset: 0,
+  //       },
+  //     }
+  //     : null;
+
   return (
-    <Form
+    <StyledForm
       id = "create-badge-form"
       {...formItemLayout}
       layout={formLayout}
@@ -74,15 +78,11 @@ export default function CreateBadgeForm() {
         name="upload"
         valuePropName="fileList"
         getValueFromEvent={normFile}
-        {...buttonItemLayout}
+        // {...buttonItemLayout}
         className="form-buttons"
       >
         <div className="ant-upload-list-text"/>
-        <UploadButton id="upload-button" name="logo" action="/upload.do" listType="text">
-          <Button type="secondary" icon={<UploadOutlined />} shape="round">Upload an Image</Button>
-        </UploadButton>
-        <br/>
-        <p> We accept images in PNG format, <br/> 500x500 px, &#60;200KB  </p>
+        <UploadButton className="upload-btn" />
         <PrimaryFormButton className="btn-right" type="primary" onClick={toggle}>Create Badge</PrimaryFormButton>
         <Modal
           isShowing={isShowing}
@@ -92,6 +92,6 @@ export default function CreateBadgeForm() {
           buttonSecondary="Close"
         />
       </Form.Item>
-    </Form>
+    </StyledForm>
   );
 }

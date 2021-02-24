@@ -4,6 +4,7 @@ import { NavBar } from "antd-mobile";
 import styled from "styled-components";
 import { ReactComponent as Logo } from "./Logo.svg";
 import { mq } from "../../constants/theme";
+
 const navbarHeight = "6rem";
 
 const FPLogo = styled(Logo)`
@@ -67,12 +68,7 @@ const Header = () => {
     <HeaderWrapper className="header">
       <StyledNavBar
         mode="light"
-        leftContent={
-          <FPLogo/>
-        }
-        rightContent={
-          <FPLogo/>
-        }
+        leftContent={<FPLogo />}
       />
     </HeaderWrapper>
   );

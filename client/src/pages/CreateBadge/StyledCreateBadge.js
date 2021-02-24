@@ -5,19 +5,20 @@ const { white, darkerGray, royalBlue } = theme.colors;
 const { display } = theme.typography.font.family;
 
 export const CreateBadgeContainer = styled.div`
-width: 100%;
-align-items: center;
-justify-content: center;
-text-align: center;
-color: ${darkerGray};
-margin: 0 auto;
-background-color: ${white};
-letter-spacing: normal;
-font-style: normal;
-font-stretch: normal;
-@media screen and (max-width: ${mq.phone.wide.maxWidth}) {
-    padding: 0 3rem;
-}
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: ${darkerGray};
+	margin: 0 auto;
+	background-color: ${white};
+	letter-spacing: normal;
+	font-style: normal;
+	font-stretch: normal;
+	@media screen and (max-width: ${mq.phone.wide.maxWidth}) {
+		padding: 0 3rem;
+	}
+	margin-bottom: 104px;
 `;
 
 export const FormContainer = styled.div`
@@ -25,6 +26,7 @@ export const FormContainer = styled.div`
 	width: 800px;
 	height: 673px;
 	margin: auto;
+	margin-bottom: 104px;
 	top: 208px;
 	border: 1px solid #c4c4c4;
 	box-sizing: border-box;
@@ -80,17 +82,18 @@ export const FormContainer = styled.div`
 		border-radius: 46px;
 		background-color: ${royalBlue};
 		color: white;
+		align-items: right;
 	}
 
 	.ant-btn-secondary {
 		border-radius: 46px;
 		background-color: ${white};
 		color: ${royalBlue};
-    border: 1px solid ${royalBlue};
+		border: 1px solid ${royalBlue};
+		height: 44px;
+		width: 200px;
+		left: 0px;
+		top: 0px;
+		font-weight: 500;
 	}
-
-  .form-buttons {
-    display: block;
-    width: 100%;
-  }
 `;
