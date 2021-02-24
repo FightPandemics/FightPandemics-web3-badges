@@ -33,12 +33,12 @@ const StyledModal = styled(AntModal)`
 	}
 	.btn-container {
 		width: 524px;
-		display: flex;
-		justify-content: end;
-		align-items: center;
 		margin: 0 auto;
+		display: flex;
+    justify-content: flex-end;
+		align-items: center;
 	}
-    .ant-typography sc-eCssSg kLCpNp {
+    .ant-typography h4 {
         text-align: center;
     }
 `;
@@ -52,7 +52,7 @@ const Modal = ({ isShowing, hide, title, buttonPrimary, buttonSecondary }) =>
           width={800}
           title={
             <Heading>
-              <h5>{title}</h5>
+              <h4>{title}</h4>
             </Heading>
           }
           visible={isShowing}
