@@ -19,6 +19,13 @@ Folder structure:
 NODE_ENV=development
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/badges_dev
 ```
+## For Pinata Access
+- In `/client` create a `.env` file with the following
+```
+REACT_APP_PINATA_API_KEY=
+REACT_APP_PINATA_SECRET_API_KEY=
+```
+- *contact @jontkoh for the Pinata keys*
 
 # General Steps
 1. Run `yarn setup` in project root directory to install dependencies for all folders.
