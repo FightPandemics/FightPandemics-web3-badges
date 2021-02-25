@@ -27,7 +27,7 @@ export const FormContainer = styled.div`
 	height: 673px;
 	margin: auto;
 	margin-bottom: 104px;
-	top: 208px;
+	top: 18vh;
 	border: 1px solid #c4c4c4;
 	box-sizing: border-box;
 

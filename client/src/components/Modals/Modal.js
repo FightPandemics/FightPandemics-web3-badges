@@ -13,6 +13,13 @@ const { colors, typography } = theme;
 
 const StyledModal = styled(AntModal)`
 	border-radius: 10px;
+    .ant-modal-body {
+        background: pink
+        height: 100px;
+    }
+    .btn-container {
+        padding-top: 50px;
+    }
 	&&& .btn-primary {
 		font-family: ${typography.font.family.display.poppins};
 		border-radius: 46px;
