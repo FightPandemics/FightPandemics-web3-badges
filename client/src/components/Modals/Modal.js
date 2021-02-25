@@ -84,6 +84,11 @@ const Modal = ({
           okButtonProps={{ type: "primary" }}
           cancelButtonProps={{ type: "primary" }}
           footer={null}>
+          {modalBodyText
+            ? (
+              <span className="modal-body">{modalBodyText}</span>
+            )
+            : null}
           {button === "false"
             ? null
             : (
@@ -100,11 +105,6 @@ const Modal = ({
                 </BaseButton>
               </div>
             )}
-          {modalBodyText
-            ? (
-              <span className="modal-body">{modalBodyText}</span>
-            )
-            : null}
         </StyledModal>
       </React.Fragment>,
       document.body,
