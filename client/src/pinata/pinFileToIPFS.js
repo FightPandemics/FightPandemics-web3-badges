@@ -33,28 +33,4 @@ export default async function pinFileToIPFS(badgeImage) {
   } catch (error) {
     console.error(error);
   }
-
-  // // Must change 1month-volunteer.png to token's metadata
-  // if (filename) {
-  //   data.append("file", fs.createReadStream(filename));
-
-  //   const res = await axios.post(url, data, {
-  //     maxContentLength: "Infinity",
-  //     headers: {
-  //       "Content-Type": `multipart/form-data;boundary=${data._boundary}`,
-  //       pinata_api_key: PINATA_API_KEY,
-  //       pinata_secret_api_key: PINATA_SECRET_API_KEY,
-  //     },
-  //   });
-  //   // console.log(res.data);
-  //   return res.data;
-  // }
-  // console.log(ethers.Contract.address);
 }
-
-// (async () => {
-//   await pinFileToIPFS().then( (data) => {
-//     console.log(data.IpfsHash);
-//   })
-// })()
-// pinFileToIPFS();
