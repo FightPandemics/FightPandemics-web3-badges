@@ -14,10 +14,10 @@ const StyledContainer = styled.div`
   height: calc(100vh - 94px);
   .left {
     background: ${selago};
-    width: 40%;
+    width: 50%;
   }
   .right {
-    width: 60%;
+    width: 50%;
     padding-top: 10vh;
     position: relative;
     .vertically-center {

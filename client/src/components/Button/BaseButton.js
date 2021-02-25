@@ -20,9 +20,13 @@ const BaseButton = styled(Button)`
 		background-color: ${colors.royalBlue};
 		color: white;
 		font-family: ${display};
+		height: 44px;
+		width: 148px;
+		left: 0px;
+		top: 0px;
 	}
 
-	&&& .btn-secondary {
+	&&&.btn-secondary {
 		font-size: 14px;
 		border-radius: 46px;
 		background-color: ${colors.white};
@@ -35,7 +39,7 @@ const BaseButton = styled(Button)`
 		top: 0px;
 	}
 
-	&&& .btn-tertiary {
+	&&&.btn-tertiary {
 		background-color: ${colors.white};
 		color: ${colors.royalBlue};
 		border: none;

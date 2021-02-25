@@ -8,13 +8,15 @@ import { Switch, Route, Link, withRouter, useLocation } from "react-router-dom";
 import CreateBadge from "./pages/CreateBadge/CreateBadge";
 import ClaimBadge from "./pages/Claim Your Badge/ClaimBadge";
 import AssignBadge from "./pages/Assign Badge/AssignBadge";
+import BadgeProfile from "./pages/Badge Profile/BadgeProfile";
 import Header from "./pages/Header/Header";
+import Navbar from "./pages/Header/Navbar";
 
 function App() {
   const location = useLocation();
   return (
     <div className="App">
-      { location.pathname === "/claimbadge" ? null : <Header/> }
+      { location.pathname === "/claimbadge" ? null : location.pathname === "/badgeprofile" ? <Navbar /> : <Header />}
       <Switch >
         <div className="app-body">
           {/* <h1>Badges Module</h1> */}
@@ -23,6 +25,7 @@ function App() {
           <Route path="/createbadge" render={routerProps => <CreateBadge routerProps={routerProps} />} />
           <Route path="/claimbadge" render={routerProps => <ClaimBadge routerProps={routerProps} />} />
           <Route path="/assignbadge" render={routerProps => <AssignBadge routerProps={routerProps} />} />
+          <Route path="/badgeprofile" render={routerProps => <BadgeProfile routerProps={routerProps} />} />
         </div>
       </Switch>
     </div>
