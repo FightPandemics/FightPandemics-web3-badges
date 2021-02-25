@@ -13,6 +13,13 @@ const { colors, typography } = theme;
 
 const StyledModal = styled(AntModal)`
 	border-radius: 10px;
+    .ant-modal-body {
+        background: pink
+        height: 100px;
+    }
+    .btn-container {
+        padding-top: 50px;
+    }
 	&&& .btn-primary {
 		font-family: ${typography.font.family.display.poppins};
 		border-radius: 46px;
@@ -84,6 +91,11 @@ const Modal = ({
           okButtonProps={{ type: "primary" }}
           cancelButtonProps={{ type: "primary" }}
           footer={null}>
+          {modalBodyText
+            ? (
+              <span className="modal-body">{modalBodyText}</span>
+            )
+            : null}
           {button === "false"
             ? null
             : (
@@ -100,11 +112,6 @@ const Modal = ({
                 </BaseButton>
               </div>
             )}
-          {modalBodyText
-            ? (
-              <span className="modal-body">{modalBodyText}</span>
-            )
-            : null}
         </StyledModal>
       </React.Fragment>,
       document.body,

@@ -45,7 +45,6 @@ const StyledForm = styled(Form)`
 		top: -1.5em;
 	}
 	.ant-upload-list-item-info {
-		font-size: 1.5em;
 		text-align: left;
 		font-family: ${body};
 		.ant-upload-list-item-name {
