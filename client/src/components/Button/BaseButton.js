@@ -11,6 +11,8 @@ const BaseButton = styled(Button)`
 	width: 148px;
 	left: 0px;
 	top: 0px;
+	background-color: ${colors.royalBlue};
+	color: white;
 
 	&&&.btn-primary {
 		font-size: 14px;

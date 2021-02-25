@@ -43,7 +43,15 @@ const StyledModal = styled(AntModal)`
     }
 `;
 
-const Modal = ({ isShowing, hide, title, buttonPrimary, buttonSecondary }) =>
+const Modal = ({
+  isShowing,
+  hide,
+  title,
+  buttonPrimary,
+  buttonSecondary,
+  button,
+  modalBodyText,
+}) =>
   isShowing
     ? ReactDOM.createPortal(
       <React.Fragment>
@@ -60,18 +68,23 @@ const Modal = ({ isShowing, hide, title, buttonPrimary, buttonSecondary }) =>
           okButtonProps={{ type: "primary" }}
           cancelButtonProps={{ type: "primary" }}
           footer={null}>
-          <div className="btn-container">
-            <Button className="btn-tertiary" key="back" onClick={hide}>
-              {buttonSecondary}
-            </Button>
-            <BaseButton
-              className="btn-primary"
-              type="primary"
-              key="submit"
-              onClick="">
-              {buttonPrimary}
-            </BaseButton>
-          </div>
+          {button === "false"
+            ? null
+            : (
+              <div className="btn-container">
+                <Button className="btn-tertiary" key="back" onClick={hide}>
+                  {buttonSecondary}
+                </Button>
+                <BaseButton
+                  className="btn-primary"
+                  type="primary"
+                  key="submit"
+                  onClick="">
+                  {buttonPrimary}
+                </BaseButton>
+              </div>
+            )}
+          {modalBodyText ? <span>{modalBodyText}</span> : null}
         </StyledModal>
       </React.Fragment>,
       document.body,

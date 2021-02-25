@@ -11,6 +11,9 @@ const PrimaryFormButton = styled(Button)`
 	left: 0px;
 	top: 0px;
 	border-radius: 46px;
+	background-color: ${colors.royalBlue};
+	color: white;
+	margin-left: 20px;
 
 	&&&.btn-primary {
 		border-radius: 46px;
@@ -19,7 +22,6 @@ const PrimaryFormButton = styled(Button)`
 		margin-left: 20px;
 	}
 	&&&.btn-right {
-		
 	}
 `;
 
