@@ -19,7 +19,13 @@ const StyledContainer = styled.div`
   .right {
     width: 60%;
     padding-top: 10vh;
-    overflow-y: scroll;
+    position: relative;
+    .vertically-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
     h1 {
       margin: 10px 0 0;
       font-weight: 800;
@@ -30,6 +36,7 @@ const StyledContainer = styled.div`
         font-family: ${body};
         font-size: 16px;
     }
+    
   }
 `;
 
@@ -79,10 +86,13 @@ function ClaimBadge() {
           <StyledLogo src={ namelogo} />
         </div>
         <div className="right">
-          <StyledHeading>Claim Your Badge</StyledHeading>
-          <StyledWallet src={walletlogo}/>
-          <h3>To claim your badge, please your email below<br/>to sign up for a FightPandemics wallet.</h3>
-          <ClaimBadgeForm/>
+          <div className="vertically-center">
+            <StyledHeading>Claim Your Badge</StyledHeading>
+            <StyledWallet src={walletlogo}/>
+            <h3>To claim your badge, please your email below<br/>to sign up for a FightPandemics wallet.</h3>
+            <ClaimBadgeForm/>
+          </div>
+
         </div>
       </StyledContainer>
       <StyledFooter>

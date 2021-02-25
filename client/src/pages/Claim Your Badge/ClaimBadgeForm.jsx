@@ -12,13 +12,8 @@ import { theme } from "../../constants/theme";
 const { body } = theme.typography.font.family;
 
 const { royalBlue } = theme.colors;
-const toolTipText =
-<span>
-        All of DuinGud&aposs badges are minted in MATIC, but should you want your
-        badge mainnet, please un-check this checkbox so that you can submit the
-        transaction to migrate the badge to mainnet. You&aposll need to pay for the
-        transaction cost.
-</span>;
+const text = "All of Duin Good's badges are minted in MATIC, but should you want your badge mainnet, please un-check this checkbox so that you can submit the transaction to migrate the badge to mainnet. You'll need to pay for the transaction cost.";
+const toolTipText = <span>{text}</span>;
 const StyledForm = styled(Form)`
 
   width: 33%;
@@ -43,6 +38,10 @@ const StyledForm = styled(Form)`
   width: 100%;
   min-width: 250px;
 }
+.modal {
+  border-radius: 10px;
+}
+h4 { padding: 0; margin: 0; }
 `;
 
 const StyledToolTip = styled(Tooltip)`
@@ -89,6 +88,7 @@ export default function CreateBadgeForm() {
       <Form.Item>
         <PrimaryFormButton type="primary" onClick={toggle}>Claim Your Badge</PrimaryFormButton>
         <Modal
+          className="modal"
           isShowing={isShowing}
           hide={toggle}
           title="Thanks for submitting your email!"

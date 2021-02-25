@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 /* eslint-disable no-unused-vars */
 import React from "react";
@@ -11,6 +12,7 @@ import Heading from "../Typography/Heading";
 const { colors, typography } = theme;
 
 const StyledModal = styled(AntModal)`
+	border-radius: 10px;
 	&&& .btn-primary {
 		font-family: ${typography.font.family.display.poppins};
 		border-radius: 46px;
@@ -35,12 +37,25 @@ const StyledModal = styled(AntModal)`
 		width: 524px;
 		margin: 0 auto;
 		display: flex;
-    justify-content: flex-end;
+		justify-content: flex-end;
 		align-items: center;
 	}
-    .ant-typography h4 {
-        text-align: center;
-    }
+	.ant-typography h4 {
+		text-align: center;
+		margin-bottom: 0;
+	}
+	.ant-modal-body {
+		width: 100%;
+		text-align: center;
+	}
+
+	.hxWmnw {
+		display: flex;
+		justify-content: center;
+		align-content: center;
+        margin: 0;
+		margin-bottom: 0;
+	}
 `;
 
 const Modal = ({
@@ -51,13 +66,14 @@ const Modal = ({
   buttonSecondary,
   button,
   modalBodyText,
+  modalWidth,
 }) =>
   isShowing
     ? ReactDOM.createPortal(
       <React.Fragment>
         <StyledModal
           centered
-          width={800}
+          width={parseInt(modalWidth)}
           title={
             <Heading>
               <h4>{title}</h4>
@@ -84,11 +100,15 @@ const Modal = ({
                 </BaseButton>
               </div>
             )}
-          {modalBodyText ? <span>{modalBodyText}</span> : null}
+          {modalBodyText
+            ? (
+              <span className="modal-body">{modalBodyText}</span>
+            )
+            : null}
         </StyledModal>
       </React.Fragment>,
       document.body,
-    )
+		  )
     : null;
 
 export default Modal;
