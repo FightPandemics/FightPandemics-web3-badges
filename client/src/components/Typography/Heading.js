@@ -6,12 +6,9 @@ const { Title } = Typography;
 const { heading } = theme.typography;
 const { display } = theme.typography.font.family;
 
-// example usage: <Heading level={3} className="h3">{isLoginForm ? "Sign In" : "Sign Up"}</Heading>
-
 const Heading = styled(Title)`
   &.ant-typography {
     font-weight: bold;
-    color: ${(props) => props.color};
     font-family: ${display};
   }
   &.h2 {

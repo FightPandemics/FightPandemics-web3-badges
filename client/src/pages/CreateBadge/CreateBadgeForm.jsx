@@ -87,6 +87,7 @@ export default function CreateBadgeForm() {
         <Modal
           isShowing={isShowing}
           hide={toggle}
+          modalWidth={800}
           title="Congratulations Your badge has been created!"
           buttonPrimary="Assign Badge"
           buttonSecondary="Close"
