@@ -28,6 +28,9 @@ const StyledNav = styled.div`
 	line-height: 28px;
 	letter-spacing: 0em;
 	text-align: left;
+    z-index: 10;
+    background: white;
+    position: relative;
 	.btn-secondary {
 		margin-left: 30vw;
 	}
@@ -147,7 +150,7 @@ function Navbar() {
         ? (
           <Dropdown overlay={groupmenu}>
             <div className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-              {" "}
+              Menu
               <DownOutlined />
             </div>
           </Dropdown>

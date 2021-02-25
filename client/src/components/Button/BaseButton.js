@@ -20,6 +20,10 @@ const BaseButton = styled(Button)`
 		background-color: ${colors.royalBlue};
 		color: white;
 		font-family: ${display};
+		height: 44px;
+		width: 148px;
+		left: 0px;
+		top: 0px;
 	}
 
 	&&&.btn-secondary {
