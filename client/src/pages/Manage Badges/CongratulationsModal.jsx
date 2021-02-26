@@ -11,12 +11,26 @@ import Heading from "../../components/Typography/Heading";
 const { colors, typography } = theme;
 
 const StyledModal = styled(AntModal)`
-
+  background-color: red;
+  color: white;
+  height: 50%;
+  width: 100%;
 `;
 
 export default function CongratulationsModal(props) {
   return (
-	  <StyledModal>
+	  <StyledModal
+      // eslint-disable-next-line react/prop-types
+      visible={props.isCongratulationsModalShowing}
+      // eslint-disable-next-line react/prop-types
+      onCancel={props.hide}>
+      centered
+      footer={null}
+      title={
+        <Heading>
+          <h4>Congratulations!!!</h4>
+        </Heading>
+      }
     </StyledModal>
   );
 }

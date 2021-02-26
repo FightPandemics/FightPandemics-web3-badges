@@ -9,6 +9,7 @@ import Heading from "../../components/Typography/Heading";
 import CongratulationsModal from "./CongratulationsModal";
 import TextModal from "./TextModal";
 import { theme } from "../../constants/theme";
+import { ControlOutlined } from "@ant-design/icons";
 const { colors, typography } = theme;
 const StyledModal = styled(AntModal)`
 border-radius: 10px;
@@ -56,8 +57,11 @@ border-radius: 10px;
         flex-direction: column;
         align-text: left;
     }
-`;
 
+
+
+`;
+const modalBodyText = <span style={{ textAlign: "center" }}>You now have xxx/xxx badges remaining</span>;
 export default class CreateFormModal extends React.Component {
     state = {
       name: this.props.name,
@@ -65,10 +69,13 @@ export default class CreateFormModal extends React.Component {
       tags: this.props.tags,
       quantity: "",
       showModal: false,
+
     }
 
   showModalHandler = (event) => {
     this.setState({ showModal: true });
+    this.props.openCongratulationsModal();
+    this.props.hide();
   }
 
   hideModalHandler = (event) => {
@@ -99,7 +106,7 @@ export default class CreateFormModal extends React.Component {
               <h4>{ this.props.title }</h4>
             </Heading>
           }
-          visible={this.props.isDoubleShowing}
+          visible={this.props.isCreateMoreModal}
           onCancel={this.props.hide}
           okButtonProps={{ type: "primary" }}
           cancelButtonProps={{ type: "primary" }}
@@ -130,13 +137,18 @@ export default class CreateFormModal extends React.Component {
                     </div>
                   </Form.Item>
                 </Form>
-                <AntModal
-                  visible={this.state.showModal}/>
-                {/* Congratulations Modal below */}
-                {/* <TextModal
-                  showing={this.state.showModal}
-                /> */}
-                {/* end */}
+                {/* Move this modal to ManageBadges.jsx */}
+                {/* <AntModal
+                  visible={this.state.otherModal}
+                  centered
+                  title={
+                    <Heading>
+                      <h4 className="congratsHeader">CONGRATS!! You created xx new badges!</h4>
+                    </Heading>
+                  }
+                  footer={null}>
+                  <>{modalBodyText}</>
+                </AntModal> */}
               </div>
             )
             : null}
