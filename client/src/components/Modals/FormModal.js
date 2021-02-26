@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
 /* eslint-disable no-unused-vars */
@@ -13,7 +14,13 @@ const { colors, typography } = theme;
 
 const StyledModal = styled(AntModal)`
 	border-radius: 10px;
-
+    .ant-modal-body {
+        background: pink
+        height: 100px;
+    }
+    .btn-container {
+        padding-top: 50px;
+    }
 	&&& .btn-primary {
 		font-family: ${typography.font.family.display.poppins};
 		border-radius: 46px;
@@ -45,24 +52,28 @@ const StyledModal = styled(AntModal)`
 		text-align: center;
 		margin-bottom: 0;
 	}
+	.ant-modal-body {
+		width: 100%;
+		text-align: center;
+	}
+
 	.hxWmnw {
 		display: flex;
-		justify-content: center;
-		align-content: center;
+		justify-content: left;
+		align-content: left;
+        text-content: left;
         margin: 0;
 		margin-bottom: 0;
 	}
-  .modal-form-body {
+    .modal-form-body {
         display: flex;
         flex-direction: column;
-        span {
-          padding-left: 5vw;
-          padding-bottom: 20px;
-        }
+        align-text: left;
+        background: aqua;
     }
 `;
 
-const Modal = ({
+const FormModal = ({
   isShowing,
   hide,
   title,
@@ -71,8 +82,10 @@ const Modal = ({
   button,
   modalBodyText,
   modalWidth,
-  secondaryButtonStyle,
-  onOk,
+  name,
+  description,
+  tags,
+  quantity,
 }) =>
   isShowing
     ? ReactDOM.createPortal(
@@ -82,7 +95,7 @@ const Modal = ({
           width={parseInt(modalWidth)}
           title={
             <Heading>
-              <h4>{title}</h4>
+              <h4>{ title }</h4>
             </Heading>
           }
           visible={isShowing}
@@ -90,41 +103,30 @@ const Modal = ({
           okButtonProps={{ type: "primary" }}
           cancelButtonProps={{ type: "primary" }}
           footer={null}>
-          {modalBodyText
+          {modalBodyText === "true"
             ? (
-              <>{modalBodyText}</>
-            )
-            : null}
-          {button === "false"
-            ? null
-            : (
-              <div className="btn-container">
-                <Button className="btn-tertiary" key="back" onClick={hide}>
-                  {buttonSecondary}
-                </Button>
-                <BaseButton
-                  className="btn-primary"
-                  type="primary"
-                  key="submit"
-                  onClick="">
-                  {buttonPrimary}
-                </BaseButton>
-              </div>
-            )}
-          {secondaryButtonStyle === "true"
-            ? (
-              <div className="btn-container">
-                <BaseButton className="btn-secondary" key="back" onClick={hide}>
-                  {buttonSecondary}
-                </BaseButton>
-                <BaseButton
-                  className="btn-primary"
-                  type="primary"
-                  key="submit"
-                  onClick=""
-                  onOk={ onOk }>
-                  {buttonPrimary}
-                </BaseButton>
+              <div className="modal-form-body">
+                <span>Name: { name }</span>
+                <span>Description: { description }</span>
+                <span>Tags: { tags }</span>
+                <span>Remaining Quantity: xxx/{quantity}</span>
+                <form>
+                  <label>Quantity</label>
+                  <input />
+                  <div className="btn-container">
+                    <Button className="btn-tertiary" key="back" onClick={hide}>
+                      {buttonSecondary}
+                    </Button>
+                    {/* <BaseButton
+                      className="btn-primary"
+                      type="primary"
+                      key="submit"
+                      onSubmit={submitHandler(name, description, tags, quantity, input.value)}>
+                      {buttonPrimary}
+                    </BaseButton> */}
+                  </div>
+                </form>
+
               </div>
             )
             : null}
@@ -134,4 +136,4 @@ const Modal = ({
 		  )
     : null;
 
-export default Modal;
+export default FormModal;
