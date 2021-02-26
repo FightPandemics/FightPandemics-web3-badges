@@ -6,7 +6,7 @@ import ManageBadgesForm from "./ManageBadgesForm";
 import { mq, theme } from "../../constants/theme";
 import { ReactComponent as Badge } from "../../components/Icon/grey circle.svg";
 import useModal from "../../hooks/useModal";
-import Modal from "../../components/Modals/Modal";
+import DoubleModal from "../../components/Modals/DoubleModal";
 const { white, darkerGray, royalBlue } = theme.colors;
 const { display } = theme.typography.font.family;
 
@@ -126,14 +126,13 @@ function ManageBadges() {
         <FormContainer>
           <ManageBadgesForm />
           {renderBadges()}
-          <Modal
+          <DoubleModal
             isShowing={isShowing}
             hide={toggle}
             title="Badge Details"
             buttonPrimary="Create More"
             buttonSecondary="Assign Badge"
             secondaryButtonStyle="true"
-            button="false"
             modalBodyText={
               <div className="modal-form-body">
                 <span>Name:</span>
