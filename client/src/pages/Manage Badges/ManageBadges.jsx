@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-tabs */
 import React from "react";
 import styled from "styled-components";
@@ -5,8 +6,11 @@ import Heading from "../../components/Typography/Heading";
 import ManageBadgesForm from "./ManageBadgesForm";
 import { mq, theme } from "../../constants/theme";
 import { ReactComponent as Badge } from "../../components/Icon/grey circle.svg";
+import BaseButton from "../../components/Button/BaseButton";
 import useModal from "../../hooks/useModal";
+import useDoubleModal from "../../hooks/useDoubleModal";
 import DoubleModal from "../../components/Modals/DoubleModal";
+import CreateFormModal from "./CreateFormModal";
 const { white, darkerGray, royalBlue } = theme.colors;
 const { display } = theme.typography.font.family;
 
@@ -50,8 +54,6 @@ const CreateBadgeContainer = styled.div`
 
 const FormContainer = styled.div`
 	position: relative;
-	width: 100%;
-	margin: auto;
 	margin-bottom: 104px;
 	border: 1px solid #c4c4c4;
 	#create-badge-form {
@@ -101,24 +103,39 @@ const FormContainer = styled.div`
 `;
 
 const StyledCircle = styled(Badge)`
-margin: 20px;
+margin: 0;
+`;
+const StyledBadge = styled.div`
+width: min-content;
+margin-right: 0;
+padding: 10px;
+display: flex;
+flex-direction: column;
+span {
+padding: 5px;
+}
 `;
 
 function ManageBadges() {
   const { isShowing, toggle } = useModal();
-
+  const { isDoubleShowing, doubletoggle } = useDoubleModal();
   const renderBadges = () => {
     const badges = [];
     for (let i = 0; i < 20; i++) {
       badges.push(Badge);
     }
     console.log(badges);
-    return badges.map(badge => <StyledCircle key={badge} onClick={openModal} />);
+    return badges.map(badge => <StyledBadge key="badge.id" ><StyledCircle onClick={openModal}/><span>[Name]</span><span>[Tags]</span></StyledBadge>);
   };
   const openModal = (e) => {
     toggle(e);
     console.log(e.target);
   };
+  const doubleToggleHandler = () => {
+    toggle();
+    doubletoggle();
+  };
+
   return (
     <div>
       <CreateBadgeContainer>
@@ -130,8 +147,6 @@ function ManageBadges() {
             isShowing={isShowing}
             hide={toggle}
             title="Badge Details"
-            buttonPrimary="Create More"
-            buttonSecondary="Assign Badge"
             secondaryButtonStyle="true"
             modalBodyText={
               <div className="modal-form-body">
@@ -139,7 +154,36 @@ function ManageBadges() {
                 <span>Description: </span>
                 <span>Tags: </span>
                 <span>Remaining Quantity: xxx/</span>
-              </div>}/>
+              </div>}
+            footer={
+              <div className="btn-container">
+                <BaseButton className="btn-secondary" key="back">
+                Assign Badge
+                </BaseButton>
+                <BaseButton
+                  className="btn-primary"
+                  type="primary"
+                  key="submit"
+                  onClick={doubleToggleHandler}>
+                Create More
+                </BaseButton>
+              </div>
+            }>
+          </DoubleModal>
+          <CreateFormModal
+            isDoubleShowing={isDoubleShowing}
+            hide={doubletoggle}
+            title="Create More Badges"
+            buttonPrimary="Create More"
+            buttonSecondary="Cancel"
+            modalBodyText="true"
+            name="name"
+            description="description"
+            tags="tags"
+            quantity="quantity" />
+          {/* <FormModal
+            showModal={isDoubleShowing}
+            hide={doubletoggle}/> */}
         </FormContainer>
       </CreateBadgeContainer>
     </div>

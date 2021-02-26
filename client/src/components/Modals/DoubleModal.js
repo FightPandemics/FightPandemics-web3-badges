@@ -66,6 +66,7 @@ const DoubleModal = ({
   isShowing,
   hide,
   title,
+  footer,
   buttonPrimary,
   buttonSecondary,
   button,
@@ -89,9 +90,9 @@ const DoubleModal = ({
           onCancel={hide}
           okButtonProps={{ type: "primary" }}
           cancelButtonProps={{ type: "primary" }}
-          footer={null}>
+          footer={ footer }>
           {modalBodyText ? <>{modalBodyText}</> : null}
-          <div className="btn-container">
+          {/* <div className="btn-container">
             <BaseButton className="btn-secondary" key="back" onClick={hide}>
               {buttonSecondary}
             </BaseButton>
@@ -103,7 +104,7 @@ const DoubleModal = ({
               onOk={onOk}>
               {buttonPrimary}
             </BaseButton>
-          </div>
+          </div> */}
 
         </StyledModal>
       </React.Fragment>,
