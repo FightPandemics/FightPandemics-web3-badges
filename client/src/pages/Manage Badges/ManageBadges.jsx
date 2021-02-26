@@ -138,6 +138,7 @@ function ManageBadges() {
             isShowing={badgeDetailsModal}
             hide={() => setBadgeDetailsModal(false)}
             title="Badge Details"
+            keyboard={true}
             secondaryButtonStyle="true"
             modalBodyText={
               <div className="modal-form-body">
@@ -176,6 +177,9 @@ function ManageBadges() {
           <CongratulationsModal
             isCongratulationsModalShowing={isCongratulationsModalShowing}
             hide={() => setCongratulationsModal(false)}
+            buttonPrimary="Assign Badge"
+            buttonSecondary="Cancel"
+            modalBodyText="true"
           />
           {/* <FormModal
             showModal={isDoubleShowing}

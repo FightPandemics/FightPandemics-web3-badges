@@ -41,7 +41,7 @@ border-radius: 10px;
 .ant-modal-body {
   width: 100%;
   text-align: center;
-        padding: 30px;
+  padding: 30px;
 }
 
 .hxWmnw {
@@ -57,9 +57,9 @@ border-radius: 10px;
         flex-direction: column;
         align-text: left;
     }
-
-
-
+    &&& .ant-modal-content, &&& .ant-modal-header {
+      border-radius: 10px;
+    }
 `;
 const modalBodyText = <span style={{ textAlign: "center" }}>You now have xxx/xxx badges remaining</span>;
 export default class CreateFormModal extends React.Component {
@@ -110,7 +110,8 @@ export default class CreateFormModal extends React.Component {
           onCancel={this.props.hide}
           okButtonProps={{ type: "primary" }}
           cancelButtonProps={{ type: "primary" }}
-          footer={null}>
+          footer={null}
+          keyboard={true}>
           {this.props.modalBodyText === "true"
             ? (
               <div className="modal-form-body">
@@ -137,18 +138,6 @@ export default class CreateFormModal extends React.Component {
                     </div>
                   </Form.Item>
                 </Form>
-                {/* Move this modal to ManageBadges.jsx */}
-                {/* <AntModal
-                  visible={this.state.otherModal}
-                  centered
-                  title={
-                    <Heading>
-                      <h4 className="congratsHeader">CONGRATS!! You created xx new badges!</h4>
-                    </Heading>
-                  }
-                  footer={null}>
-                  <>{modalBodyText}</>
-                </AntModal> */}
               </div>
             )
             : null}
