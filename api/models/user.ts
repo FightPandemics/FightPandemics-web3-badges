@@ -17,12 +17,12 @@ export class User extends Model {
       email: { type: "string", minLength: 1, maxLength: 255 },
       issuer: { type: "string" },
       lastLoginAt: { type: "number" },
-    }
+    },
   };
 
   static modifiers: Modifiers = {
     findByIssuer(query: any, issuer: string) {
-      query.where("issuer", issuer)
-    }
+      query.where("issuer", issuer);
+    },
   };
 }
