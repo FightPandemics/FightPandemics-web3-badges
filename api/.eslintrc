@@ -13,7 +13,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "semi": [2, "always"],
+    "semi": [2, "never"],
     "indent": ["error", 2],
     "space-in-parens": ["error", "never"],
     "array-bracket-spacing": ["error", "never"],

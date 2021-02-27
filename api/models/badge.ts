@@ -1,4 +1,4 @@
-import { Model } from "objection";
+import { Model } from "objection"
 
 export class Badge extends Model {
   id!: number;

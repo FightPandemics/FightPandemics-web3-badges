@@ -1,4 +1,4 @@
-import { Model, Modifiers } from "objection";
+import { Model, Modifiers } from "objection"
 
 export class User extends Model {
   id!: number;
@@ -22,7 +22,7 @@ export class User extends Model {
 
   static modifiers: Modifiers = {
     findByIssuer(query: any, issuer: string) {
-      query.where("issuer", issuer);
+      query.where("issuer", issuer)
     },
   };
 }
