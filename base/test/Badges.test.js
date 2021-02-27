@@ -57,9 +57,10 @@ describe("Badges contract", function() {
     const originalBadgeId = (await contract.getLatestBadgeId()).toNumber()
     await contract.clone(contractOwner, originalBadgeId, numClonesRequested)
     const cloneIds = await contract.getOriginalToCloneMapping(originalBadgeId)
-    forEach((cloneIds, id) => {
-      console.log("Clone ID: ", id.toNumber())
+    cloneIds.forEach(cloneId => {
+      // console.log("Clone Id: ", cloneId.toNumber())
     });
+
 
 
     const actualOriginalBadge = await contract.getBadgeById(originalBadgeId);
