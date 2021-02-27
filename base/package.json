@@ -10,7 +10,7 @@
     "dev": "nodemon --exec babel-node index.js",
     "test": "npx hardhat test",
     "start": "npx hardhat node",
-    "compile": "npx hardhat compile",
+    "compile": "npx hardhat compile && cp ./artifacts/contracts/Badges.sol/Badges.json ../client/src/contracts",
     "compile:trace": "npx hardhat compile --show-stack-traces",
     "console": "npx hardhat console --network localhost",
     "deploy": "npx hardhat run --network localhost scripts/deploy.js",

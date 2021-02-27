@@ -3,8 +3,8 @@ const assert = require('chai').assert;
 let factory
 let contract
 let accounts
-const numClonesAllowed = 5
-const numClonesRequested = 2
+const numClonesAllowed = 100
+const numClonesRequested = 50
 const tokenURI = "http://sticlalux.ro/bedge.json"
 let contractOwner
 // start test block
@@ -56,6 +56,11 @@ describe("Badges contract", function() {
     await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
     const originalBadgeId = (await contract.getLatestBadgeId()).toNumber()
     await contract.clone(contractOwner, originalBadgeId, numClonesRequested)
+    const cloneIds = await contract.getOriginalToCloneMapping(originalBadgeId)
+    forEach((cloneIds, id) => {
+      console.log("Clone ID: ", id.toNumber())
+    });
+
 
     const actualOriginalBadge = await contract.getBadgeById(originalBadgeId);
     const actualNumClonesInWild = actualOriginalBadge[1].toNumber()
