@@ -7,13 +7,21 @@ import Modal from "../../components/Modals/Modal";
 import useModal from "../../hooks/useModal";
 import UploadButton from "../../components/Button/UploadButton";
 import PrimaryFormButton from "../../components/Button/PrimaryFormButton";
+import pinFileToIPFS from "../../web3/pinata/pinFileToIPFS";
+import hashMetadataToIPFS from "../../web3/pinata/hashMetadataToIPFS";
 const { TextArea } = Input;
 
 export default function CreateBadgeForm() {
   const { isShowing, toggle } = useModal();
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState("vertical");
-  const [image, setImage] = useState();
+
+  // TODO: set the form items to these states. 
+  const [badgeImage, setBadgeImage] = useState("");
+  const [badgeName, setBadgeName] = useState("");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
+  const [quantity, setQuantity] = useState("");
 
   const onFormLayoutChange = ({ layout }) => {
     setFormLayout(layout);
@@ -40,6 +48,16 @@ export default function CreateBadgeForm() {
     console.log(e.fileList);
     return e && e.fileList;
   };
+
+  // Submit event for creating IPFS uri and hashing metadata to that IPFS uri
+  async function handleSubmit(evt) {
+    evt.preventDefault();
+    const [file] = badgeImage;
+    const ipfsHash = await pinFileToIPFS(file);
+    console.log(ipfsHash);
+
+    await hashMetadataToIPFS(ipfsHash, badgeName, description, tags, quantity);
+  }
 
   // const buttonItemLayout =
   //   formLayout === "vertical"

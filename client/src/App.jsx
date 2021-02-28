@@ -11,6 +11,7 @@ import AssignBadge from "./pages/Assign Badge/AssignBadge";
 import BadgeProfile from "./pages/Badge Profile/BadgeProfile";
 import Header from "./pages/Header/Header";
 import Navbar from "./pages/Header/Navbar";
+import Pinata from "./pages/Pinata";
 
 function App() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function App() {
           <Route path="/claimbadge" render={routerProps => <ClaimBadge routerProps={routerProps} />} />
           <Route path="/assignbadge" render={routerProps => <AssignBadge routerProps={routerProps} />} />
           <Route path="/badgeprofile" render={routerProps => <BadgeProfile routerProps={routerProps} />} />
+          <Route path="/testpinata" render={routerProps => <Pinata routerProps={routerProps} />} />
         </div>
       </Switch>
     </div>

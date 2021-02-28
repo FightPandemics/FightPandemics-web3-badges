@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import pinFileToIPFS from "../pinata/pinFileToIPFS";
-import hashMetadataToIPFS from "../pinata/hashMetadataToIPFS";
+import pinFileToIPFS from "../web3/pinata/pinFileToIPFS";
+import hashMetadataToIPFS from "../web3/pinata/hashMetadataToIPFS";
 
 export default function Pinata() {
   const [badgeImage, setBadgeImage] = useState("");
@@ -18,7 +18,9 @@ export default function Pinata() {
     await hashMetadataToIPFS(ipfsHash, badgeName, description, tags, quantity);
   }
   return (
+
     <form onSubmit={handleSubmit}>
+      <br/><br/><br/><br/><br/><br/><br/>
       <label >
         Title (name)
         <input type="text" name="badgeNamge"

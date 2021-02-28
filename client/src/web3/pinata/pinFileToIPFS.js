@@ -1,7 +1,11 @@
+/* eslint-disable max-len */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-multiple-empty-lines */
 import "dotenv/config";
 import axios from "axios";
 // import { ethers } from "ethers";
 import FormData from "form-data";
+import GetContractReadWrite from "../GetContractReadWrite";
 const {
   REACT_APP_PINATA_API_KEY,
   REACT_APP_PINATA_SECRET_API_KEY,
@@ -34,3 +38,7 @@ export default async function pinFileToIPFS(badgeImage) {
     console.error(error);
   }
 }
+
+// const contract = GetContractReadWrite();
+// await contract.mint()
+
