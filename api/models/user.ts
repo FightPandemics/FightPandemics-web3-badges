@@ -1,4 +1,4 @@
-import { Model, Modifiers } from "objection";
+import { Model, Modifiers } from "objection"
 
 export class User extends Model {
   id!: number;
@@ -17,12 +17,12 @@ export class User extends Model {
       email: { type: "string", minLength: 1, maxLength: 255 },
       issuer: { type: "string" },
       lastLoginAt: { type: "number" },
-    }
+    },
   };
 
   static modifiers: Modifiers = {
     findByIssuer(query: any, issuer: string) {
       query.where("issuer", issuer)
-    }
+    },
   };
 }

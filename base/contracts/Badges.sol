@@ -19,6 +19,7 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
     }
 
     Badge[] public badges;
+    mapping(uint256 => uint256[]) public originalToClones;
     bool public isMintable = true;
 
     modifier mintable {
@@ -66,29 +67,37 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         address _to,
         uint256 _tokenId,
         uint256 _numClonesRequested
-    ) public mintable onlyOwner {
+    ) public
+    mintable
+    onlyOwner {
         Badge memory _badge = badges[_tokenId];
         require(_badge.numClonesInWild + _numClonesRequested <= _badge.numClonesAllowed,
             "No. of clones requested exceed no. of clones allowed"
         );
 
+        uint256[] memory cloneIds = new uint256[](_numClonesRequested);
         _badge.numClonesInWild += _numClonesRequested;
         badges[_tokenId] = _badge;
 
         for (uint i = 0; i < _numClonesRequested; i++) {
-            Badge memory _newBadge;
-            _newBadge.numClonesAllowed = 0;
-            _newBadge.numClonesInWild = 0;
-            _newBadge.cloneFromId = _tokenId;
-
-            badges.push(_newBadge);
             _tokenIds.increment();
             uint256 newTokenId = _tokenIds.current();
+            cloneIds[i] = newTokenId;
             _safeMint(_to, newTokenId);
 
             string memory  _tokenUri = tokenURI(_tokenId);
             _setTokenURI(newTokenId, _tokenUri);
         }
+
+        originalToClones[_tokenId] = cloneIds;
+    }
+
+    function getOriginalToCloneMapping(
+        uint256 _tokenId
+    ) public
+    view
+    returns (uint256[] memory) {
+        return originalToClones[_tokenId];
     }
 
     function burn(uint256 _tokenId) public onlyOwner {

@@ -1,13 +1,13 @@
-import express from "express";
-import { Magic, MagicUserMetadata } from "@magic-sdk/admin";
-import { config } from "../libs/config";
-import passport from "passport";
-import { Strategy as MagicStrategy, MagicUser, DoneFunc } from "passport-magic";
+import express from "express"
+import { Magic, MagicUserMetadata } from "@magic-sdk/admin"
+import { config } from "../libs/config"
+import passport from "passport"
+import { Strategy as MagicStrategy, MagicUser, DoneFunc } from "passport-magic"
 import { User } from "../models/user"
 
 const router = express.Router()
 
-const magic = new Magic(config.magicSecretKey);
+const magic = new Magic(config.magicSecretKey)
 
 const strategy = new MagicStrategy(async (user, done) => {
   const userMetadata = await magic.users.getMetadataByIssuer(user.issuer)
@@ -28,7 +28,7 @@ const signup = async (user: MagicUser, userMetadata: MagicUserMetadata, done: Do
     issuer: user.issuer,
     email: userMetadata.email || "",
     lastLoginAt: user.claim.iat,
-    did: user.publicAddress
+    did: user.publicAddress,
   }
   try {
     await User.query().insert(newUser)
@@ -43,13 +43,13 @@ const login = async (user: MagicUser, existingUser: User, done: DoneFunc) => {
   /* Replay attack protection (https://go.magic.link/replay-attack) */
   if (user.claim.iat <= existingUser.lastLoginAt) {
     return done(null, false, {
-      message: `Replay attack detected for user ${user.issuer}`
+      message: `Replay attack detected for user ${user.issuer}`,
     })
   }
   try {
     await User.query().update({
       issuer: user.issuer,
-      lastLoginAt: user.claim.iat
+      lastLoginAt: user.claim.iat,
     })
     return done(null, user)
   } catch (error) {
@@ -58,7 +58,7 @@ const login = async (user: MagicUser, existingUser: User, done: DoneFunc) => {
 }
 
 /* Attach middleware to login endpoint */
-router.post("/login",  passport.authenticate("magic"), (req, res) => {
+router.post("/login", passport.authenticate("magic"), (req, res) => {
   if (req.user) {
     res
       .status(200)
@@ -118,4 +118,4 @@ router.post("/logout", async (req, res) => {
   }
 })
 
-export default router;
+export default router

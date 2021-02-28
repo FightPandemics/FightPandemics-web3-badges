@@ -1,4 +1,4 @@
-import { knexSnakeCaseMappers } from "objection";
+import { knexSnakeCaseMappers } from "objection"
 import { config } from "./libs/config"
 
 export default {
@@ -40,4 +40,4 @@ export default {
     },
     ...knexSnakeCaseMappers(),
   },
-};
+}
