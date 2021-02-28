@@ -80,12 +80,6 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         badges[_tokenId] = _badge;
 
         for (uint i = 0; i < _numClonesRequested; i++) {
-            Badge memory _newBadge;
-            _newBadge.numClonesAllowed = 0;
-            _newBadge.numClonesInWild = 0;
-            _newBadge.cloneFromId = _tokenId;
-
-            badges.push(_newBadge);
             _tokenIds.increment();
             uint256 newTokenId = _tokenIds.current();
             cloneIds[i] = newTokenId;
