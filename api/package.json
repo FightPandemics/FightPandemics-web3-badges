@@ -9,7 +9,7 @@
   "scripts": {
     "start": "ts-node index.ts",
     "build": "rm -rf dist && webpack",
-    "migrate": "NODE_ENV=development knex migrate:latest",
+    "migrate": "knex migrate:latest",
     "watch": "NODE_ENV=development nodemon -L --watch '*.ts' --exec 'ts-node' index.ts",
     "debug": "NODE_ENV=development nodemon -L --watch '*.ts' --exec 'node --inspect -r ts-node/register' index.ts",
     "lint": "eslint .",
