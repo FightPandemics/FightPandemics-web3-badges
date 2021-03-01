@@ -12,7 +12,6 @@ import CreateFormModal from "./CreateFormModal";
 import CongratulationsModal from "./CongratulationsModal";
 const { white, darkerGray, royalBlue } = theme.colors;
 const { display } = theme.typography.font.family;
-// testing ashab
 const CreateBadgeContainer = styled.div`
 	width: 800px;
 	align-items: center;
@@ -59,6 +58,7 @@ const FormContainer = styled.div`
 		align-content: center;
 		justify-content: center;
 		margin: 3vh 2.5vw;
+		margin-bottom: 0.25vh;
 	}
 
 	.ant-modal-body {
@@ -106,12 +106,10 @@ margin: 0;
 `;
 const StyledBadge = styled.div`
 width: min-content;
-margin-right: 0;
-padding: 10px;
-display: flex;
-flex-direction: column;
+padding: 20px;
+display: inline-block;
 span {
-padding: 5px;
+padding: 3px;
 }
 `;
 
