@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import pinFileToIPFS from "../web3/pinata/pinFileToIPFS";
 import hashMetadataToIPFS from "../web3/pinata/hashMetadataToIPFS";
+import addIpfsUriToContract from "../web3/pinata/addIpfsUriToContract";
 
 export default function Pinata() {
   const [badgeImage, setBadgeImage] = useState("");
@@ -16,6 +17,7 @@ export default function Pinata() {
     console.log(ipfsHash);
 
     await hashMetadataToIPFS(ipfsHash, badgeName, description, tags, quantity);
+    await addIpfsUriToContract(ipfsHash);
   }
   return (
 

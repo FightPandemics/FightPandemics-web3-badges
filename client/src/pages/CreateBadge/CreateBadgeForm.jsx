@@ -16,7 +16,7 @@ export default function CreateBadgeForm() {
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState("vertical");
 
-  // TODO: set the form items to these states. 
+  // TODO: set the form items to these states.
   const [badgeImage, setBadgeImage] = useState("");
   const [badgeName, setBadgeName] = useState("");
   const [description, setDescription] = useState("");
