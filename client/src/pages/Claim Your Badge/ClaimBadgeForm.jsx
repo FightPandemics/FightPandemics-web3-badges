@@ -10,7 +10,6 @@ import Checkbox from "antd/lib/checkbox/Checkbox";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { theme } from "../../constants/theme";
 const { body } = theme.typography.font.family;
-
 const { royalBlue } = theme.colors;
 const text = "All of Duin Good's badges are minted in MATIC, but should you want your badge mainnet, please un-check this checkbox so that you can submit the transaction to migrate the badge to mainnet. You'll need to pay for the transaction cost.";
 const toolTipText = <span>{text}</span>;
