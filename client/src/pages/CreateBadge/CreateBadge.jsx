@@ -7,8 +7,8 @@ export default function CreateBadge() {
   return (
     <div>
       <CreateBadgeContainer>
+        <Heading> Create Badge </Heading>
         <FormContainer>
-          <Heading> Create Badge </Heading>
           <CreateBadgeForm/>
         </FormContainer>
       </CreateBadgeContainer>

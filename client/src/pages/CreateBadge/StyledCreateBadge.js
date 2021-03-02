@@ -19,6 +19,24 @@ export const CreateBadgeContainer = styled.div`
 		padding: 0 3rem;
 	}
 	margin-bottom: 104px;
+	h1 {
+		font-family: ${display.poppins};
+		font-size: 32px;
+		margin: 1em 0;
+		font-style: normal;
+		font-weight: 700;
+		line-height: 48px;
+		letter-spacing: 0em;
+		text-align: left;
+
+		/* Color/Primary Text */
+
+		color: #282828;
+		@media screen and (max-width: ${mq.phone.wide.maxWidth}) {
+			font-size: 2.6rem;
+			line-height: 2.8rem;
+		}
+	}
 `;
 
 export const FormContainer = styled.div`
@@ -27,7 +45,6 @@ export const FormContainer = styled.div`
 	height: 673px;
 	margin: auto;
 	margin-bottom: 104px;
-	top: 18vh;
 	border: 1px solid #c4c4c4;
 	box-sizing: border-box;
 
@@ -45,27 +62,6 @@ export const FormContainer = styled.div`
 		position: relative;
 		background-color: white;
 		color: ${royalBlue};
-	}
-
-	h1 {
-		position: absolute;
-		top: -75px;
-
-		font-family: ${display.poppins};
-		font-size: 32px;
-		font-style: normal;
-		font-weight: 700;
-		line-height: 48px;
-		letter-spacing: 0em;
-		text-align: left;
-
-		/* Color/Primary Text */
-
-		color: #282828;
-		@media screen and (max-width: ${mq.phone.wide.maxWidth}) {
-			font-size: 2.6rem;
-			line-height: 2.8rem;
-		}
 	}
 
 	p {

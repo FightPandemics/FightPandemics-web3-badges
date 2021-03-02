@@ -54,6 +54,9 @@ const StyledForm = styled(Form)`
 			font-size: 1.5em;
 		}
 	}
+	.ant-form-item-control-input-content textarea {
+		height: 92px;
+	}
 `;
 
 export default StyledForm;
