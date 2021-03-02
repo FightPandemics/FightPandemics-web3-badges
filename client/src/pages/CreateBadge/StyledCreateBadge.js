@@ -15,19 +15,17 @@ export const CreateBadgeContainer = styled.div`
 	letter-spacing: normal;
 	font-style: normal;
 	font-stretch: normal;
-	@media screen and (max-width: ${mq.phone.wide.maxWidth}) {
-		padding: 0 3rem;
-	}
-	margin-bottom: 104px;
 	h1 {
 		font-family: ${display.poppins};
 		font-size: 32px;
-		margin: 1em 0;
+		margin: 1em auto;
 		font-style: normal;
 		font-weight: 700;
 		line-height: 48px;
-		letter-spacing: 0em;
 		text-align: left;
+		width: 95%;
+		max-width: 800px;
+	
 
 		/* Color/Primary Text */
 
@@ -41,21 +39,20 @@ export const CreateBadgeContainer = styled.div`
 
 export const FormContainer = styled.div`
 	position: relative;
-	width: 800px;
-	height: 673px;
+	width: 95%;
+	max-width: 800px;
+	min-height: 673px;
+	height: auto;
 	margin: auto;
-	margin-bottom: 104px;
+	margin-bottom: 176px;
 	border: 1px solid #c4c4c4;
-	box-sizing: border-box;
 
 	#create-badge-form {
 		align-content: center;
 		justify-content: center;
-		position: absolute;
-		left: 17.12%;
-		right: 17.12%;
-		top: 7.85%;
-		bottom: 75.7%;
+		min-width: 275px;
+		width: 65%;
+		margin: 68px auto;
 	}
 
 	.ant-btn {
@@ -72,8 +69,12 @@ export const FormContainer = styled.div`
 		line-height: 16px;
 		letter-spacing: 0em;
 		text-align: center;
+		margin-bottom: 0;
 	}
 
+	.ant-upload {
+		margin-bottom: 24px;
+	}
 	.ant-btn-primary {
 		border-radius: 46px;
 		background-color: ${royalBlue};
@@ -88,8 +89,6 @@ export const FormContainer = styled.div`
 		border: 1px solid ${royalBlue};
 		height: 44px;
 		width: 200px;
-		left: 0px;
-		top: 0px;
 		font-weight: 500;
 	}
 `;

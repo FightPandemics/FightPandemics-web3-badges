@@ -36,7 +36,7 @@ const CreateBadgeContainer = styled.div`
 		line-height: 48px;
 		letter-spacing: 0em;
 		text-align: left;
-		padding: 3vh 0;
+		margin 1em 0;
 
 		/* Color/Primary Text */
 
