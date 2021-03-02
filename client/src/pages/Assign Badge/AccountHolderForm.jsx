@@ -72,14 +72,29 @@ export default function AccountHolderForm() {
       >
         <FormikAntdForm>
           <Form.Item label="Select a FightPandemics account holder">
-            <SearchInput name="accountHolder" placeholder="Start typing names of the person you want to award badges to" forminputs={formInputs({ value })}/>
+            <SearchInput
+              name="accountHolder"
+              placeholder="Start typing names of the person you want to award badges to"
+              forminputs={formInputs({ value })}
+            />
           </Form.Item>
           <Form.Item label="">
             <span>Evidence</span>
-            <TextArea name="evidence" placeholder="Optionally provide evidence for the person who completed the task" forminputs={formInputs({ value })}/>
+            <TextArea
+              name="evidence"
+              placeholder="Optionally provide evidence for the person who completed the task"
+              forminputs={formInputs({ value })}
+            />
           </Form.Item>
           <Form.Item>
-            <PrimaryFormButton className="btn-right" type="primary" onClick={toggle} onSubmit={handleSubmit}>Assign Badge</PrimaryFormButton>
+            <PrimaryFormButton
+              className="btn-right"
+              type="primary"
+              htmlType="submit"
+              onClick={toggle}
+              onSubmit={handleSubmit}
+            >Assign Badge</PrimaryFormButton>
+
             <Modal
               isShowing={isShowing}
               hide={toggle}

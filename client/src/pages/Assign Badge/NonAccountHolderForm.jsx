@@ -97,7 +97,13 @@ export default function NonAccountHolderForm() {
           }
 
           <Form.Item>
-            <PrimaryFormButton className="btn-right" type="primary" onClick={toggle} onSubmit={handleSubmit}>Generate Link to Share</PrimaryFormButton>
+            <PrimaryFormButton
+              className="btn-right"
+              type="primary"
+              htmlType="submit"
+              onClick={toggle}
+              onSubmit={handleSubmit}
+            >Generate Link to Share</PrimaryFormButton>
             <Modal
               isShowing={isShowing}
               hide={toggle}
