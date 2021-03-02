@@ -21,6 +21,7 @@ const StyledForm = styled(Form)`
 	}
 	.ant-form-item-control-input-content {
 		font-family: ${body};
+		border-radius: 2px;
 	}
 
 	&&&.ant-col-14,
