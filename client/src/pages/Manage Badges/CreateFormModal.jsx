@@ -28,7 +28,6 @@ border-radius: 10px;
 }
 
 .btn-container {
-  width: 524px;
   margin: 0 auto;
   display: flex;
   justify-content: flex-end;
@@ -48,18 +47,18 @@ border-radius: 10px;
   display: flex;
   justify-content: center;
   align-content: center;
-        text-content: center;
-        margin: 0;
+  text-content: center;
+  margin: 0;
   margin-bottom: 0;
 }
-    .modal-form-body {
-        display: flex;
-        flex-direction: column;
-        align-text: left;
-    }
-    &&& .ant-modal-content, &&& .ant-modal-header {
-      border-radius: 10px;
-    }
+.modal-form-body {
+  display: flex;
+  flex-direction: column;
+  align-text: left;
+}
+&&& .ant-modal-content, &&& .ant-modal-header {
+  border-radius: 10px;
+}
 `;
 const modalBodyText = <span style={{ textAlign: "center" }}>You now have xxx/xxx badges remaining</span>;
 export default class CreateFormModal extends React.Component {

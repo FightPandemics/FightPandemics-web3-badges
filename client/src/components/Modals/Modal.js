@@ -35,7 +35,6 @@ const StyledModal = styled(AntModal)`
 		box-shadow: none;
 	}
 	.btn-container {
-		width: 524px;
 		margin: 0 auto;
 		display: flex;
 		justify-content: flex-end;

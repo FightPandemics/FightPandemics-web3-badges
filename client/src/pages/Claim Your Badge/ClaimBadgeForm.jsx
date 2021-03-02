@@ -17,7 +17,6 @@ const StyledForm = styled(Form)`
 width: 33%;
 min-width: 250px;
 margin: 2.5vh auto;
-
 button {
   width: 100%;
   margin: 0;

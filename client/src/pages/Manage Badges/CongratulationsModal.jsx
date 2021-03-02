@@ -14,7 +14,6 @@ const { colors, typography } = theme;
 
 const StyledModal = styled(AntModal)`
   text-align: center;
-  height: 50%;
   width: 100%;
   .ant-modal-header {
   }
