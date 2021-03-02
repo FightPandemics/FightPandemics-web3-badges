@@ -7,10 +7,10 @@ const StyledInput = styled(Input)`
 font-family: ${theme.typography.font.family.body};
 `;
 
-const BasicInput = (inputLabel) => {
+const BasicInput = (inputLabel, placeholder) => {
   return (
     <Form.Item label={inputLabel}>
-      <StyledInput />
+      <StyledInput placeholder={ placeholder }/>
     </Form.Item>
   );
 };
