@@ -49,23 +49,24 @@ const StyledModal = styled(AntModal)`
 		display: flex;
 		justify-content: center;
 		align-content: center;
-        margin: 0;
+		margin: 0;
 		margin-bottom: 0;
 	}
-  .modal-form-body {
-        display: flex;
-        flex-direction: column;
-        span {
-          padding-left: 5vw;
-          padding-bottom: 20px;
-        }
-    }
+	.modal-form-body {
+		display: flex;
+		flex-direction: column;
+		span {
+			padding-left: 5vw;
+			padding-bottom: 20px;
+		}
+	}
 `;
 
-const Modal = ({
+const DoubleModal = ({
   isShowing,
   hide,
   title,
+  footer,
   buttonPrimary,
   buttonSecondary,
   button,
@@ -89,49 +90,26 @@ const Modal = ({
           onCancel={hide}
           okButtonProps={{ type: "primary" }}
           cancelButtonProps={{ type: "primary" }}
-          footer={null}>
-          {modalBodyText
-            ? (
-              <>{modalBodyText}</>
-            )
-            : null}
-          {button === "false"
-            ? null
-            : (
-              <div className="btn-container">
-                <Button className="btn-tertiary" key="back" onClick={hide}>
-                  {buttonSecondary}
-                </Button>
-                <BaseButton
-                  className="btn-primary"
-                  type="primary"
-                  key="submit"
-                  onClick="">
-                  {buttonPrimary}
-                </BaseButton>
-              </div>
-            )}
-          {secondaryButtonStyle === "true"
-            ? (
-              <div className="btn-container">
-                <BaseButton className="btn-secondary" key="back" onClick={hide}>
-                  {buttonSecondary}
-                </BaseButton>
-                <BaseButton
-                  className="btn-primary"
-                  type="primary"
-                  key="submit"
-                  onClick=""
-                  onOk={ onOk }>
-                  {buttonPrimary}
-                </BaseButton>
-              </div>
-            )
-            : null}
+          footer={ footer }>
+          {modalBodyText ? <>{modalBodyText}</> : null}
+          {/* <div className="btn-container">
+            <BaseButton className="btn-secondary" key="back" onClick={hide}>
+              {buttonSecondary}
+            </BaseButton>
+            <BaseButton
+              className="btn-primary"
+              type="primary"
+              key="submit"
+              onClick=""
+              onOk={onOk}>
+              {buttonPrimary}
+            </BaseButton>
+          </div> */}
+
         </StyledModal>
       </React.Fragment>,
       document.body,
 		  )
     : null;
 
-export default Modal;
+export default DoubleModal;
