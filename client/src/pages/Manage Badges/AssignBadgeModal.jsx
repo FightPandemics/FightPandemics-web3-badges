@@ -169,9 +169,34 @@ export default function AssignBadgeModal(props) {
         <Form.Item label="Select a FightPandemics account holder">
           <SearchInput placeholder="Start typing names of the person you want to award badges to" forminputs={formInputs({ value })}/>
         </Form.Item>
+        <Form.Item label= "Share link with a non-account holder">
+          <span>Username</span>
+          <Input placeholder="First and Last Name" forminputs={formInputs(value)} />
+        </Form.Item>
         <Form.Item label="">
           <span>Evidence</span>
           <TextArea placeholder="Optionally provide evidence for the person who completed the task" forminputs={formInputs({ value })}/>
+        </Form.Item>
+        <Form.Item label="">
+          <span>Email</span>
+          <Input placeholder="Email of non-account holder recipient" />
+        </Form.Item>
+        <Form.Item>
+          <PrimaryFormButton
+            className="btn-right"
+            type="primary"
+            onClick={toggle}
+            // onSubmit={linkSubmitHandler()}
+          >Generate Link to Share</PrimaryFormButton>
+          <Modal
+            isShowing={isShowing}
+            hide={toggle}
+            modalWidth={800}
+            title="Share Link with a non-account holder"
+            buttonPrimary="Copy URL"
+            buttonSecondary="Link"
+            modalBodyText="The badge link has been successfully generated for [name]. Please copy this link to send to them!"
+          />
         </Form.Item>
         <Form.Item>
           <PrimaryFormButton className="btn-right" type="primary" onClick={toggle} onSubmit={submitHandler()}>Assign Badge</PrimaryFormButton>
