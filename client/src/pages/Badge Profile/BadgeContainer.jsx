@@ -9,7 +9,6 @@ const StyledBadgeContainer = styled.div`
 grid-column: 2/3;
 align-self: flex-end;
 justify-self: right;
-height: 1196px;
 width: 100%;
 border-radius: 12px;
 background: #FFFFFF;
