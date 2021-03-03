@@ -20,7 +20,7 @@ const StyledModal = styled(AntModal)`
   }
   &&& h4 {
     text-align: center;
-    margin: 28px 0 0;
+    margin 0;
   }
   .btn-primary {
     margin: 0 auto;
@@ -50,13 +50,16 @@ const StyledModal = styled(AntModal)`
   &&& .ant-modal-content, &&& .ant-modal-header {
     border-radius: 10px;
   }
+  &&& .ant-modal-content {
+    width: 130%;
+  }
 `;
 
 const StyledForm = styled(Form)`
 
-  width: 33%;
+  width: 100%;
   min-width: 250px;
-  margin: 2.5vh auto;
+  min-width: 275px;
 
   .ant-form-item-label label {
     padding: 0;
@@ -74,10 +77,19 @@ const StyledForm = styled(Form)`
   padding: 4.5px;
 }
 
-.ant-form-item-control-input-content .jpEryk {
+.ant-form-item-control-input-content, .jpEryk {
     align-self: flex-end;
-    width: 148px;
+    min-width: 148px;
     font-size: 14px;
+}
+.jpEryk {
+  width: 30%
+}
+
+.generate-link {
+  background-color: white;
+  color: #425af2;
+  border-color: #425af2;
 }
 
 .modal {
@@ -104,6 +116,11 @@ h4 { padding: 0; margin: 0; }
     border-bottom: solid;
     border-right: solid;
   }
+}
+
+#email-generate-link-div, .ant-form-item-control {
+  display: flex;
+  flex-wrap: wrap;
 }
 `;
 
@@ -153,7 +170,7 @@ export default function AssignBadgeModal(props) {
       centered
       title={
         <Heading>
-          <h4>Assign A Badge</h4>
+          <h4>Assign a Badge</h4>
         </Heading>
       }>
       <StyledForm
@@ -173,33 +190,33 @@ export default function AssignBadgeModal(props) {
           <span>Username</span>
           <Input placeholder="First and Last Name" forminputs={formInputs(value)} />
         </Form.Item>
+        <div id="email-generate-link-div" >
+          <Form.Item>
+            <span>Email</span>
+            <Input placeholder="Email of non-account holder recipient" />
+            <PrimaryFormButton
+              className="generate-link"
+              type="primary"
+              onClick={toggle}
+              // onSubmit={linkSubmitHandler()}
+            >Generate Link</PrimaryFormButton>
+            <Modal
+              isShowing={isShowing}
+              hide={toggle}
+              modalWidth={800}
+              title="Share Link with a non-account holder"
+              buttonPrimary="Copy URL"
+              buttonSecondary="Link"
+              modalBodyText="The badge link has been successfully generated for [name]. Please copy this link to send to them!"
+            />
+          </Form.Item>
+        </div>
         <Form.Item label="">
           <span>Evidence</span>
           <TextArea placeholder="Optionally provide evidence for the person who completed the task" forminputs={formInputs({ value })}/>
         </Form.Item>
-        <Form.Item label="">
-          <span>Email</span>
-          <Input placeholder="Email of non-account holder recipient" />
-        </Form.Item>
         <Form.Item>
-          <PrimaryFormButton
-            className="btn-right"
-            type="primary"
-            onClick={toggle}
-            // onSubmit={linkSubmitHandler()}
-          >Generate Link to Share</PrimaryFormButton>
-          <Modal
-            isShowing={isShowing}
-            hide={toggle}
-            modalWidth={800}
-            title="Share Link with a non-account holder"
-            buttonPrimary="Copy URL"
-            buttonSecondary="Link"
-            modalBodyText="The badge link has been successfully generated for [name]. Please copy this link to send to them!"
-          />
-        </Form.Item>
-        <Form.Item>
-          <PrimaryFormButton className="btn-right" type="primary" onClick={toggle} onSubmit={submitHandler()}>Assign Badge</PrimaryFormButton>
+          <PrimaryFormButton className="assign-badge" type="primary" onClick={toggle} onSubmit={submitHandler()}>Assign Badge</PrimaryFormButton>
           <Modal
             isShowing={isShowing}
             hide={toggle}

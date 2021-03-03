@@ -17,7 +17,8 @@ const StyledNav = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	border-bottom: 0.5px solid rgba(147, 147, 147, 0.1);
-	height: 7vh;
+	height: 80px;
+  height: clamp(60px, 7vh, 80px);
 	margin-top: 0;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -42,6 +43,7 @@ const StyledLogo = styled(DuinGood)`
 align-items: left;
 justify-self: flex-start;
 padding-left: 2vw;
+width: clamp(125px, 25vw, 250px);
 `;
 const Marketplace = styled(Menu)`
     width: 100%;

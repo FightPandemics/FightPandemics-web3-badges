@@ -28,6 +28,11 @@ position: relative;
     width: 100%;
     grid-column: 1/2;
     }
+    @media only screen and (max-width: 600px){
+      width: 90vw;
+      margin: 0 5vw;
+      top: 10vh;
+    }
 }
 `;
 
@@ -40,6 +45,9 @@ transition: .5s;
 @media only screen and (min-width: 1200px) {
   margin-top: -5vw;
 } 
+svg {
+  width: 40px;
+}
 `;
 
 const StyledRectangle = styled.div`
@@ -61,6 +69,7 @@ position: relative;
 `;
 
 const StyledProfileBox = styled.div`
+
 display: grid;
 position: relative;
 height: 222px;
@@ -69,7 +78,7 @@ grid-template-columns: calc(140px + 5vw) 1fr calc(148px + 2.5vw);
 grid-template-rows: repeat(2, 55px) minmax(30px, auto) minmax(55px, 110px);
 align-content: center;
 justify-content: center;
-.profile-img-container{
+.profile-img-container {
   width: 140px;
   height: 140px;
   border-radius: 50%;
@@ -170,6 +179,34 @@ justify-content: center;
   }
   .blue {
     background: #40ffff;
+  }
+}
+@media only screen and (max-width: 600px){
+  height: 100%;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(5, auto);
+  justify-items: center;
+  .profile-img-container {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+  .profile-name-container {
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+  .bio {
+    grid-column: 1/3;
+    grid-row: 2/3;
+  }
+  .buttons-con {
+    grid-column: 1/3;
+    grid-row: 3/4;
+    align-self: end;
+  }
+  .badges {
+    grid-column: 1/3;
+    grid-row: 4/5;
+    padding: 2vmin;
   }
 }
 `;

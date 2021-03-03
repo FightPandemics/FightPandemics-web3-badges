@@ -7,7 +7,7 @@ import ManageBadgesForm from "./ManageBadgesForm";
 import { mq, theme } from "../../constants/theme";
 import { ReactComponent as Badge } from "../../components/Icon/grey circle.svg";
 import BaseButton from "../../components/Button/BaseButton";
-import DoubleModal from "../../components/Modals/DoubleModal";
+import BadgeDetailsModal from "./BadgeDetailsModal";
 import CreateFormModal from "./CreateFormModal";
 import AssignBadgeModal from "./AssignBadgeModal";
 import CongratulationsModal from "./CongratulationsModal";
@@ -131,7 +131,7 @@ function ManageBadges() {
         <FormContainer>
           <ManageBadgesForm />
           {renderBadges()}
-          <DoubleModal
+          <BadgeDetailsModal
             isShowing={badgeDetailsModal}
             hide={() => setBadgeDetailsModal(false)}
             title="Badge Details"
@@ -163,7 +163,7 @@ function ManageBadges() {
                 </BaseButton>
               </div>
             }>
-          </DoubleModal>
+          </BadgeDetailsModal>
           <CreateFormModal
             isCreateMoreModal={createMoreModal}
             hide={() => setCreateMoreModal(false)}

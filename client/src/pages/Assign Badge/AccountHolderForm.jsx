@@ -1,14 +1,13 @@
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
+
 import React, { useState } from "react";
-import { Form, Input, Radio } from "antd";
-import styled, { css } from "styled-components";
+import { Form, Input } from "antd";
+import styled from "styled-components";
 import Modal from "../../components/Modals/Modal";
 import useModal from "../../hooks/useModal";
 import PrimaryFormButton from "../../components/Button/PrimaryFormButton";
 import { theme } from "../../constants/theme";
 import SearchInput from "../../components/Input/SearchInput";
-const { display, body } = theme.typography.font.family;
+const { body } = theme.typography.font.family;
 const { royalBlue } = theme.colors;
 const { TextArea } = Input;
 
@@ -71,8 +70,8 @@ export default function AccountHolderForm() {
   const { isShowing, toggle } = useModal();
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState("vertical");
-  const [value, setValue] = useState();
-  const [nameValue, setNameValue] = useState();
+  const [value] = useState();
+  // const [nameValue, setNameValue] = useState();
 
   const onFormLayoutChange = ({ layout }) => {
     setFormLayout(layout);
@@ -112,14 +111,21 @@ export default function AccountHolderForm() {
       onValuesChange={onFormLayoutChange}
     >
       <Form.Item label="Select a FightPandemics account holder">
-        <SearchInput placeholder="Start typing names of the person you want to award badges to" forminputs={formInputs({ value })}/>
+        <SearchInput
+          placeholder="Start typing names of the person you want to award badges to"
+          forminputs={formInputs({ value })}/>
       </Form.Item>
       <Form.Item label="">
         <span>Evidence</span>
-        <TextArea placeholder="Optionally provide evidence for the person who completed the task" forminputs={formInputs({ value })}/>
+        <TextArea
+          placeholder="Optionally provide evidence for the person who completed the task"
+          forminputs={formInputs({ value })}/>
       </Form.Item>
       <Form.Item>
-        <PrimaryFormButton className="btn-right" type="primary" onClick={toggle} onSubmit={submitHandler()}>Assign Badge</PrimaryFormButton>
+        <PrimaryFormButton
+          className="btn-right" type="primary"
+          onClick={toggle}
+          onSubmit={submitHandler()}>Assign Badge</PrimaryFormButton>
         <Modal
           isShowing={isShowing}
           hide={toggle}
@@ -127,6 +133,7 @@ export default function AccountHolderForm() {
           title="Congratulations your badge has been assigned!"
           buttonPrimary="Copy URL"
           buttonSecondary="Link"
+          // eslint-disable-next-line max-len
           modalBodyText="Your badge has been sent to [recipient name]! They will receieve an email notification for their new badge. You now have xxx badges remaining."
         />
       </Form.Item>

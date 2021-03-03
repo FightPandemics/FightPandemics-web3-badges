@@ -59,6 +59,9 @@ const StyledModal = styled(AntModal)`
           padding-bottom: 20px;
         }
     }
+    &&& .ant-modal-content, &&& .ant-modal-header {
+      border-radius: 10px;
+    }
 `;
 
 const Modal = ({

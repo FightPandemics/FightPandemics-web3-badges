@@ -47,14 +47,6 @@ export const FormContainer = styled.div`
 	margin-bottom: 176px;
 	border: 1px solid #c4c4c4;
 
-	#create-badge-form {
-		align-content: center;
-		justify-content: center;
-		min-width: 275px;
-		width: 65%;
-		margin: 68px auto;
-	}
-
 	.ant-btn {
 		position: relative;
 		background-color: white;

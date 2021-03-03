@@ -7,6 +7,11 @@ const { white, darkerGray, royalBlue } = theme.colors;
 const { display, body } = theme.typography.font.family;
 
 const StyledForm = styled(Form)`
+align-content: center;
+justify-content: center;
+min-width: 275px;
+width: 65%;
+margin: 68px auto;
 	p {
 		font-family: ${body};
 		margin: 1em 0;
