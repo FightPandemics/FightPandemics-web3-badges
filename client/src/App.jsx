@@ -9,6 +9,7 @@ import CreateBadge from "./pages/CreateBadge/CreateBadge";
 import ClaimBadge from "./pages/Claim Your Badge/ClaimBadge";
 import AssignBadge from "./pages/Assign Badge/AssignBadge";
 import BadgeProfile from "./pages/Badge Profile/BadgeProfile";
+import ManageBadges from "./pages/Manage Badges/ManageBadges";
 import Header from "./pages/Header/Header";
 import Navbar from "./pages/Header/Navbar";
 import Pinata from "./pages/Pinata";
@@ -27,7 +28,7 @@ function App() {
           <Route path="/claimbadge" render={routerProps => <ClaimBadge routerProps={routerProps} />} />
           <Route path="/assignbadge" render={routerProps => <AssignBadge routerProps={routerProps} />} />
           <Route path="/badgeprofile" render={routerProps => <BadgeProfile routerProps={routerProps} />} />
-          <Route path="/testpinata" render={routerProps => <Pinata routerProps={routerProps} />} />
+          <Route path="/managebadges" render={routerProps => <ManageBadges routerProps={routerProps} />} />
         </div>
       </Switch>
     </div>
