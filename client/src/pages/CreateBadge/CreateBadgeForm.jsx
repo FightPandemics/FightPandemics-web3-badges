@@ -41,16 +41,6 @@ export default function CreateBadgeForm() {
     return e && e.fileList;
   };
 
-  // const buttonItemLayout =
-  //   formLayout === "vertical"
-  //     ? {
-  //       wrapperCol: {
-  //         span: 14,
-  //         offset: 0,
-  //       },
-  //     }
-  //     : null;
-
   return (
     <StyledForm
       id = "create-badge-form"

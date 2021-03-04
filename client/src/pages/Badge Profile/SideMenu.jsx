@@ -8,9 +8,15 @@ const { selago, darkGray, white, royalBlue } = theme.colors;
 const { display } = theme.typography.font.family;
 
 const StyledSideMenu = styled(Menu)`
+width: 100%;
+grid-column: 1/2;
+@media only screen and (max-width: 600px){
+  grid-column: 1/3;
+}
 padding: 0 1.5vw;
 border-radius: 8px;
-border: 1px solid black;
+border: 1px solid ${darkGray};
+box-shadow: 5px;
 li {
   font-family: ${display};
   margin: 35px;

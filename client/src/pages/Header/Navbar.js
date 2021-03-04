@@ -29,30 +29,41 @@ const StyledNav = styled.div`
 	line-height: 28px;
 	letter-spacing: 0em;
 	text-align: left;
-    z-index: 10;
-    background: white;
-    position: relative;
+  z-index: 10;
+  background: white;
+  position: relative;
+
+  white-space: nowrap;
+
 	.btn-secondary {
 		margin-left: 30vw;
 	}
 	.btn-primary {
 		margin-right: 2vw;
 	}
+  .ant-dropdown-link {
+    width: clamp(175px, 25vw, 250px);
+    padding-right: 20px;
+  }
+
+  .navbar-left {
+    display: flex;
+    flex-direction: row;
+  }
 `;
 const StyledLogo = styled(DuinGood)`
 align-items: left;
 justify-self: flex-start;
 padding-left: 2vw;
+padding-right: 0.5vw;
 width: clamp(125px, 25vw, 250px);
 `;
 const Marketplace = styled(Menu)`
-    width: 100%;
 `;
 const FindGig = styled(Menu)`
-	width: 100%;
 `;
 const FindDuinGudders = styled(Menu)`
-	width: 100%;
+  white-space: nowrap;
 `;
 const SignUp = styled(BaseButton)`
 	align-items: right;
@@ -69,10 +80,10 @@ const marketplacemenu = (
       <Link to="/createbadge"><p>Create Badge</p></Link>
     </Menu.Item>
     <Menu.Item>
-      <Link to="/createbadge">Assign Badge </Link>
+      <Link to="/assignbadge">Assign Badge </Link>
     </Menu.Item>
     <Menu.Item>
-      <Link to="/createbadge">Claim Badge </Link>
+      <Link to="/claimbadge">Claim Badge </Link>
     </Menu.Item>
   </Marketplace>
 );
@@ -82,10 +93,10 @@ const findgigmenu = (
       <Link to="/createbadge">Create Badge </Link>
     </Menu.Item>
     <Menu.Item>
-      <Link to="/createbadge">Assign Badge </Link>
+      <Link to="/assignbadge">Assign Badge </Link>
     </Menu.Item>
     <Menu.Item>
-      <Link to="/createbadge">Claim Badge </Link>
+      <Link to="/claimbadge">Claim Badge </Link>
     </Menu.Item>
   </FindGig>
 );
@@ -95,10 +106,10 @@ const findduinguddersmenu = (
       <Link to="/createbadge">Create Badge </Link>
     </Menu.Item>
     <Menu.Item>
-      <Link to="/createbadge">Assign Badge </Link>
+      <Link to="/assignbadge">Assign Badge </Link>
     </Menu.Item>
     <Menu.Item>
-      <Link to="/createbadge">Claim Badge </Link>
+      <Link to="/claimbadge">Claim Badge </Link>
     </Menu.Item>
   </FindDuinGudders>
 );
@@ -150,36 +161,40 @@ function Navbar() {
       <StyledLogo />
       {window.innerWidth < 900
         ? (
-          <Dropdown overlay={groupmenu}>
-            <div className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-              Menu
-              <DownOutlined />
-            </div>
-          </Dropdown>
+          <>
+            <Dropdown overlay={groupmenu}>
+              <div className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
+                Menu
+                <DownOutlined />
+              </div>
+            </Dropdown>
+          </>
         )
         : (
           <>
-            <Dropdown overlay={marketplacemenu}>
-              <div
-                className="ant-dropdown-link"
-                onClick={(e) => e.preventDefault()}>
-							Marketplace <DownOutlined />
-              </div>
-            </Dropdown>
-            <Dropdown overlay={findgigmenu}>
-              <div
-                className="ant-dropdown-link"
-                onClick={(e) => e.preventDefault()}>
-							Find Gig <DownOutlined />
-              </div>
-            </Dropdown>
-            <Dropdown overlay={findduinguddersmenu}>
-              <div
-                className="ant-dropdown-link"
-                onClick={(e) => e.preventDefault()}>
-							Find DuinGudders <DownOutlined />
-              </div>
-            </Dropdown>
+            <div className="navbar-left">
+              <Dropdown overlay={marketplacemenu}>
+                <div
+                  className="ant-dropdown-link"
+                  onClick={(e) => e.preventDefault()}>
+                Marketplace <DownOutlined />
+                </div>
+              </Dropdown>
+              <Dropdown overlay={findgigmenu}>
+                <div
+                  className="ant-dropdown-link"
+                  onClick={(e) => e.preventDefault()}>
+                Find Gig <DownOutlined />
+                </div>
+              </Dropdown>
+              <Dropdown overlay={findduinguddersmenu}>
+                <div
+                  className="ant-dropdown-link"
+                  onClick={(e) => e.preventDefault()}>
+                Find DuinGudders <DownOutlined />
+                </div>
+              </Dropdown>
+            </div>
             <SignUp className="btn-secondary">Sign Up</SignUp>
             <SignIn className="btn-primary">Sign In</SignIn>
           </>

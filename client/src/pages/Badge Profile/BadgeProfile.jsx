@@ -1,16 +1,14 @@
 /* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../constants/theme";
-import Heading from "../../components/Typography/Heading";
 import BaseButton from "../../components/Button/BaseButton";
 import BadgeContainer from "./BadgeContainer";
 import { ReactComponent as Banner } from "../../components/Icon/profilebanner.svg";
 import SideMenu from "./SideMenu";
 import { ReactComponent as Mail } from "../../components/Icon/white mail.svg";
 import { ReactComponent as Heart } from "../../components/Icon/heart-filled.svg";
-const { selago, darkGray, white, royalBlue } = theme.colors;
+const { royalBlue } = theme.colors;
 const { body, display } = theme.typography.font.family;
 
 const StyledProfile = styled.div`
@@ -21,10 +19,6 @@ align-items: center;
     grid-gap: 2.5vw;
     width: 80vw;
     margin: 0 10vw;
-    .aside {
-    width: 100%;
-    grid-column: 1/2;
-    }
     @media only screen and (max-width: 600px){
       width: 90vw;
       margin: 0 5vw;

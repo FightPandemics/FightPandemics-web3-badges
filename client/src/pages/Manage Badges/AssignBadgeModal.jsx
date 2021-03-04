@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Form, Input, Radio, Modal as AntModal } from "antd";
 import styled, { css } from "styled-components";
 import useModal from "../../hooks/useModal";
+import BaseButton from "../../components/Button/BaseButton";
 import Modal from "../../components/Modals/Modal";
 import PrimaryFormButton from "../../components/Button/PrimaryFormButton";
 import { theme } from "../../constants/theme";
@@ -50,8 +52,11 @@ const StyledModal = styled(AntModal)`
   &&& .ant-modal-content, &&& .ant-modal-header {
     border-radius: 10px;
   }
+  &&& .ant-modal-header {
+    border-radius: 10px 10p
+  }
   &&& .ant-modal-content {
-    width: 130%;
+    width: 100%;
   }
 `;
 
@@ -60,15 +65,17 @@ const StyledForm = styled(Form)`
   width: 100%;
   min-width: 250px;
   min-width: 275px;
-
-  .ant-form-item-label label {
-    padding: 0;
-    width: 100%;
-    min-width: 250px;
-    font-weight: 800;
-    font-size: 16px;
-    font-family: ${body};
-  }
+.ant-input {
+  border-radius: 2px;
+}
+.ant-form-item-label label {
+  padding: 0;
+  width: 100%;
+  min-width: 250px;
+  font-weight: 800;
+  font-size: 16px;
+  font-family: ${body};
+}
 
 .ant-input {
   width: 100%;
@@ -118,9 +125,47 @@ h4 { padding: 0; margin: 0; }
   }
 }
 
-#email-generate-link-div, .ant-form-item-control {
-  display: flex;
-  flex-wrap: wrap;
+.generate-link {
+  margin: 0;
+}
+
+.evidence-span {
+  font-weight: 700;
+}
+
+.btn-tertiary {
+  justify-content: center;
+  align-content: center;
+  text-content: center;
+}
+
+.grid-item .ant-form-item-control-input-content {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-template-columns: auto auto;
+  align-content: center;
+  input {
+    grid-row: 2/3;
+    grid-column: 1/2;
+    align-self: center;
+    margin-bottom: 0;
+    @media only screen and (max-width: 500px){
+      width: 100%;
+      grid-column: 1/3;
+    }
+  }
+  button {
+    grid-row: 2/3;
+    grid-column: 2/3;
+    justify-self: flex-end;
+    align-self: center;
+    @media only screen and (max-width: 500px) {
+      grid-column: 1/3;
+      grid-row: 3/4;
+      margin-top: 24px;
+      justify-self: center;
+    }
+  }
 }
 `;
 
@@ -190,32 +235,33 @@ export default function AssignBadgeModal(props) {
           <span>Username</span>
           <Input placeholder="First and Last Name" forminputs={formInputs(value)} />
         </Form.Item>
-        <div id="email-generate-link-div" >
-          <Form.Item>
-            <span>Email</span>
-            <Input placeholder="Email of non-account holder recipient" />
-            <PrimaryFormButton
-              className="generate-link"
-              type="primary"
-              onClick={toggle}
-              // onSubmit={linkSubmitHandler()}
-            >Generate Link</PrimaryFormButton>
-            <Modal
-              isShowing={isShowing}
-              hide={toggle}
-              modalWidth={800}
-              title="Share Link with a non-account holder"
-              buttonPrimary="Copy URL"
-              buttonSecondary="Link"
-              modalBodyText="The badge link has been successfully generated for [name]. Please copy this link to send to them!"
-            />
-          </Form.Item>
-        </div>
+        <Form.Item className="grid-item">
+          <span>Email</span>
+          <Input placeholder="Email of non-account holder recipient" />
+          <PrimaryFormButton
+            className="generate-link"
+            type="primary"
+            onClick={toggle}
+            // onSubmit={linkSubmitHandler()}
+          >Generate Link</PrimaryFormButton>
+          <Modal
+            isShowing={isShowing}
+            hide={toggle}
+            modalWidth={800}
+            title="Share Link with a non-account holder"
+            buttonPrimary="Copy URL"
+            buttonSecondary="Link"
+            modalBodyText="The badge link has been successfully generated for [name]. Please copy this link to send to them!"
+          />
+        </Form.Item>
         <Form.Item label="">
-          <span>Evidence</span>
+          <span className="evidence-span">Evidence</span>
           <TextArea placeholder="Optionally provide evidence for the person who completed the task" forminputs={formInputs({ value })}/>
         </Form.Item>
         <Form.Item>
+          <BaseButton className="btn-tertiary" key="back" onClick={props.hide}>
+            Cancel
+          </BaseButton>
           <PrimaryFormButton className="assign-badge" type="primary" onClick={toggle} onSubmit={submitHandler()}>Assign Badge</PrimaryFormButton>
           <Modal
             isShowing={isShowing}

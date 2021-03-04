@@ -7,7 +7,6 @@ import Heading from "../../components/Typography/Heading";
 const { colors, typography } = theme;
 
 const StyledModal = styled(AntModal)`
-border-radius: 10px;
 
 &&& .btn-primary {
     font-family: ${typography.font.family.display.poppins};
@@ -54,8 +53,11 @@ border-radius: 10px;
       padding-bottom: 20px;
     }
 }
-&&& .ant-modal-content, &&& .ant-modal-header {
+&&& .ant-modal-content {
   border-radius: 10px;
+}
+&&& .ant-modal-header {
+  border-radius: 10px 10px 0 0;
 }
 `;
 

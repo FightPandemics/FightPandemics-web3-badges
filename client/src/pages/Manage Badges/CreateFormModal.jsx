@@ -56,8 +56,11 @@ border-radius: 10px;
   flex-direction: column;
   align-text: left;
 }
-&&& .ant-modal-content, &&& .ant-modal-header {
+&&& .ant-modal-content {
   border-radius: 10px;
+}
+&&& .ant-modal-header {
+  border-radius: 10px 10px 0 0;
 }
 `;
 const modalBodyText = <span style={{ textAlign: "center" }}>You now have xxx/xxx badges remaining</span>;

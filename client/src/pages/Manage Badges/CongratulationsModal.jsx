@@ -46,8 +46,11 @@ const StyledModal = styled(AntModal)`
     text-align: center;
     padding: 30px;
   }
-  &&& .ant-modal-content, &&& .ant-modal-header {
+  &&& .ant-modal-content {
     border-radius: 10px;
+  }
+  &&& .ant-modal-header {
+    border-radius: 10px 10px 0 0;
   }
 `;
 
