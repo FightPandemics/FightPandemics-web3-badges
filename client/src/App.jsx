@@ -12,6 +12,7 @@ import BadgeProfile from "./pages/Badge Profile/BadgeProfile";
 import ManageBadges from "./pages/Manage Badges/ManageBadges";
 import Header from "./pages/Header/Header";
 import Navbar from "./pages/Header/Navbar";
+import Pinata from "./pages/Pinata";
 
 function App() {
   const location = useLocation();
