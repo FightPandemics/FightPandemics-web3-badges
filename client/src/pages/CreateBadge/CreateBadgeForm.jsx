@@ -10,6 +10,7 @@ import UploadButton from "../../components/Button/UploadButton";
 import PrimaryFormButton from "../../components/Button/PrimaryFormButton";
 import pinFileToIPFS from "../../web3/pinata/pinFileToIPFS";
 import hashMetadataToIPFS from "../../web3/pinata/hashMetadataToIPFS";
+import addIpfsUriToContract from "../../web3/pinata/addIpfsUriToContract";
 import { useFormik, FormikProvider } from "formik";
 import { Form as FormikAntdForm, Input } from "formik-antd";
 const { TextArea } = Input;
@@ -18,13 +19,6 @@ export default function CreateBadgeForm() {
   const { isShowing, toggle } = useModal();
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState("vertical");
-
-  // TODO: set the form items to these states.
-  const [badgeImage, setBadgeImage] = useState("");
-  const [badgeName, setBadgeName] = useState("");
-  const [description, setDescription] = useState("");
-  const [tags, setTags] = useState("");
-  const [quantity, setQuantity] = useState("");
 
   const onFormLayoutChange = ({ layout }) => {
     setFormLayout(layout);
@@ -53,13 +47,23 @@ export default function CreateBadgeForm() {
   };
 
   // Submit event for creating IPFS uri and hashing metadata to that IPFS uri
-  async function handleSubmit(evt) {
-    evt.preventDefault();
-    const [file] = badgeImage;
-    const ipfsHash = await pinFileToIPFS(file);
+  async function handlePinataSubmit(values) {
+    // TODO: upload file for pinning to work.
+    const {
+      title,
+      description,
+      tags,
+      quantity,
+      upload,
+    } = values;
+
+    // this function wont work bc upload is not working yet.
+    const ipfsHash = await pinFileToIPFS(upload);
     console.log(ipfsHash);
 
-    await hashMetadataToIPFS(ipfsHash, badgeName, description, tags, quantity);
+    await hashMetadataToIPFS(ipfsHash, title, description, tags, quantity);
+
+    // await addIpfsUriToContract(ipfsHash);
   }
   const handleSubmit = (values) => {
     alert(JSON.stringify(values, null, 2));
@@ -75,6 +79,7 @@ export default function CreateBadgeForm() {
     },
     onSubmit: values => {
       handleSubmit(values);
+      handlePinataSubmit(values);
     },
   });
 
