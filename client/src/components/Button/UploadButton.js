@@ -1,21 +1,25 @@
+/* eslint no-unused-expressions: 1 */
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Upload, Button, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { theme } from "../../constants/theme";
+import PropTypes from "prop-types";
 
 const StyledUpload = styled(Upload)`
 font-family: ${theme.typography.font.family.display};
 `;
 
-export default function UploadButton() {
+export default function UploadButton({ ...props }) {
   const [fileList, setFileList] = useState([]);
 
   const handleChange = (info) => {
     let newFileList = [...info.fileList];
     newFileList = newFileList.slice(-1);
     setFileList(newFileList);
+    props.onFileChange(newFileList[0]);
   };
+
   const beforeUpload = (file) => {
     const isCorrectSize = file.size < 200000;
     if (!isCorrectSize) {
@@ -53,3 +57,7 @@ export default function UploadButton() {
     </StyledUpload>
   );
 }
+
+UploadButton.propTypes = {
+  onFileChange: PropTypes.func,
+};

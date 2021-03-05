@@ -46,6 +46,10 @@ export default function CreateBadgeForm() {
     return e && e.fileList;
   };
 
+  const handleFileChange = (file) => {
+    setFieldValue("upload", file);
+  };
+
   // Submit event for creating IPFS uri and hashing metadata to that IPFS uri
   async function handlePinataSubmit(values) {
     // TODO: upload file for pinning to work.
@@ -58,8 +62,8 @@ export default function CreateBadgeForm() {
     } = values;
 
     // this function wont work bc upload is not working yet.
-    const ipfsHash = await pinFileToIPFS(upload);
-    console.log(ipfsHash);
+    const ipfsHash = await pinFileToIPFS(upload.originFileObj);
+    console.log("IPFS hash: ", ipfsHash);
 
     await hashMetadataToIPFS(ipfsHash, title, description, tags, quantity);
 
@@ -75,13 +79,15 @@ export default function CreateBadgeForm() {
       description: "",
       tags: "",
       quantity: "",
-      upload: "",
+      uploadFile: "",
     },
     onSubmit: values => {
       handleSubmit(values);
       handlePinataSubmit(values);
     },
   });
+
+  const { values, setFieldValue } = formik;
 
   // const buttonItemLayout =
   //   formLayout === "vertical"
@@ -126,7 +132,7 @@ export default function CreateBadgeForm() {
             className="form-buttons"
           >
             <div className="ant-upload-list-text"/>
-            <UploadButton className="upload-btn" />
+            <UploadButton className="upload-btn" onFileChange={handleFileChange}/>
             <PrimaryFormButton className="btn-right" type="primary" onClick={toggle} htmlType="submit">Create Badge</PrimaryFormButton>
             <Modal
               isShowing={isShowing}

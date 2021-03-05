@@ -17,6 +17,7 @@
     "formik": "^2.2.6",
     "formik-antd": "^2.0.1",
     "localStorage": "^1.0.4",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
