@@ -7,25 +7,24 @@ import ManageBadgesForm from "./ManageBadgesForm";
 import { mq, theme } from "../../constants/theme";
 import { ReactComponent as Badge } from "../../components/Icon/grey circle.svg";
 import BaseButton from "../../components/Button/BaseButton";
-import DoubleModal from "../../components/Modals/DoubleModal";
+import BadgeDetailsModal from "./BadgeDetailsModal";
 import CreateFormModal from "./CreateFormModal";
+import AssignBadgeModal from "./AssignBadgeModal";
 import CongratulationsModal from "./CongratulationsModal";
 const { white, darkerGray, royalBlue } = theme.colors;
 const { display } = theme.typography.font.family;
 const CreateBadgeContainer = styled.div`
-	width: 800px;
+	width: 95%;
+	max-width: 800px;
+	margin: 0 auto;
 	align-items: center;
 	justify-content: center;
 	text-align: center;
 	color: ${darkerGray};
-	margin: 0 auto;
 	background-color: ${white};
 	letter-spacing: normal;
 	font-style: normal;
 	font-stretch: normal;
-	@media screen and (max-width: ${mq.phone.wide.maxWidth}) {
-		padding: 0 3rem;
-	}
 	margin-bottom: 104px;
 
 	h1 {
@@ -36,8 +35,7 @@ const CreateBadgeContainer = styled.div`
 		line-height: 48px;
 		letter-spacing: 0em;
 		text-align: left;
-		margin-top: 7vh;
-		padding: 3vh 0;
+		margin 1em 0;
 
 		/* Color/Primary Text */
 
@@ -117,6 +115,7 @@ function ManageBadges() {
   const [badgeDetailsModal, setBadgeDetailsModal] = useState(false);
   const [createMoreModal, setCreateMoreModal] = useState(false);
   const [isCongratulationsModalShowing, setCongratulationsModal] = useState(false);
+  const [assignBadgeModal, setAssignBadgeModal] = useState(false);
   const renderBadges = () => {
     const badges = [];
     for (let i = 0; i < 20; i++) {
@@ -132,7 +131,7 @@ function ManageBadges() {
         <FormContainer>
           <ManageBadgesForm />
           {renderBadges()}
-          <DoubleModal
+          <BadgeDetailsModal
             isShowing={badgeDetailsModal}
             hide={() => setBadgeDetailsModal(false)}
             title="Badge Details"
@@ -147,7 +146,12 @@ function ManageBadges() {
               </div>}
             footer={
               <div className="btn-container">
-                <BaseButton className="btn-secondary" key="back">
+                <BaseButton
+                  className="btn-secondary" key="back"
+                  onClick={() => {
+                    setBadgeDetailsModal(false);
+                    setAssignBadgeModal(true);
+                  }}>
                 Assign Badge
                 </BaseButton>
                 <BaseButton
@@ -159,7 +163,7 @@ function ManageBadges() {
                 </BaseButton>
               </div>
             }>
-          </DoubleModal>
+          </BadgeDetailsModal>
           <CreateFormModal
             isCreateMoreModal={createMoreModal}
             hide={() => setCreateMoreModal(false)}
@@ -179,9 +183,12 @@ function ManageBadges() {
             buttonSecondary="Cancel"
             modalBodyText="true"
           />
-          {/* <FormModal
-            showModal={isDoubleShowing}
-            hide={doubletoggle}/> */}
+          <AssignBadgeModal
+            assignBadgeModal={assignBadgeModal}
+            hide={() => setAssignBadgeModal(false)}
+            title="Assign a Badge"
+          />
+
         </FormContainer>
       </CreateBadgeContainer>
     </div>

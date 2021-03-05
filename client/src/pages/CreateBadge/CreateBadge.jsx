@@ -2,16 +2,20 @@ import React from "react";
 import { CreateBadgeContainer, FormContainer } from "./StyledCreateBadge";
 import CreateBadgeForm from "./CreateBadgeForm";
 import Heading from "../../components/Typography/Heading";
+import styled from "styled-components";
+const StyledCreateBadgeContainer = styled(CreateBadgeContainer)`
+  background: #FBFBFD;
+`;
 
 export default function CreateBadge() {
   return (
     <div>
-      <CreateBadgeContainer>
+      <StyledCreateBadgeContainer>
+        <Heading> Create Badge </Heading>
         <FormContainer>
-          <Heading> Create Badge </Heading>
           <CreateBadgeForm/>
         </FormContainer>
-      </CreateBadgeContainer>
+      </StyledCreateBadgeContainer>
     </div>
   );
 }

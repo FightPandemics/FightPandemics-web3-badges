@@ -35,7 +35,6 @@ const StyledModal = styled(AntModal)`
 		box-shadow: none;
 	}
 	.btn-container {
-		width: 524px;
 		margin: 0 auto;
 		display: flex;
 		justify-content: flex-end;
@@ -49,17 +48,23 @@ const StyledModal = styled(AntModal)`
 		display: flex;
 		justify-content: center;
 		align-content: center;
-        margin: 0;
+    margin: 0;
 		margin-bottom: 0;
 	}
   .modal-form-body {
-        display: flex;
-        flex-direction: column;
-        span {
-          padding-left: 5vw;
-          padding-bottom: 20px;
-        }
+    display: flex;
+    flex-direction: column;
+    span {
+      padding-left: 5vw;
+      padding-bottom: 20px;
     }
+  }
+  &&& .ant-modal-content {
+    border-radius: 10px;
+  }
+  &&& .ant-modal-header {
+    border-radius: 10px 10px;
+  }
 `;
 
 const Modal = ({

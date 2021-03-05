@@ -83,16 +83,6 @@ export default function CreateBadgeForm() {
     },
   });
 
-  // const buttonItemLayout =
-  //   formLayout === "vertical"
-  //     ? {
-  //       wrapperCol: {
-  //         span: 14,
-  //         offset: 0,
-  //       },
-  //     }
-  //     : null;
-
   return (
     <FormikProvider value={formik}>
       <StyledForm

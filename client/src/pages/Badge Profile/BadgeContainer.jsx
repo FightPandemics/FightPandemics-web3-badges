@@ -9,12 +9,14 @@ const StyledBadgeContainer = styled.div`
 grid-column: 2/3;
 align-self: flex-end;
 justify-self: right;
-height: 1196px;
 width: 100%;
 border-radius: 12px;
 background: #FFFFFF;
 box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
 border-radius: 12px;
+@media only screen and (max-width: 600px){
+  grid-column: 1/3;
+}
 `;
 
 const StyledBadges = styled.div`

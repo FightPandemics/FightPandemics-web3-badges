@@ -14,25 +14,26 @@ const { royalBlue } = theme.colors;
 const text = "All of Duin Good's badges are minted in MATIC, but should you want your badge mainnet, please un-check this checkbox so that you can submit the transaction to migrate the badge to mainnet. You'll need to pay for the transaction cost.";
 const toolTipText = <span>{text}</span>;
 const StyledForm = styled(Form)`
+width: 33%;
+min-width: 250px;
+margin: 2.5vh auto;
+button {
+  width: 100%;
+  margin: 0;
+}
 
+.ant-form-item-label label {
+  padding: 0 11px;
   width: 33%;
   min-width: 250px;
-  margin: 2.5vh auto;
-
-  button {
-    width: 100%;
-    margin: 0;
-  }
-
-  .ant-form-item-label label {
-    padding: 0 11px;
-    width: 33%;
-    min-width: 250px;
-    font-weight: 800;
-    font-size: 16px;
-    font-family: ${body};
-  }
-
+  font-weight: 800;
+  font-size: 16px;
+  font-family: ${body};
+}
+.ant-form-item-control-input-content {
+  font-family: ${body};
+  border-radius: 2px;
+}
 .ant-input {
   width: 100%;
   min-width: 250px;

@@ -7,19 +7,13 @@ import { Form, Input, Modal as AntModal } from "antd";
 import BaseButton from "../../components/Button/BaseButton";
 import Heading from "../../components/Typography/Heading";
 import CongratulationsModal from "./CongratulationsModal";
-import TextModal from "./TextModal";
 import { theme } from "../../constants/theme";
 import { ControlOutlined } from "@ant-design/icons";
 const { colors, typography } = theme;
 const StyledModal = styled(AntModal)`
 border-radius: 10px;
-    .ant-modal-body {
-        background: pink
-        height: 100px;
-    }
-    .btn-container {
-        padding-top: 50px;
-    }
+width: 90vw;
+max-width: 500px;
 &&& .btn-primary {
   font-family: ${typography.font.family.display.poppins};
   border-radius: 46px;
@@ -27,12 +21,18 @@ border-radius: 10px;
   color: white;
 }
 
+.ant-form-item-control-input-content label {
+  text-align: left;
+  display: block;
+  margin-bottom: 10px;
+}
+
 .btn-container {
-  width: 524px;
   margin: 0 auto;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  padding-top: 50px;
 }
 .ant-typography h4 {
   text-align: center;
@@ -42,24 +42,22 @@ border-radius: 10px;
   width: 100%;
   text-align: center;
   padding: 30px;
+  .row-item {
+    margin-bottom: 20px;
+    text-align: left;
+  }
 }
-
-.hxWmnw {
+.modal-form-body {
   display: flex;
-  justify-content: center;
-  align-content: center;
-        text-content: center;
-        margin: 0;
-  margin-bottom: 0;
+  flex-direction: column;
+  align-text: left;
 }
-    .modal-form-body {
-        display: flex;
-        flex-direction: column;
-        align-text: left;
-    }
-    &&& .ant-modal-content, &&& .ant-modal-header {
-      border-radius: 10px;
-    }
+&&& .ant-modal-content {
+  border-radius: 10px;
+}
+&&& .ant-modal-header {
+  border-radius: 10px 10px 0 0;
+}
 `;
 const modalBodyText = <span style={{ textAlign: "center" }}>You now have xxx/xxx badges remaining</span>;
 export default class CreateFormModal extends React.Component {
@@ -115,10 +113,10 @@ export default class CreateFormModal extends React.Component {
           {this.props.modalBodyText === "true"
             ? (
               <div className="modal-form-body">
-                <span>Name: { this.props.name }</span>
-                <span>Description: { this.props.description }</span>
-                <span>Tags: { this.props.tags }</span>
-                <span>Remaining Quantity: xxx/{this.props.quantity}</span>
+                <span className="row-item">Name: { this.props.name }</span>
+                <span className="row-item">Description: { this.props.description }</span>
+                <span className="row-item">Tags: { this.props.tags }</span>
+                <span className="row-item">Remaining Quantity: xxx/{this.props.quantity}</span>
                 <Form>
                   <Form.Item>
                     <label>Quantity</label>
