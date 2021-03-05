@@ -1,41 +1,42 @@
-/* eslint-disable max-len */
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Upload, Button } from "antd";
+import { Upload, Button, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { theme } from "../../constants/theme";
-// const { colors } = theme;
 
 const StyledUpload = styled(Upload)`
 font-family: ${theme.typography.font.family.display};
 `;
 
-class UploadButton extends React.Component {
-state = {
-  fileList: [],
-};
+export default function UploadButton() {
+  const [fileList, setFileList] = useState([]);
 
-handleChange = (info) => {
-  let fileList = [...info.fileList];
-  fileList = fileList.slice(-1);
-  this.setState({ fileList });
-};
-
-render() {
-  const props = {
-    onChange: this.handleChange,
-    multiple: true,
+  const handleChange = (info) => {
+    let newFileList = [...info.fileList];
+    newFileList = newFileList.slice(-1);
+    setFileList(newFileList);
   };
+  const beforeUpload = (file) => {
+    const isCorrectSize = file.size < 200000;
+    if (!isCorrectSize) {
+      message.error("Image must be no more than 500x500 and smaller than 200KB!");
+    }
+    console.log("isCorrectSize?", isCorrectSize, "File Size:", file.size);
+    return isCorrectSize;
+  };
+
   return (
     <StyledUpload
-      {...props}
-      fileList={this.state.fileList}
+      onChange={handleChange}
+      fileList={fileList}
       id="upload-button"
       name="logo"
       action="/upload.do"
+      beforeUpload={beforeUpload}
       listType="text"
-      accept="image/png">
-      {this.state.fileList.length > 0
+      accept="image/png"
+    >
+      {fileList.length > 0
         ? null
         : (
           <>
@@ -52,6 +53,3 @@ render() {
     </StyledUpload>
   );
 }
-}
-
-export default UploadButton;
