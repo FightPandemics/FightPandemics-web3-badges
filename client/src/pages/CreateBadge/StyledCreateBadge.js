@@ -18,7 +18,8 @@ export const CreateBadgeContainer = styled.div`
 	h1 {
 		font-family: ${display.poppins};
 		font-size: 32px;
-		margin: 1em auto;
+		margin: 0 auto;
+		padding: 1em 0;
 		font-style: normal;
 		font-weight: 700;
 		line-height: 48px;
@@ -38,6 +39,7 @@ export const CreateBadgeContainer = styled.div`
 `;
 
 export const FormContainer = styled.div`
+    background: #ffffff;
 	position: relative;
 	width: 95%;
 	max-width: 800px;

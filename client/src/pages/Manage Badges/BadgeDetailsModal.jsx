@@ -7,7 +7,9 @@ import Heading from "../../components/Typography/Heading";
 const { colors, typography } = theme;
 
 const StyledModal = styled(AntModal)`
-
+width: 90vw;
+max-width: 500px;
+padding: 30px;
 &&& .btn-primary {
     font-family: ${typography.font.family.display.poppins};
     border-radius: 46px;
@@ -31,6 +33,7 @@ const StyledModal = styled(AntModal)`
 .btn-container {
     margin: 0 auto;
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-end;
     align-items: center;
 }
@@ -39,19 +42,20 @@ const StyledModal = styled(AntModal)`
     margin-bottom: 0;
 }
 .hxWmnw {
-    display: flex;
-    justify-content: center;
-    align-content: center;
     margin: 0;
-    margin-bottom: 0;
 }
 .modal-form-body {
     display: flex;
     flex-direction: column;
     span {
-      padding-left: 5vw;
       padding-bottom: 20px;
+      width: 67%;
+      margin: auto;
     }
+}
+.ant-modal-footer {
+  border: none;
+  padding: 0 30px 30px;
 }
 &&& .ant-modal-content {
   border-radius: 10px;

@@ -59,6 +59,7 @@ h4 { padding: 0; margin: 0; }
 .ant-radio-group {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .radio {
