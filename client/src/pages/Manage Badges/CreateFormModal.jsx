@@ -7,7 +7,6 @@ import { Form, Input, Modal as AntModal } from "antd";
 import BaseButton from "../../components/Button/BaseButton";
 import Heading from "../../components/Typography/Heading";
 import CongratulationsModal from "./CongratulationsModal";
-import TextModal from "./TextModal";
 import { theme } from "../../constants/theme";
 import { ControlOutlined } from "@ant-design/icons";
 const { colors, typography } = theme;

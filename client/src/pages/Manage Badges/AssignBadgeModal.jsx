@@ -49,11 +49,11 @@ const StyledModal = styled(AntModal)`
     text-align: center;
     padding: 30px;
   }
-  &&& .ant-modal-content, &&& .ant-modal-header {
+  &&& .ant-modal-content {
     border-radius: 10px;
   }
   &&& .ant-modal-header {
-    border-radius: 10px 10p
+    border-radius: 10px 10px
   }
   &&& .ant-modal-content {
     width: 100%;
@@ -63,7 +63,6 @@ const StyledModal = styled(AntModal)`
 const StyledForm = styled(Form)`
 
   width: 100%;
-  min-width: 250px;
   min-width: 275px;
 .ant-input {
   border-radius: 2px;
@@ -85,12 +84,13 @@ const StyledForm = styled(Form)`
 }
 
 .ant-form-item-control-input-content, .jpEryk {
-    align-self: flex-end;
-    min-width: 148px;
-    font-size: 14px;
+  align-self: flex-end;
+  min-width: 148px;
+  font-size: 14px;
 }
+
 .jpEryk {
-  width: 30%
+  width: 30%;
 }
 
 .generate-link {
@@ -102,7 +102,11 @@ const StyledForm = styled(Form)`
 .modal {
   border-radius: 10px;
 }
-h4 { padding: 0; margin: 0; }
+
+h4 { 
+  padding: 0; 
+  margin: 0; 
+}
 
 .ant-form-item-control-input-content {
   position: relative;
@@ -136,7 +140,15 @@ h4 { padding: 0; margin: 0; }
 .btn-tertiary {
   justify-content: center;
   align-content: center;
-  text-content: center;
+  padding: 0;
+  width: auto;
+  margin-right: 50px;
+}
+
+.buttons-parent-div .ant-form-item-control-input-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .grid-item .ant-form-item-control-input-content {
@@ -258,7 +270,7 @@ export default function AssignBadgeModal(props) {
           <span className="evidence-span">Evidence</span>
           <TextArea placeholder="Optionally provide evidence for the person who completed the task" forminputs={formInputs({ value })}/>
         </Form.Item>
-        <Form.Item>
+        <Form.Item className="buttons-parent-div">
           <BaseButton className="btn-tertiary" key="back" onClick={props.hide}>
             Cancel
           </BaseButton>

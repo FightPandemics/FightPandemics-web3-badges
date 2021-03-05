@@ -20,35 +20,34 @@ const StyledNav = styled.div`
 	height: 80px;
   height: clamp(60px, 7vh, 80px);
 	margin-top: 0;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding: 10px 0;
 	font-family: ${display};
 	font-size: 20px;
 	font-style: normal;
 	font-weight: 500;
 	line-height: 28px;
-	letter-spacing: 0em;
 	text-align: left;
   z-index: 10;
   background: white;
   position: relative;
-
   white-space: nowrap;
 
 	.btn-secondary {
-		margin-left: 30vw;
+		
 	}
 	.btn-primary {
-		margin-right: 2vw;
+		
 	}
   .ant-dropdown-link {
-    width: clamp(175px, 25vw, 250px);
-    padding-right: 20px;
+    width: 100%;
+    padding: 0 .5em;
   }
 
   .navbar-left {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    width: 45vw;
   }
 `;
 const StyledLogo = styled(DuinGood)`
@@ -159,7 +158,7 @@ function Navbar() {
   return (
     <StyledNav>
       <StyledLogo />
-      {window.innerWidth < 900
+      {window.innerWidth < 1025
         ? (
           <>
             <Dropdown overlay={groupmenu}>

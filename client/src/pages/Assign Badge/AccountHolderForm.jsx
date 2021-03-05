@@ -12,9 +12,9 @@ const { royalBlue } = theme.colors;
 const { TextArea } = Input;
 
 const StyledForm = styled(Form)`
-
-  width: 33%;
+  width: 100%;
   min-width: 250px;
+  max-width: 500px;
   margin: 2.5vh auto;
 
   .ant-form-item-label label {
