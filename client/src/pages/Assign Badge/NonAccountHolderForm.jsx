@@ -13,10 +13,10 @@ const { royalBlue } = theme.colors;
 const { TextArea } = Input;
 
 const StyledForm = styled(Form)`
-
-  width: 33%;
-  min-width: 250px;
-  margin: 2.5vh auto;
+width: 100%;
+min-width: 250px;
+max-width: 500px;
+margin: 2.5vh auto;
 
   button {
     width: 100%;
@@ -54,6 +54,12 @@ h4 { padding: 0; margin: 0; }
 .ant-form-item-control-input-content .jpEryk {
     align-self: flex-end;
     width: 226px;
+}
+
+.ant-radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .radio {

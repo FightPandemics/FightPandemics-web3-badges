@@ -7,6 +7,11 @@ const { white, darkerGray, royalBlue } = theme.colors;
 const { display, body } = theme.typography.font.family;
 
 const StyledForm = styled(Form)`
+align-content: center;
+justify-content: center;
+min-width: 275px;
+width: 65%;
+margin: 68px auto;
 	p {
 		font-family: ${body};
 		margin: 1em 0;
@@ -21,6 +26,7 @@ const StyledForm = styled(Form)`
 	}
 	.ant-form-item-control-input-content {
 		font-family: ${body};
+		border-radius: 2px;
 	}
 
 	&&&.ant-col-14,
@@ -53,6 +59,9 @@ const StyledForm = styled(Form)`
 		svg {
 			font-size: 1.5em;
 		}
+	}
+	.ant-form-item-control-input-content textarea {
+		height: 92px;
 	}
 `;
 

@@ -11,14 +11,23 @@ const { body } = theme.typography.font.family;
 
 const StyledContainer = styled.div`
   display: flex;
-  height: calc(100vh - 94px);
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: calc(100vh - 94px);
   .left {
     background: ${selago};
     width: 50%;
+    min-width: 300px;
+    min-height: 500px;
+    @media only screen and (max-width: 600px) {
+      width: 100vw;
+    }
   }
   .right {
     width: 50%;
-    padding-top: 10vh;
+    min-width: 300px;
+    min-height: 500px;
+    margin-top: 10vh;
     position: relative;
     .vertically-center {
       position: absolute;
@@ -33,37 +42,39 @@ const StyledContainer = styled.div`
       color: ${royalBlue};
     }
     h3 {
-        font-family: ${body};
-        font-size: 16px;
+      font-family: ${body};
+      font-size: 16px;
     }
-    
   }
 `;
 
 const StyledFooter = styled.footer`
   background: ${white};
   display: block;
-  height: 94px;
+  min-height: 94px;
   width: 100%;
   padding: 1em 0;
   
   .policy-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
   }
   .policy-container a {
     color: ${darkGray};
-    text-decoration: underline
+    text-decoration: underline;
+    text-align: center;
   }
-  .policy-container a:nth-child(1)::after, .policy-container a:nth-child(2)::after {
-    content: "|";
-    padding: 0 1em;
+  .policy-container span {
     color: ${darkGray};
   }
 `;
 
 const StyledLogo = styled.img`
-width: 40%;
+width: 175px;
+width: clamp(175px, 20vw, 250px);
 align-content: left;
 margin-left: -40%;
 margin-top: 2.5vh;
@@ -99,7 +110,9 @@ function ClaimBadge() {
         <p>Copyright 2020 FightPandemics. All rights reserved</p>
         <div className="policy-container">
           <a>Terms & Conditions</a>
+          <span>|</span>
           <a>Privacy Policy</a>
+          <span>|</span>
           <a>Cookies Policy</a>
         </div>
       </StyledFooter>

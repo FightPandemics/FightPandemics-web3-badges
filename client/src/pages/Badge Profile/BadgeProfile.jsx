@@ -1,45 +1,45 @@
 /* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../constants/theme";
-import Heading from "../../components/Typography/Heading";
 import BaseButton from "../../components/Button/BaseButton";
 import BadgeContainer from "./BadgeContainer";
 import { ReactComponent as Banner } from "../../components/Icon/profilebanner.svg";
 import SideMenu from "./SideMenu";
 import { ReactComponent as Mail } from "../../components/Icon/white mail.svg";
 import { ReactComponent as Heart } from "../../components/Icon/heart-filled.svg";
-const { selago, darkGray, white, royalBlue } = theme.colors;
+const { royalBlue } = theme.colors;
 const { body, display } = theme.typography.font.family;
 
 const StyledProfile = styled.div`
 align-items: center;
-position: relative;
 .rectangles {
     display: grid;
     grid-template-columns: 1fr minmax(140px, auto);
     grid-gap: 2.5vw;
     width: 80vw;
     margin: 0 10vw;
-    position: absolute;
-    top: 7.5vmin;
-    .aside {
-    width: 100%;
-    grid-column: 1/2;
+    @media only screen and (max-width: 600px){
+      width: 90vw;
+      margin: 0 5vw;
     }
 }
 `;
 
 const StyledBanner = styled(Banner)`
 z-index: -1;
-width: 100%;
-height: 100%;
+width: 100vw;
+position: absolute;
+top: calc(70px - 7vw);
+left: 0;
 border-radius: 0px 0px 2.5vmax 2.5vmax;
 transition: .5s;
-@media only screen and (min-width: 1200px) {
-  margin-top: -5vw;
+@media only screen and (min-width: 1000px) {
+  top: calc(75px - 8vw);
 } 
+svg {
+  width: 40px;
+}
 `;
 
 const StyledRectangle = styled.div`
@@ -49,6 +49,7 @@ margin: auto;
 background: none;
 box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.08);
 position: relative;
+border-radius: 8px;
 .white-background {
   position: absolute;
   bottom: 0;
@@ -61,15 +62,16 @@ position: relative;
 `;
 
 const StyledProfileBox = styled.div`
+
 display: grid;
 position: relative;
-height: 222px;
-padding: 0 2.5vw 2.5vh;
+padding: 2.5vh 2.5vw 2.5vh;
+border-radius: 8px;
 grid-template-columns: calc(140px + 5vw) 1fr calc(148px + 2.5vw);
 grid-template-rows: repeat(2, 55px) minmax(30px, auto) minmax(55px, 110px);
 align-content: center;
 justify-content: center;
-.profile-img-container{
+.profile-img-container {
   width: 140px;
   height: 140px;
   border-radius: 50%;
@@ -172,6 +174,34 @@ justify-content: center;
     background: #40ffff;
   }
 }
+@media only screen and (max-width: 600px){
+  height: 100%;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(5, auto);
+  justify-items: center;
+  .profile-img-container {
+    grid-column: 1/2;
+    grid-row: 1/2;
+  }
+  .profile-name-container {
+    grid-column: 2/3;
+    grid-row: 1/2;
+  }
+  .bio {
+    grid-column: 1/3;
+    grid-row: 2/3;
+  }
+  .buttons-con {
+    grid-column: 1/3;
+    grid-row: 3/4;
+    align-self: end;
+  }
+  .badges {
+    grid-column: 1/3;
+    grid-row: 4/5;
+    padding: 2vmin;
+  }
+}
 `;
 
 const StyledMail = styled(Mail)`
@@ -181,15 +211,12 @@ width: 20.000001907348633px;
 left: 2.0001220703125px;
 top: 4px;
 border-radius: 0px;
-
-
 `;
 
 function BadgeProfile() {
   return (
     <StyledProfile className="app-body">
-      {/* <Heading>Badge Profile</Heading> */}
-      <StyledBanner />
+      <StyledBanner className="banner" />
       <div className="rectangles">
         <StyledRectangle>
           <div className="white-background"></div>
