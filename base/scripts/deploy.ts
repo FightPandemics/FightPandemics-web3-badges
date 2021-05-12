@@ -4,9 +4,10 @@
 //
 // When running the script with `hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
-const hre = require("hardhat"); // unused atm. usage e.g: const Greeter = await hre.ethers.getContractFactory("Greeter");
+import { ethers } from "hardhat" // unused atm. usage e.g: const Greeter = await hre.ethers.getContractFactory("Greeter");
 
-async function main() {
+
+const main = async () => {
   // Hardhat always runs the compile task when running scripts with its command
   // line interface.
   //
@@ -15,9 +16,9 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const Box = await ethers.getContractFactory("Badges");
+  const Badge = await ethers.getContractFactory("Badges");
   console.log("Deploying Badges...");
-  const badge = await Box.deploy();
+  const badge = await Badge.deploy();
   await badge.deployed();
   console.log("Badges deployed to:", badge.address);
 

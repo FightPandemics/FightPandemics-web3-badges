@@ -13,27 +13,31 @@
     "compile": "npx hardhat compile && cp ./artifacts/contracts/Badges.sol/Badges.json ../client/src/contracts",
     "compile:trace": "npx hardhat compile --show-stack-traces",
     "console": "npx hardhat console --network localhost",
-    "deploy": "npx hardhat run --network localhost scripts/deploy.js",
+    "deploy": "npx hardhat run --network localhost scripts/deploy.ts",
     "lint": "solhint contracts/*.sol"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.1",
-    "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "@openzeppelin/contracts": "^3.4.0",
-    "chai": "^4.2.0",
-    "ethereum-waffle": "^3.2.2",
-    "ethers": "^5.0.24",
-    "hardhat": "^2.0.5"
-  },
-  "dependencies": {
-    "eslint": "^7.20.0",
+    "@openzeppelin/contracts": "3.4.0",
+    "@types/chai": "^4.2.18",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "^15.0.2",
+    "eslint": "^7.26.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.3.1",
-    "form-data": "^4.0.0"
+    "eslint-plugin-promise": "^5.1.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.3.4",
+    "ethereum-waffle": "^3.3.0",
+    "ethers": "^5.1.4",
+    "hardhat": "^2.2.1"
   }
 }
