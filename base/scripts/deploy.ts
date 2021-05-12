@@ -6,7 +6,6 @@
 // Runtime Environment's members available in the global scope.
 import { ethers } from "hardhat" // unused atm. usage e.g: const Greeter = await hre.ethers.getContractFactory("Greeter");
 
-
 const main = async () => {
   // Hardhat always runs the compile task when running scripts with its command
   // line interface.
