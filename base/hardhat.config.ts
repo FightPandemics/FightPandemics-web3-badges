@@ -13,7 +13,7 @@ task("accounts", "Prints the list of accounts", async (args, hre) => {
 
 // You need to export an object to set up your config
 // Go to https://hardhat.org/config/ to learn more
-module.exports = {
+export default {
   networks: {
     hardhat: {
       gas: "auto",
@@ -21,10 +21,10 @@ module.exports = {
     }
   },
   solidity: "0.7.3",
-  paths: {
-    source: "./contracts",
-    tests: "./test",
-    cache: "./cache",
-    artifacts: "./artifacts",
-  },
+  // paths: {
+  //   source: "./contracts",
+  //   tests: "./test",
+  //   cache: "./cache",
+  //   artifacts: "./artifacts",
+  // },
 }

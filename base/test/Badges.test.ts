@@ -1,12 +1,16 @@
-const assert = require('chai').assert;
+// const assert = require('chai').assert;
+import { assert } from "chai"
+import { describe, before, beforeEach } from "mocha"
+import { ethers } from "hardhat"
 
-let factory
-let contract
-let accounts
+let factory: any
+let contract: any
+let accounts: any
 const numClonesAllowed = 100
 const numClonesRequested = 50
 const tokenURI = "http://sticlalux.ro/bedge.json"
-let contractOwner
+
+let contractOwner: any
 // start test block
 describe("Badges contract", function() {
   // get contract instance
@@ -57,11 +61,6 @@ describe("Badges contract", function() {
     const originalBadgeId = (await contract.getLatestBadgeId()).toNumber()
     await contract.clone(contractOwner, originalBadgeId, numClonesRequested)
     const cloneIds = await contract.getOriginalToCloneMapping(originalBadgeId)
-    cloneIds.forEach(cloneId => {
-      // console.log("Clone Id: ", cloneId.toNumber())
-    });
-
-
 
     const actualOriginalBadge = await contract.getBadgeById(originalBadgeId);
     const actualNumClonesInWild = actualOriginalBadge[1].toNumber()
