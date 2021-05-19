@@ -18,8 +18,16 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         uint256 cloneFromId;
     }
 
+    event Minted(
+        uint256 tokenId,
+        uint256 numClonesAllowed,
+        uint256 numClonesInWild,
+        string tokenUri,
+        address owner
+    );
+
     Badge[] public badges;
-    mapping(uint256 => uint256[]) public originalToClones;
+    // mapping(uint256 => uint256[]) public originalToClones;
     bool public isMintable = true;
 
     modifier mintable {
@@ -57,12 +65,20 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         tokenId = _tokenIds.current();
 
         badges.push(_badge);
-        badges[tokenId].cloneFromId = tokenId;
+        // badges[tokenId].cloneFromId = tokenId;
 
         _safeMint(_to, tokenId);
         _setTokenURI(tokenId, _tokenUri);
+
+        emit Minted(tokenId,
+            badges[tokenId].numClonesAllowed,
+            badges[tokenId].numClonesInWild,
+            _tokenUri,
+            _to
+        );
     }
 
+    /*
     function clone(
         address _to,
         uint256 _tokenId,
@@ -111,7 +127,7 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         delete badges[_tokenId];
         _burn(_tokenId);
     }
-
+    */
     function setTokenURI(uint256 _tokenId, string memory _tokenURI)
         public
         onlyOwner
@@ -145,13 +161,5 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
 
     function setMintable(bool _isMintable) public onlyOwner {
         isMintable = _isMintable;
-    }
-
-    function sendBadge(
-        address _from,
-        address _to,
-        uint256 _tokenId
-    ) public onlyOwner {
-        safeTransferFrom(_from, _to, _tokenId);
     }
 }
