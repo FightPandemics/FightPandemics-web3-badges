@@ -40,7 +40,7 @@ describe("Badges contract", function() {
 
     // expect Minted(tokenId, numClonesAllowed, numClonesInWild, tokenURI, owner) event
     expect(await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner }))
-      .to.emit(contract, "Minted")
+      .to.emit(contract, "BadgeMinted")
       .withArgs(1, numClonesAllowed, 0, tokenURI, contractOwner)
   })
 
@@ -52,24 +52,35 @@ describe("Badges contract", function() {
     assert.equal(actualBadgeOwner, contractOwner)
   })
 
-  /*
-  it("Clones badge", async function() {
+  it("Sets token URI", async function() {
     await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
-    const originalBadgeId = (await contract.getLatestBadgeId()).toNumber()
-    await contract.clone(contractOwner, originalBadgeId, numClonesRequested)
-    const cloneIds = await contract.getOriginalToCloneMapping(originalBadgeId)
 
-    const actualOriginalBadge = await contract.getBadgeById(originalBadgeId);
-    const actualNumClonesInWild = actualOriginalBadge[1].toNumber()
-    assert.equal(actualNumClonesInWild, numClonesRequested)
+    const newTokenURI = "https://fightpandemics.com"
+    const latestId = (await contract.getLatestBadgeId()).toNumber()
+    await contract.setTokenURI(latestId, newTokenURI)
 
-    const actualBadgeIdOfClone = (await contract.getLatestBadgeId()).toNumber()
-    const actualClonedBadge = await contract.getBadgeById(actualBadgeIdOfClone)
-    const actualTokenUriOfClonedBadge = actualClonedBadge[3]
-    assert.equal(actualTokenUriOfClonedBadge, tokenURI)
-
+    const actualBadge = await contract.getBadgeById(latestId)
+    const actualTokenUri = actualBadge[3]
+    assert.equal(actualTokenUri, newTokenURI)
   })
 
+
+  it("Clones badge", async function() {
+
+    // mint badge first
+    await contract.mint(contractOwner, numClonesRequested, tokenURI, { from: contractOwner })
+
+    // expect two events:
+    // 1. OriginalBadgeUpdated(originalTokenId, numClonesInWild)
+    // 2. BadgeCloned(clonedTokenId, cloneFromId, tokenUri, owner)
+    expect(await contract.clone(contractOwner, 1, numClonesRequested))
+      .to.emit(contract, "OriginalBadgeUpdated")
+        .withArgs(1, numClonesRequested)
+      .to.emit(contract, "BadgeCloned")
+        .withArgs(2, 1, tokenURI, contractOwner)
+  })
+
+  /*
   it("Burns badge", async function() {
     await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
     const originalBadgeId = (await contract.getLatestBadgeId()).toNumber()
@@ -83,18 +94,6 @@ describe("Badges contract", function() {
     const actualNumClonesInWild = actualOriginalBadge[1].toNumber()
 
     assert.equal(actualNumClonesInWild, numClonesRequested - 1)
-  })
-
-  it("Sets token URI", async function() {
-    await contract.mint(contractOwner, numClonesAllowed, tokenURI, { from: contractOwner })
-
-    const newTokenURI = "https://fightpandemics.com"
-    const latestId = (await contract.getLatestBadgeId()).toNumber()
-    await contract.setTokenURI(latestId, newTokenURI)
-
-    const actualBadge = await contract.getBadgeById(latestId)
-    const actualTokenUri = actualBadge[3]
-    assert.equal(actualTokenUri, newTokenURI)
   })
 
   it("Transfers badge", async function() {

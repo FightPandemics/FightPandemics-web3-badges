@@ -22,10 +22,10 @@ export default {
     }
   },
   solidity: "0.7.3",
-  // paths: {
-  //   source: "./contracts",
-  //   tests: "./test",
-  //   cache: "./cache",
-  //   artifacts: "./artifacts",
-  // },
+  paths: {
+    source: "./contracts",
+    tests: "./test",
+    cache: "./cache",
+    artifacts: "./artifacts",
+  },
 }
