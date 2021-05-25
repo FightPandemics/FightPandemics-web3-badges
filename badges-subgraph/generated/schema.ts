@@ -12,7 +12,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class ExampleEntity extends Entity {
+export class MainBadge extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -20,17 +20,17 @@ export class ExampleEntity extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id !== null, "Cannot save ExampleEntity entity without an ID");
+    assert(id !== null, "Cannot save MainBadge entity without an ID");
     assert(
       id.kind == ValueKind.STRING,
-      "Cannot save ExampleEntity entity with non-string ID. " +
+      "Cannot save MainBadge entity with non-string ID. " +
         'Considering using .toHex() to convert the "id" to a string.'
     );
-    store.set("ExampleEntity", id.toString(), this);
+    store.set("MainBadge", id.toString(), this);
   }
 
-  static load(id: string): ExampleEntity | null {
-    return store.get("ExampleEntity", id) as ExampleEntity | null;
+  static load(id: string): MainBadge | null {
+    return store.get("MainBadge", id) as MainBadge | null;
   }
 
   get id(): string {
@@ -42,30 +42,105 @@ export class ExampleEntity extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get count(): BigInt {
-    let value = this.get("count");
+  get numClonesAllowed(): BigInt {
+    let value = this.get("numClonesAllowed");
     return value.toBigInt();
   }
 
-  set count(value: BigInt) {
-    this.set("count", Value.fromBigInt(value));
+  set numClonesAllowed(value: BigInt) {
+    this.set("numClonesAllowed", Value.fromBigInt(value));
   }
 
-  get owner(): Bytes {
+  get numClonesInWild(): BigInt {
+    let value = this.get("numClonesInWild");
+    return value.toBigInt();
+  }
+
+  set numClonesInWild(value: BigInt) {
+    this.set("numClonesInWild", Value.fromBigInt(value));
+  }
+
+  get tokenUri(): string {
+    let value = this.get("tokenUri");
+    return value.toString();
+  }
+
+  set tokenUri(value: string) {
+    this.set("tokenUri", Value.fromString(value));
+  }
+
+  get owner(): string {
     let value = this.get("owner");
-    return value.toBytes();
+    return value.toString();
   }
 
-  set owner(value: Bytes) {
-    this.set("owner", Value.fromBytes(value));
+  set owner(value: string) {
+    this.set("owner", Value.fromString(value));
   }
 
-  get approved(): Bytes {
-    let value = this.get("approved");
-    return value.toBytes();
+  get clones(): Array<string> | null {
+    let value = this.get("clones");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
   }
 
-  set approved(value: Bytes) {
-    this.set("approved", Value.fromBytes(value));
+  set clones(value: Array<string> | null) {
+    if (value === null) {
+      this.unset("clones");
+    } else {
+      this.set("clones", Value.fromStringArray(value as Array<string>));
+    }
+  }
+}
+
+export class CloneBadge extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save CloneBadge entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save CloneBadge entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("CloneBadge", id.toString(), this);
+  }
+
+  static load(id: string): CloneBadge | null {
+    return store.get("CloneBadge", id) as CloneBadge | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get owner(): string {
+    let value = this.get("owner");
+    return value.toString();
+  }
+
+  set owner(value: string) {
+    this.set("owner", Value.fromString(value));
+  }
+
+  get cloneFromId(): string {
+    let value = this.get("cloneFromId");
+    return value.toString();
+  }
+
+  set cloneFromId(value: string) {
+    this.set("cloneFromId", Value.fromString(value));
   }
 }

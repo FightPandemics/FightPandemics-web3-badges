@@ -1,14 +1,14 @@
 type MainBadge @entity {
-  tokenId: BigInt!
+  id: ID!
   numClonesAllowed: BigInt!
   numClonesInWild: BigInt!
   tokenUri: String!
   owner: String!
-  clones: [CloneBadge!]! @derivedFrom(field: "mainBadge")
+  clones: [CloneBadge!] @derivedFrom(field: "cloneFromId")
 }
 
 type CloneBadge @entity {
-  tokenId: BigInt!
+  id: ID!
   owner: String!
-  mainBadge: MainBadge!
+  cloneFromId: MainBadge!
 }

@@ -1,4 +1,4 @@
-import { BigInt } from "@graphprotocol/graph-ts"
+import { BigInt, Value } from "@graphprotocol/graph-ts"
 import {
   Badges,
   Approval,
@@ -9,8 +9,9 @@ import {
   OwnershipTransferred,
   Transfer
 } from "../generated/Badges/Badges"
-import { ExampleEntity } from "../generated/schema"
+import { CloneBadge, MainBadge } from "../generated/schema"
 
+/*
 export function handleApproval(event: Approval): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
@@ -67,16 +68,47 @@ export function handleApproval(event: Approval): void {
   // - contract.tokenByIndex(...)
   // - contract.tokenOfOwnerByIndex(...)
   // - contract.tokenURI(...)
-  // - contract.totalSupply(...)
-}
+  // - c
+  */
 
 export function handleApprovalForAll(event: ApprovalForAll): void {}
 
-export function handleBadgeCloned(event: BadgeCloned): void {}
+export function handleBadgeCloned(event: BadgeCloned): void {
+  let mainBadgeId = event.params.cloneFromId.toString()
+  let mainBadge = MainBadge.load(mainBadgeId)
+  if (mainBadge === null) {
+    throw new Error("Main badge does not exist")
+  } else {
+    let cloneBadge = new CloneBadge(event.params.clonedTokenId.toString())
+    cloneBadge.owner = event.params.owner.toHex()
+    cloneBadge.cloneFromId = event.params.cloneFromId.toString()
+    mainBadge.clones.push(cloneBadge.id)
+  }
+}
 
-export function handleBadgeMinted(event: BadgeMinted): void {}
+export function handleBadgeMinted(event: BadgeMinted): void {
+  let id = event.params.tokenId.toString()
+  let mainBadge = MainBadge.load(id)
+  if (mainBadge == null) {
+    mainBadge = new MainBadge(id)
+  }
+  mainBadge.numClonesAllowed = event.params.numClonesAllowed
+  mainBadge.numClonesInWild = event.params.numClonesInWild
+  mainBadge.tokenUri = event.params.tokenUri
+  mainBadge.owner = event.params.owner.toHex()
+  mainBadge.save()
+}
 
-export function handleOriginalBadgeUpdated(event: OriginalBadgeUpdated): void {}
+export function handleOriginalBadgeUpdated(event: OriginalBadgeUpdated): void {
+  let id = event.params.originalTokenId.toString()
+  let mainBadge = MainBadge.load(id)
+  if (mainBadge !== null) {
+    mainBadge.numClonesInWild = event.params.numClonesInWild
+  } else {
+    throw new Error("Main badge does not exist")
+  }
+  mainBadge.save()
+}
 
 export function handleOwnershipTransferred(event: OwnershipTransferred): void {}
 
