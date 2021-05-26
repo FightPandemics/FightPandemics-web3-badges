@@ -76,27 +76,30 @@ export function handleApprovalForAll(event: ApprovalForAll): void {}
 export function handleBadgeCloned(event: BadgeCloned): void {
   let mainBadgeId = event.params.cloneFromId.toString()
   let mainBadge = MainBadge.load(mainBadgeId)
-  if (mainBadge === null) {
-    throw new Error("Main badge does not exist")
-  } else {
+  if (mainBadge !== null) {
     let cloneBadge = new CloneBadge(event.params.clonedTokenId.toString())
     cloneBadge.owner = event.params.owner.toHex()
     cloneBadge.cloneFromId = event.params.cloneFromId.toString()
     mainBadge.clones.push(cloneBadge.id)
+    mainBadge.save()
+    cloneBadge.save()
+  } else {
+    throw new Error("Main badge does not exist")
   }
 }
 
 export function handleBadgeMinted(event: BadgeMinted): void {
   let id = event.params.tokenId.toString()
   let mainBadge = MainBadge.load(id)
-  if (mainBadge == null) {
+  if (mainBadge === null) {
     mainBadge = new MainBadge(id)
+    mainBadge.id = id
+    mainBadge.numClonesAllowed = event.params.numClonesAllowed
+    mainBadge.numClonesInWild = event.params.numClonesInWild
+    mainBadge.tokenUri = event.params.tokenUri
+    mainBadge.owner = event.params.owner.toHex()
+    mainBadge.save()
   }
-  mainBadge.numClonesAllowed = event.params.numClonesAllowed
-  mainBadge.numClonesInWild = event.params.numClonesInWild
-  mainBadge.tokenUri = event.params.tokenUri
-  mainBadge.owner = event.params.owner.toHex()
-  mainBadge.save()
 }
 
 export function handleOriginalBadgeUpdated(event: OriginalBadgeUpdated): void {
