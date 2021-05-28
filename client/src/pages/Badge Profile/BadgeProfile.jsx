@@ -62,7 +62,6 @@ border-radius: 8px;
 `;
 
 const StyledProfileBox = styled.div`
-
 display: grid;
 position: relative;
 padding: 2.5vh 2.5vw 2.5vh;
@@ -80,10 +79,11 @@ justify-content: center;
   border: 5px solid #ffffff;
   position: relative;
   .profile-img {
-    background: #000090;
     height: 100%;
     width: 100%;
     border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
   }
   .active {
     position: absolute;
@@ -222,7 +222,7 @@ function BadgeProfile() {
           <div className="white-background"></div>
           <StyledProfileBox>
             <div className="profile-img-container">
-              <div className="profile-img"></div>
+              <img src="https://pyxis.nymag.com/v1/imgs/3ac/46a/53e6f8347acc73c65ab6ae4f2aa9a978f9-17-logan-lucky.rsquare.w700.jpg"className="profile-img" />
               <span className="active"></span>
             </div>
             <div className="profile-name-container">

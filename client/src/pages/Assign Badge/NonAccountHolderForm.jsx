@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import { Form, Input, Radio } from "antd";
 import styled from "styled-components";
@@ -7,17 +6,14 @@ import Modal from "../../components/Modals/Modal";
 import useModal from "../../hooks/useModal";
 import PrimaryFormButton from "../../components/Button/PrimaryFormButton";
 import { theme } from "../../constants/theme";
-import SearchInput from "../../components/Input/SearchInput";
 const { body } = theme.typography.font.family;
 const { royalBlue } = theme.colors;
-const { TextArea } = Input;
 
 const StyledForm = styled(Form)`
 width: 100%;
 min-width: 250px;
 max-width: 500px;
 margin: 2.5vh auto;
-
   button {
     width: 100%;
     margin: 0;
@@ -26,7 +22,6 @@ margin: 2.5vh auto;
   span {
     text-align: left;
   }
-
   .ant-form-item-label label {
     padding: 0;
     width: 100%;
@@ -35,7 +30,6 @@ margin: 2.5vh auto;
     font-size: 16px;
     font-family: ${body};
   }
-
 .ant-input {
   width: 100%;
   min-width: 250px;
@@ -44,24 +38,20 @@ margin: 2.5vh auto;
   border-radius: 10px;
 }
 h4 { padding: 0; margin: 0; }
-
 .ant-form-item-control-input-content {
   position: relative;
   display: flex;
   flex-direction: column;
 }
-
 .ant-form-item-control-input-content .jpEryk {
     align-self: flex-end;
     width: 226px;
 }
-
 .ant-radio-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .radio {
     display: flex
     flex-direction: row
@@ -70,19 +60,15 @@ h4 { padding: 0; margin: 0; }
         justify-content: space-between;
     }
 }
-
 .ant-radio-checked .ant-radio-inner{
   border-color: ${royalBlue} !important ;
 }
-
 .ant-radio-checked:before{
   background-color: ${royalBlue};
 }
-
 .ant-radio-checked .ant-radio-inner:after{
   background-color: ${royalBlue};
 }
-
 .ant-radio:hover .ant-radio-inner {
   border-color: ${royalBlue} ;
 }
