@@ -16,7 +16,6 @@ const StyledForm = styled(Form)`
   min-width: 250px;
   max-width: 500px;
   margin: 2.5vh auto;
-
   .ant-form-item-label label {
     padding: 0;
     width: 100%;
@@ -25,25 +24,21 @@ const StyledForm = styled(Form)`
     font-size: 16px;
     font-family: ${body};
   }
-
 .ant-input {
   width: 100%;
   min-width: 250px;
   margin-bottom -7px;
   padding: 4.5px;
 }
-
 .ant-form-item-control-input-content .jpEryk {
     align-self: flex-end;
     width: 148px;
     font-size: 14px;
 }
-
 .modal {
   border-radius: 10px;
 }
 h4 { padding: 0; margin: 0; }
-
 .ant-form-item-control-input-content {
   position: relative;
   display: flex;
@@ -52,7 +47,6 @@ h4 { padding: 0; margin: 0; }
     text-align: left;
   }
 }
-
 .ant-input-group-addon button {
   border-top: hidden;
   border-bottom: hidden;

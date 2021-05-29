@@ -1,9 +1,9 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import { Form, Input, Radio, Modal as AntModal } from "antd";
-import styled, { css } from "styled-components";
+import { Form, Input, Modal as AntModal } from "antd";
+import styled from "styled-components";
 import useModal from "../../hooks/useModal";
 import BaseButton from "../../components/Button/BaseButton";
 import Modal from "../../components/Modals/Modal";
@@ -11,13 +11,14 @@ import PrimaryFormButton from "../../components/Button/PrimaryFormButton";
 import { theme } from "../../constants/theme";
 import SearchInput from "../../components/Input/SearchInput";
 import Heading from "../../components/Typography/Heading";
-const { display, body } = theme.typography.font.family;
+const { body } = theme.typography.font.family;
 const { royalBlue } = theme.colors;
 const { TextArea } = Input;
 
 const StyledModal = styled(AntModal)`
   text-align: center;
-  width: 100%;
+  max-width: 90vw;
+  width: 564px;
   .ant-modal-header {
   }
   &&& h4 {
@@ -40,7 +41,6 @@ const StyledModal = styled(AntModal)`
     text-align: center;
     display: block;
   }
-
   .hxWmnw {
     margin: 0;
   }
@@ -61,7 +61,6 @@ const StyledModal = styled(AntModal)`
 `;
 
 const StyledForm = styled(Form)`
-
   width: 100%;
   min-width: 275px;
 .ant-input {
@@ -75,39 +74,32 @@ const StyledForm = styled(Form)`
   font-size: 16px;
   font-family: ${body};
 }
-
 .ant-input {
   width: 100%;
   min-width: 250px;
   margin-bottom -7px;
   padding: 4.5px;
 }
-
 .ant-form-item-control-input-content, .jpEryk {
   align-self: flex-end;
   min-width: 148px;
   font-size: 14px;
 }
-
 .jpEryk {
   width: 30%;
 }
-
 .generate-link {
   background-color: white;
   color: #425af2;
   border-color: #425af2;
 }
-
 .modal {
   border-radius: 10px;
 }
-
 h4 { 
   padding: 0; 
   margin: 0; 
 }
-
 .ant-form-item-control-input-content {
   position: relative;
   display: flex;
@@ -116,7 +108,6 @@ h4 {
     text-align: left;
   }
 }
-
 .ant-input-group-addon button {
   border-top: hidden;
   border-bottom: hidden;
@@ -128,15 +119,12 @@ h4 {
     border-right: solid;
   }
 }
-
 .generate-link {
   margin: 0;
 }
-
 .evidence-span {
   font-weight: 700;
 }
-
 .btn-tertiary {
   justify-content: center;
   align-content: center;
@@ -144,13 +132,11 @@ h4 {
   width: auto;
   margin-right: 50px;
 }
-
 .buttons-parent-div .ant-form-item-control-input-content {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 }
-
 .grid-item .ant-form-item-control-input-content {
   display: grid;
   grid-template-rows: repeat(3, auto);
@@ -186,7 +172,7 @@ export default function AssignBadgeModal(props) {
   const [form] = Form.useForm();
   const [formLayout, setFormLayout] = useState("vertical");
   const [value, setValue] = useState();
-  const [nameValue, setNameValue] = useState();
+  // const [nameValue, setNameValue] = useState();
 
   const onFormLayoutChange = ({ layout }) => {
     setFormLayout(layout);
@@ -216,7 +202,8 @@ export default function AssignBadgeModal(props) {
 
   return (
     <StyledModal
-    // eslint-disable-next-line react/prop-types
+      width="564"
+      // eslint-disable-next-line react/prop-types
       visible={props.assignBadgeModal}
       keyboard={true}
       // eslint-disable-next-line react/prop-types
@@ -283,6 +270,8 @@ export default function AssignBadgeModal(props) {
             buttonPrimary="Copy URL"
             buttonSecondary="Link"
             modalBodyText="Your badge has been sent to [recipient name]! They will receieve an email notification for their new badge. You now have xxx badges remaining."
+            button="false"
+            secondarybuttonlink="/claimbadge"
           />
         </Form.Item>
       </StyledForm>

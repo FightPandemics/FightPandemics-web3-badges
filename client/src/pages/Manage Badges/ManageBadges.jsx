@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 /* eslint-disable no-tabs */
 import React, { useState } from "react";
@@ -5,7 +6,6 @@ import styled from "styled-components";
 import Heading from "../../components/Typography/Heading";
 import ManageBadgesForm from "./ManageBadgesForm";
 import { mq, theme } from "../../constants/theme";
-import { ReactComponent as Badge } from "../../components/Icon/grey circle.svg";
 import BaseButton from "../../components/Button/BaseButton";
 import BadgeDetailsModal from "./BadgeDetailsModal";
 import CreateFormModal from "./CreateFormModal";
@@ -13,6 +13,7 @@ import AssignBadgeModal from "./AssignBadgeModal";
 import CongratulationsModal from "./CongratulationsModal";
 const { white, darkerGray, royalBlue } = theme.colors;
 const { display } = theme.typography.font.family;
+
 const CreateBadgeContainer = styled.div`
 	width: 95%;
 	max-width: 800px;
@@ -26,7 +27,6 @@ const CreateBadgeContainer = styled.div`
 	font-style: normal;
 	font-stretch: normal;
 	margin-bottom: 104px;
-
 	h1 {
 		font-family: ${display.poppins};
 		font-size: 32px;
@@ -36,9 +36,7 @@ const CreateBadgeContainer = styled.div`
 		letter-spacing: 0em;
 		text-align: left;
 		margin 1em 0;
-
 		/* Color/Primary Text */
-
 		color: #282828;
 		@media screen and (max-width: ${mq.phone.wide.maxWidth}) {
 			font-size: 2.6rem;
@@ -53,22 +51,19 @@ const FormContainer = styled.div`
 	margin-bottom: 104px;
 	border: 1px solid #c4c4c4;
 	#create-badge-form {
-		align-content: center;
+		align-content: top;
 		justify-content: center;
 		margin: 3vh 2.5vw;
 		margin-bottom: 0.25vh;
 	}
-
 	.ant-modal-body {
 		text-align: left;
 	}
-
 	.ant-btn {
 		position: relative;
 		background-color: white;
 		color: ${royalBlue};
 	}
-
 	p {
 		font-family: ${display.worksans};
 		font-size: 12px;
@@ -78,14 +73,12 @@ const FormContainer = styled.div`
 		letter-spacing: 0em;
 		text-align: center;
 	}
-
 	.ant-btn-primary {
 		border-radius: 46px;
 		background-color: ${royalBlue};
 		color: white;
 		align-items: right;
 	}
-
 	.ant-btn-secondary {
 		border-radius: 46px;
 		background-color: ${white};
@@ -97,11 +90,20 @@ const FormContainer = styled.div`
 		top: 0px;
 		font-weight: 500;
 	}
+  .badge-thumbnail {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
 `;
 
-const StyledCircle = styled(Badge)`
-margin: 0;
-`;
 const StyledBadge = styled.div`
 width: min-content;
 padding: 20px;
@@ -116,12 +118,17 @@ function ManageBadges() {
   const [createMoreModal, setCreateMoreModal] = useState(false);
   const [isCongratulationsModalShowing, setCongratulationsModal] = useState(false);
   const [assignBadgeModal, setAssignBadgeModal] = useState(false);
-  const renderBadges = () => {
-    const badges = [];
-    for (let i = 0; i < 20; i++) {
-      badges.push(Badge);
-    }
-    return badges.map(badge => <StyledBadge key="badge.id" ><StyledCircle onClick={() => setBadgeDetailsModal(true)}/><span>[Name]</span><span>[Tags]</span></StyledBadge>);
+  const [currentBadge, setCurrentBadge] = useState({});
+
+  const renderTags = (tags) => {
+    return tags
+      ? tags.map(tag => <span key="tag-id"> {tag} </span>)
+      : null;
+  };
+
+  const clickHandler = (badge) => {
+    setCurrentBadge(badge);
+    setBadgeDetailsModal(true);
   };
 
   return (
@@ -130,7 +137,7 @@ function ManageBadges() {
         <Heading>Manage Badges</Heading>
         <FormContainer>
           <ManageBadgesForm />
-          {renderBadges()}
+          <div className="badge-container"></div>
           <BadgeDetailsModal
             isShowing={badgeDetailsModal}
             hide={() => setBadgeDetailsModal(false)}
@@ -139,9 +146,10 @@ function ManageBadges() {
             secondaryButtonStyle="true"
             modalBodyText={
               <div className="modal-form-body">
-                <span>Name:</span>
-                <span>Description: </span>
-                <span>Tags: </span>
+                <img className="badge-modal-thumbnail" src={currentBadge.src} />
+                <span>Name: {currentBadge.name}</span>
+                <span>Description: {currentBadge.description}</span>
+                <span>Tags: {renderTags(currentBadge.tags)}</span>
                 <span>Remaining Quantity: xxx/</span>
               </div>}
             footer={
@@ -175,13 +183,16 @@ function ManageBadges() {
             name="name"
             description="description"
             tags="tags"
-            quantity="quantity" />
+            quantity="quantity"
+            currentBadge={currentBadge}/>
           <CongratulationsModal
             isCongratulationsModalShowing={isCongratulationsModalShowing}
             hide={() => setCongratulationsModal(false)}
             buttonPrimary="Assign Badge"
             buttonSecondary="Cancel"
             modalBodyText="true"
+            title="Congratulations You created xx new badges!"
+            currentBadge={currentBadge}
           />
           <AssignBadgeModal
             assignBadgeModal={assignBadgeModal}

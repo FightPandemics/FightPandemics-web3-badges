@@ -1,33 +1,28 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-tabs */
-/* eslint-disable no-unused-vars */
 import React from "react";
 import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Modal as AntModal, Button } from "antd";
 import { theme } from "../../constants/theme";
-import logo from "../Logo/Logo.svg";
 import BaseButton from "../Button/BaseButton";
 import Heading from "../Typography/Heading";
 const { colors, typography } = theme;
 
 const StyledModal = styled(AntModal)`
 	border-radius: 10px;
-
-	&&& .btn-primary {
+  &&& .btn-primary {
 		font-family: ${typography.font.family.display.poppins};
 		border-radius: 46px;
 		background-color: ${colors.royalBlue};
 		color: white;
 	}
-
 	&&& .btn-secondary !important {
 		border-radius: 46px;
 		background-color: ${colors.white};
 		color: ${colors.royalBlue};
 		border: 1px solid ${colors.royalBlue};
 	}
-
 	&&& .btn-tertiary {
 		background-color: ${colors.white};
 		color: ${colors.royalBlue};
@@ -39,6 +34,7 @@ const StyledModal = styled(AntModal)`
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
+		padding-top: 30px;
 	}
 	.ant-typography h4 {
 		text-align: center;
@@ -48,23 +44,23 @@ const StyledModal = styled(AntModal)`
 		display: flex;
 		justify-content: center;
 		align-content: center;
-    margin: 0;
+		margin: 0;
 		margin-bottom: 0;
 	}
-  .modal-form-body {
-    display: flex;
-    flex-direction: column;
-    span {
-      padding-left: 5vw;
-      padding-bottom: 20px;
-    }
-  }
-  &&& .ant-modal-content {
-    border-radius: 10px;
-  }
-  &&& .ant-modal-header {
-    border-radius: 10px 10px;
-  }
+	.modal-form-body {
+		display: flex;
+		flex-direction: column;
+		span {
+			padding-left: 5vw;
+			padding-bottom: 20px;
+		}
+	}
+	&&& .ant-modal-content {
+		border-radius: 10px;
+	}
+	&&& .ant-modal-header {
+		border-radius: 10px 10px;
+	}
 `;
 
 const Modal = ({
@@ -78,6 +74,8 @@ const Modal = ({
   modalWidth,
   secondaryButtonStyle,
   onOk,
+  primarybuttonlink,
+  secondarybuttonlink,
 }) =>
   isShowing
     ? ReactDOM.createPortal(
@@ -95,48 +93,86 @@ const Modal = ({
           okButtonProps={{ type: "primary" }}
           cancelButtonProps={{ type: "primary" }}
           footer={null}>
-          {modalBodyText
-            ? (
-              <>{modalBodyText}</>
-            )
-            : null}
+          {modalBodyText ? <>{modalBodyText}</> : null}
           {button === "false"
             ? null
             : (
-              <div className="btn-container">
-                <Button className="btn-tertiary" key="back" onClick={hide}>
+              <div className='btn-container'>
+                <Button className='btn-tertiary' key='back' onClick={hide}>
                   {buttonSecondary}
                 </Button>
                 <BaseButton
-                  className="btn-primary"
-                  type="primary"
-                  key="submit"
-                  onClick="">
+                  className='btn-primary'
+                  type='primary'
+                  key='submit'
+                  onClick=''>
                   {buttonPrimary}
                 </BaseButton>
               </div>
             )}
           {secondaryButtonStyle === "true"
             ? (
-              <div className="btn-container">
-                <BaseButton className="btn-secondary" key="back" onClick={hide}>
+              <div className='btn-container'>
+                <BaseButton className='btn-secondary' key='back' onClick={hide}>
                   {buttonSecondary}
                 </BaseButton>
                 <BaseButton
-                  className="btn-primary"
-                  type="primary"
-                  key="submit"
-                  onClick=""
-                  onOk={ onOk }>
+                  className='btn-primary'
+                  type='primary'
+                  key='submit'
+                  onClick=''
+                  onOk={onOk}>
                   {buttonPrimary}
                 </BaseButton>
+              </div>
+            )
+            : null}
+          {secondarybuttonlink
+            ? (
+              <div className='btn-container'>
+                <Link to={secondarybuttonlink}>
+                  <BaseButton
+                    className='btn-tertiary'
+                    key='back'
+                    onClick={hide}>
+                    {buttonSecondary}
+                  </BaseButton>
+                </Link>
+                <BaseButton
+                  className='btn-primary'
+                  type='primary'
+                  key='submit'
+                  onClick=''
+                  onOk={onOk}>
+                  {buttonPrimary}
+                </BaseButton>
+              </div>
+            )
+            : null}
+          {primarybuttonlink
+            ? (
+              <div className='btn-container'>
+                <BaseButton className='btn-tertiary' key='back' onClick={hide}>
+                  {buttonSecondary}
+                </BaseButton>
+                <Link to={primarybuttonlink}>
+                  {" "}
+                  <BaseButton
+                    className='btn-primary'
+                    type='primary'
+                    key='submit'
+                    onClick=''
+                    onOk={onOk}>
+                    {buttonPrimary}
+                  </BaseButton>
+                </Link>
               </div>
             )
             : null}
         </StyledModal>
       </React.Fragment>,
       document.body,
-		  )
+    )
     : null;
 
 export default Modal;

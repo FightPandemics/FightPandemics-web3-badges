@@ -16,14 +16,12 @@ padding: 30px;
     background-color: ${colors.royalBlue};
     color: white;
 }
-
 &&& .btn-secondary !important {
     border-radius: 46px;
     background-color: ${colors.white};
     color: ${colors.royalBlue};
     border: 1px solid ${colors.royalBlue};
 }
-
 &&& .btn-tertiary {
     background-color: ${colors.white};
     color: ${colors.royalBlue};
@@ -62,6 +60,13 @@ padding: 30px;
 }
 &&& .ant-modal-header {
   border-radius: 10px 10px 0 0;
+}
+.badge-modal-thumbnail {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 15px auto;
+  display: block;
 }
 `;
 

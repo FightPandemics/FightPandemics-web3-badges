@@ -22,6 +22,12 @@ const StyledContainer = styled.div`
     @media only screen and (max-width: 600px) {
       width: 100vw;
     }
+    .badge-container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   .right {
     width: 50%;
@@ -73,16 +79,23 @@ const StyledFooter = styled.footer`
 `;
 
 const StyledLogo = styled.img`
+display: block;
 width: 175px;
 width: clamp(175px, 20vw, 250px);
 align-content: left;
-margin-left: -40%;
+margin-left: 55px;
 margin-top: 2.5vh;
+`;
+
+const StyledBadge = styled.img`
+  width: 240px;
+  height: 240px;
+  background: #0000aa;
+  border-radius: 50%;
 `;
 
 const StyledWallet = styled.img`
 margin: 2.5vh auto;
-
 `;
 
 const StyledHeading = styled(Heading)`
@@ -95,6 +108,9 @@ function ClaimBadge() {
       <StyledContainer>
         <div className="left">
           <StyledLogo src={ namelogo} />
+          <div className="badge-container">
+            <StyledBadge />
+          </div>
         </div>
         <div className="right">
           <div className="vertically-center">

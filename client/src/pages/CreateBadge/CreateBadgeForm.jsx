@@ -1,5 +1,4 @@
 /* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 // import { Form, Input, Button, Upload } from "antd";
 import { Form } from "antd";
@@ -10,10 +9,9 @@ import UploadButton from "../../components/Button/UploadButton";
 import PrimaryFormButton from "../../components/Button/PrimaryFormButton";
 import pinFileToIPFS from "../../web3/pinata/pinFileToIPFS";
 import hashMetadataToIPFS from "../../web3/pinata/hashMetadataToIPFS";
-import addIpfsUriToContract from "../../web3/pinata/addIpfsUriToContract";
+// import addIpfsUriToContract from "../../web3/pinata/addIpfsUriToContract";
 import { useFormik, FormikProvider } from "formik";
 import { Form as FormikAntdForm, Input } from "formik-antd";
-const { TextArea } = Input;
 
 export default function CreateBadgeForm() {
   const { isShowing, toggle } = useModal();
@@ -121,10 +119,12 @@ export default function CreateBadgeForm() {
             <Modal
               isShowing={isShowing}
               hide={toggle}
-              modalWidth={800}
+              modalWidth={564}
               title="Congratulations Your badge has been created!"
               buttonPrimary="Assign Badge"
               buttonSecondary="Close"
+              button="false"
+              primarybuttonlink="/assignbadge"
             />
           </Form.Item>
         </FormikAntdForm>
