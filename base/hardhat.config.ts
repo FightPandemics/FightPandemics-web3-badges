@@ -1,5 +1,6 @@
 import { task } from "hardhat/config";
 import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-ethers"
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -21,10 +22,10 @@ export default {
     }
   },
   solidity: "0.7.3",
-  // paths: {
-  //   source: "./contracts",
-  //   tests: "./test",
-  //   cache: "./cache",
-  //   artifacts: "./artifacts",
-  // },
+  paths: {
+    source: "./contracts",
+    tests: "./test",
+    cache: "./cache",
+    artifacts: "./artifacts",
+  },
 }

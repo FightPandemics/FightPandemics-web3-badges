@@ -18,8 +18,27 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         uint256 cloneFromId;
     }
 
+    event BadgeMinted(
+        uint256 tokenId,
+        uint256 numClonesAllowed,
+        uint256 numClonesInWild,
+        string tokenUri,
+        address owner
+    );
+
+    event BadgeCloned(
+        uint256 clonedTokenId,
+        uint256 cloneFromId,
+        string tokenUri,
+        address owner
+    );
+
+    event OriginalBadgeUpdated(
+        uint256 originalTokenId,
+        uint256 numClonesInWild
+    );
+
     Badge[] public badges;
-    mapping(uint256 => uint256[]) public originalToClones;
     bool public isMintable = true;
 
     modifier mintable {
@@ -61,37 +80,55 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
 
         _safeMint(_to, tokenId);
         _setTokenURI(tokenId, _tokenUri);
+
+        emit BadgeMinted(tokenId,
+            badges[tokenId].numClonesAllowed,
+            badges[tokenId].numClonesInWild,
+            _tokenUri,
+            _to
+        );
     }
 
     function clone(
         address _to,
-        uint256 _tokenId,
+        uint256 _originalTokenId,
         uint256 _numClonesRequested
     ) public
     mintable
     onlyOwner {
-        Badge memory _badge = badges[_tokenId];
+        Badge memory _badge = badges[_originalTokenId];
         require(_badge.numClonesInWild + _numClonesRequested <= _badge.numClonesAllowed,
             "No. of clones requested exceed no. of clones allowed"
         );
 
-        uint256[] memory cloneIds = new uint256[](_numClonesRequested);
         _badge.numClonesInWild += _numClonesRequested;
-        badges[_tokenId] = _badge;
+        badges[_originalTokenId] = _badge;
+        emit OriginalBadgeUpdated(_originalTokenId, _badge.numClonesInWild);
 
         for (uint i = 0; i < _numClonesRequested; i++) {
+            Badge memory _clonedBadge;
+            _clonedBadge.numClonesAllowed = 0;
+            _clonedBadge.numClonesInWild = 0;
+            _clonedBadge.cloneFromId = _originalTokenId;
+
             _tokenIds.increment();
             uint256 newTokenId = _tokenIds.current();
-            cloneIds[i] = newTokenId;
+            badges.push(_clonedBadge);
+
             _safeMint(_to, newTokenId);
 
-            string memory  _tokenUri = tokenURI(_tokenId);
+            string memory  _tokenUri = tokenURI(_originalTokenId);
             _setTokenURI(newTokenId, _tokenUri);
-        }
 
-        originalToClones[_tokenId] = cloneIds;
+            emit BadgeCloned(newTokenId,
+                _clonedBadge.cloneFromId,
+                _tokenUri,
+                _to
+            );
+        }
     }
 
+    /*
     function getOriginalToCloneMapping(
         uint256 _tokenId
     ) public
@@ -111,7 +148,7 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         delete badges[_tokenId];
         _burn(_tokenId);
     }
-
+    */
     function setTokenURI(uint256 _tokenId, string memory _tokenURI)
         public
         onlyOwner
@@ -147,11 +184,4 @@ contract Badges is ERC721("FightPandemics.com Badges", "FPB"), Ownable {
         isMintable = _isMintable;
     }
 
-    function sendBadge(
-        address _from,
-        address _to,
-        uint256 _tokenId
-    ) public onlyOwner {
-        safeTransferFrom(_from, _to, _tokenId);
-    }
 }
