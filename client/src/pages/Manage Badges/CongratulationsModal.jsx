@@ -1,20 +1,15 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable max-len */
-/* eslint-disable no-mixed-spaces-and-tabs */
-/* eslint-disable no-tabs */
-/* eslint-disable no-unused-vars */
 import React from "react";
-import ReactDOM from "react-dom";
 import styled from "styled-components";
-import { Modal as AntModal, Button } from "antd";
-import { theme } from "../../constants/theme";
+import { Modal as AntModal } from "antd";
 import BaseButton from "../../components/Button/BaseButton";
 import Heading from "../../components/Typography/Heading";
-const { colors, typography } = theme;
 
 const StyledModal = styled(AntModal)`
   text-align: center;
-  width: 100%;
+  width: 90vw;
+  max-width: 564px;
   .ant-modal-header {
   }
   &&& h4 {
@@ -37,7 +32,6 @@ const StyledModal = styled(AntModal)`
     text-align: center;
     display: block;
   }
-
   .hxWmnw {
     margin: 0;
   }
@@ -56,30 +50,31 @@ const StyledModal = styled(AntModal)`
 
 export default function CongratulationsModal(props) {
   return (
-	  <StyledModal
+    <StyledModal
+      width="564"
       // eslint-disable-next-line react/prop-types
       visible={props.isCongratulationsModalShowing}
       keyboard={true}
       // eslint-disable-next-line react/prop-types
       onCancel={props.hide}
-      okButtonProps={{ type: "primary" }}
-      cancelButtonProps={{ type: "primary" }}
+      okButtonProps={{ type: "primary " }}
+      cancelButtonProps={{ type: "primary " }}
       footer={null}
       centered
       title={
         <Heading>
-          <h4>Congratulations You created xx new badges!</h4>
+          <h4>{props.title}</h4>
         </Heading>
-      }>
+      }
+    >
       {props.modalBodyText === "true"
         ? (
           <div className="modal-form-body">
-            <span className="remaining">You now have xxx/{props.quantity} badges remaining.</span>
-            <span className="image-holder"></span>
-            <BaseButton
-              className="btn-primary"
-              type="primary"
-              key="submit">
+            <span className="remaining">
+              You now have xxx/{props.quantity} badges remaining.
+            </span>
+            <img className="image-holder" src={props.currentBadge.src}/>
+            <BaseButton className="btn-primary" type="primary" key="submit">
               {props.buttonPrimary}
             </BaseButton>
           </div>

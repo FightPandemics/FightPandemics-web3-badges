@@ -1,10 +1,8 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable max-len */
 import React, { useState } from "react";
 import { Menu } from "antd";
 import styled from "styled-components";
 import { theme } from "../../constants/theme";
-const { selago, darkGray, white, royalBlue } = theme.colors;
+const { royalBlue } = theme.colors;
 const { display } = theme.typography.font.family;
 
 const StyledSideMenu = styled(Menu)`
@@ -14,9 +12,6 @@ grid-column: 1/2;
   grid-column: 1/3;
 }
 padding: 0 1.5vw;
-border-radius: 8px;
-border: 1px solid ${darkGray};
-box-shadow: 5px;
 li {
   font-family: ${display};
   margin: 35px;
@@ -28,11 +23,9 @@ li {
   padding-bottom: 100px;
   margin: 0;
 }
-
 &&&.ant-menu-item ant-menu-item-only-child {
     margin-bottom: 10px;
 }
-
 &&&li.ant-menu-item ant-menu-item-only-child customClass ant-menu-item-selected {
     background: red;
     color: ${royalBlue};
